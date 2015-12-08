@@ -1051,22 +1051,6 @@ progress[value]::-webkit-progress-bar{
 }
 
 
-#my-page {
-  .trans.ng-enter {
-    transition: 200ms;
-    transition-timing-function: cubic-bezier(0.4, 0.6, 0.2, 1);
-    -webkit-transition-property: -webkit-transform;
-            transition-property: transform;
-  }
-  .trans.ng-enter-active {
-    transition: 200ms;
-    transition-timing-function: cubic-bezier(0.4, 0.6, 0.2, 1);
-    -webkit-transition-property: -webkit-transform;
-            transition-property: transform;
-
-  }
-}
-
 // Dependencies:
 //  daum map <script> with places library
 
@@ -1082,7 +1066,7 @@ progress[value]::-webkit-progress-bar{
   //   }
   // }
   .custom-button-left, .custom-button-right, .custom-search-bar {
-    z-index: 2;
+    z-index: 3;
   }
 }
 
@@ -1177,6 +1161,22 @@ progress[value]::-webkit-progress-bar{
 
 #filter-list {
 
+}
+
+#my-page {
+  .trans.ng-enter {
+    transition: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0.6, 0.2, 1);
+    -webkit-transition-property: -webkit-transform;
+            transition-property: transform;
+  }
+  .trans.ng-enter-active {
+    transition: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0.6, 0.2, 1);
+    -webkit-transition-property: -webkit-transform;
+            transition-property: transform;
+
+  }
 }
 
 #place-list {

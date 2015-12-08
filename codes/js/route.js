@@ -46,16 +46,6 @@
           }
         }
       })
-      .state('Main.MainTab.MyPage', {
-        abstract: true,
-        url: '/MyPage',
-        views: {
-          MainTab: {
-            templateUrl: 'state/2MyPage/MyPage.html',
-            controller: 'MyPageController as MyPage'
-          }
-        }
-      })
 
     //====================================================
     //  Login
@@ -172,33 +162,15 @@
     //====================================================
     //  MyPage
     //====================================================
-    .state('Main.MainTab.MyPage.MyPostList', {
-      url: '/MyPostList',
+    .state('Main.MainTab.MyPage', {
+      url: '/MyPage/:template',
       views: {
-        MyPage: {
-          templateUrl: 'state/MyPostList/MyPostList.html',
-          controller: 'MyPostListController as MyPostList'
+        MainTab: {
+          templateUrl: 'state/MyPage/MyPage.html',
+          controller: 'MyPageController as MyPage'
         }
       }
     })
-      .state('Main.MainTab.MyPage.FavoritePlaceList', {
-        url: '/FavoritePlaceList',
-        views: {
-          MyPage: {
-            templateUrl: 'state/FavoritePlaceList/FavoritePlaceList.html',
-            controller: 'FavoritePlaceListController as FavoritePlaceList'
-          }
-        }
-      })
-      .state('Main.MainTab.MyPage.FavoritePostList', {
-        url: '/FavoritePostList',
-        views: {
-          MyPage: {
-            templateUrl: 'state/FavoritePostList/FavoritePostList.html',
-            controller: 'FavoritePostListController as FavoritePostList'
-          }
-        }
-      });
 
   } //route end
 })(angular);

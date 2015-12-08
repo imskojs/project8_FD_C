@@ -2,7 +2,7 @@
     cache-view="true"
     hide-back-button="true"
 >
-  <ion-nav-buttons side="left">
+<!--   <ion-nav-buttons side="left">
     <button class="button button-icon icon ion-navicon"
       ng-click="toggleSideMenu(true)"
     >
@@ -16,35 +16,35 @@
       >
     </div>
   </ion-nav-title>
-
+ -->
   <ion-header-bar class="bar top88px zero white-bg flex-v light-grey-bb">
     <div class="row zero h34px dark-b w90p r5px auto">
       <div class="col h33px flex darker"
-        ng-class="{'positive-bg': isState('Main.MainTab.PostList.Recent')}"
-        ng-click="goToState('Main.MainTab.PostList.Recent')"
+        ng-class="{'positive-bg': isState('Main.MainTab.PostList.PostListRecent')}"
+        ng-click="goToState('Main.MainTab.PostList.PostListRecent')"
       >
         <p class="zero f16px center bold"
-          ng-class="{'white': isState('Main.MainTab.PostList.Recent')}"
+          ng-class="{'white': isState('Main.MainTab.PostList.PostListRecent')}"
         >
           최신
         </p>
       </div>
       <div class="col h33px flex dark-bl"
-        ng-class="{'positive-bg': isState('Main.MainTab.PostList.Popular')}"
-        ng-click="goToState('Main.MainTab.PostList.Popular')"
+        ng-class="{'positive-bg': isState('Main.MainTab.PostList.PostListPopular')}"
+        ng-click="goToState('Main.MainTab.PostList.PostListPopular')"
       >
         <p class="zero f16px darker center bold"
-          ng-class="{'white': isState('Main.MainTab.PostList.Popular')}"
+          ng-class="{'white': isState('Main.MainTab.PostList.PostListPopular')}"
         >
           인기
         </p>
       </div>
       <div class="col h33px flex dark-bl"
-        ng-class="{'positive-bg': isState('Main.MainTab.PostList.Contents')}"
-        ng-click="goToState('Main.MainTab.PostList.Contents')"
+        ng-class="{'positive-bg': isState('Main.MainTab.PostList.PostListContent')}"
+        ng-click="goToState('Main.MainTab.PostList.PostListContent')"
       >
         <p class="zero f16px darker center bold"
-          ng-class="{'white': isState('Main.MainTab.PostList.Contents')}"
+          ng-class="{'white': isState('Main.MainTab.PostList.PostListContent')}"
         >
           컨텐츠
         </p>
