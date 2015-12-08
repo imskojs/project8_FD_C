@@ -1,0 +1,25 @@
+/**
+ * Created by Seunghoon Ko on 10/10/2015
+ * As part of applicat platform
+ *
+ * Copyright (C) Applicat (www.applicat.co.kr) & Seunghoon Ko - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Seunghoon Ko <imskojs@gmail.com>, 10/10/2015
+ *
+ */
+//====================================================
+//  Images
+//====================================================
+.app-slide-image {
+  display: block;
+  height: 66.6666666vw;
+  width: 100%;
+}
+@for $i from 0 through 300 {
+  .app-slide-image#{$i}vw {
+    display: block;
+    height: #{$i}vw;
+    width: 100%;
+  }
+}

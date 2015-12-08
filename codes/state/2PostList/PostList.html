@@ -1,0 +1,62 @@
+<ion-view id="post-list"
+    cache-view="true"
+    hide-back-button="true"
+>
+  <ion-nav-buttons side="left">
+    <button class="button button-icon icon ion-navicon"
+      ng-click="toggleSideMenu(true)"
+    >
+    </button>
+  </ion-nav-buttons>
+
+  <ion-nav-title>
+    <div class="row zero flex h44px">
+      <img class="h24px"
+        src="img/header_logo.png"
+      >
+    </div>
+  </ion-nav-title>
+
+  <ion-header-bar class="bar top88px zero white-bg flex-v light-grey-bb">
+    <div class="row zero h34px dark-b w90p r5px auto">
+      <div class="col h33px flex darker"
+        ng-class="{'positive-bg': isState('Main.MainTab.PostList.Recent')}"
+        ng-click="goToState('Main.MainTab.PostList.Recent')"
+      >
+        <p class="zero f16px center bold"
+          ng-class="{'white': isState('Main.MainTab.PostList.Recent')}"
+        >
+          최신
+        </p>
+      </div>
+      <div class="col h33px flex dark-bl"
+        ng-class="{'positive-bg': isState('Main.MainTab.PostList.Popular')}"
+        ng-click="goToState('Main.MainTab.PostList.Popular')"
+      >
+        <p class="zero f16px darker center bold"
+          ng-class="{'white': isState('Main.MainTab.PostList.Popular')}"
+        >
+          인기
+        </p>
+      </div>
+      <div class="col h33px flex dark-bl"
+        ng-class="{'positive-bg': isState('Main.MainTab.PostList.Contents')}"
+        ng-click="goToState('Main.MainTab.PostList.Contents')"
+      >
+        <p class="zero f16px darker center bold"
+          ng-class="{'white': isState('Main.MainTab.PostList.Contents')}"
+        >
+          컨텐츠
+        </p>
+      </div>
+    </div>
+  </ion-header-bar>
+
+  <ion-nav-view name="PostList">
+  </ion-nav-view>
+
+
+  <div class="r60px w60px h60px absolute bottom70px right10px flex positive-b5px white-bg shadow">
+    <i class="ion-plus f40px positive"></i>
+  </div>
+</ion-view>

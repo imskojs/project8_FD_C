@@ -1,0 +1,148 @@
+<ion-view id="main-tab"
+  cache-view="true"
+>
+  <ion-header-bar class="bar bar-subheader stable-bg zero light-grey-bb">
+    <div class="row zero mt0px h44px">
+      <div class="col zero flex"
+        ng-click="goToState('Main.MainTab.PlaceEvent.DaumMap')"
+      >
+        <img class="block h30px"
+          src="img/main_icon01.png"
+          ng-if="!areStates([
+            'Main.MainTab.PlaceEvent.DaumMap', 'Main.MainTab.FilterList', 'Main.MainTab.PlaceList'
+          ])"
+        >
+        <img class="block h30px"
+          src="img/main_icon01_2.png"
+          ng-if="areStates([
+            'Main.MainTab.PlaceEvent.DaumMap', 'Main.MainTab.FilterList', 'Main.MainTab.PlaceList'
+          ])"
+        >
+      </div>
+      <div class="col zero flex"
+        ng-click="goToState('Main.MainTab.PostList.PostListRecent')"
+      >
+        <img class="block h30px"
+          src="img/main_icon02_2.png"
+          ng-if="!areStates([
+            'Main.MainTab.PostList.PostListRecent', 'Main.MainTab.PostList.PostListPopular',
+            'Main.MainTab.PostList.PostListContent'
+          ])"
+        >
+        <img class="block h30px"
+          src="img/main_icon02.png"
+          ng-if="areStates([
+            'Main.MainTab.PostList.PostListRecent', 'Main.MainTab.PostList.PostListPopular',
+            'Main.MainTab.PostList.PostListContent'
+          ])"
+        >
+      </div>
+      <div class="col zero flex"
+        ng-click="goToState('Main.MainTab.MyPage.MyPostList')"
+      >
+        <img class="block h30px"
+          src="img/main_icon03.png"
+          ng-if="!areStates(['Main.MainTab.MyPage.MyPostList'])"
+        >
+        <img class="block h30px"
+          src="img/main_icon03_2.png"
+          ng-if="areStates(['Main.MainTab.MyPage.MyPostList'])"
+        >
+      </div>
+    </div>
+  </ion-header-bar>
+
+  <ion-nav-view name="MainTab">
+  </ion-nav-view>
+
+</ion-view>
+
+      <!-- custom header-->
+<!--       <ion-header-bar class="bar top88px zero white-bg flex-v light-grey-bb"
+        ng-if="!areStates(['Main.Login', 'Main.SignUp'])"
+      >
+ -->
+        <!-- FilterList -->
+<!--         <p class="zero center w100p positive f16px bold"
+          ng-if="isState('Main.FilterList')"
+        >시설 필터링</p>
+ -->
+        <!-- DaumMap -->
+<!--         <div class="row zero h34px dark-b w90p r5px auto"
+          ng-if="isState('Main.DaumMap')"
+        >
+          <div class="col h33px flex darker"
+            ng-class="{'positive-bg': !Main.DaumMapModel.filterByEvent}"
+            ng-click="Main.DaumMapModel.filterByEvent = false"
+          >
+            <p class="zero f16px center bold"
+              ng-class="{'white': !Main.DaumMapModel.filterByEvent}"
+            >
+              다모여스포츠 시설
+            </p>
+          </div>
+          <div class="col h33px flex dark-bl"
+            ng-class="{'positive-bg': Main.DaumMapModel.filterByEvent}"
+            ng-click="Main.DaumMapModel.filterByEvent = true"
+          >
+            <p class="zero f16px darker center bold"
+              ng-class="{'white': Main.DaumMapModel.filterByEvent}"
+            >
+              다모여스포츠 이벤트
+            </p>
+          </div>
+        </div> -->
+
+        <!-- PlaceList -->
+<!--         <p class="zero center w100p positive f16px bold"
+          ng-if="isState('Main.PlaceList')"
+        >시설 리스트</p>
+ -->
+        <!-- PostList -->
+<!--         <div class="row zero h34px dark-b w90p r5px auto"
+          ng-if="areStates(['Main.PostList.Recent', 'Main.PostList.Popular',
+            'Main.PostList.Contents'
+          ])"
+        >
+          <div class="col h33px flex darker"
+            ng-class="{'positive-bg': isState('Main.PostList.Recent')}"
+            ng-click="goToState('Main.PostList.Recent')"
+          >
+            <p class="zero f16px center bold"
+              ng-class="{'white': isState('Main.PostList.Recent')}"
+            >
+              최신
+            </p>
+          </div>
+
+          <div class="col h33px flex dark-bl"
+            ng-class="{'positive-bg': isState('Main.PostList.Popular')}"
+            ng-click="goToState('Main.PostList.Popular')"
+          >
+            <p class="zero f16px darker center bold"
+              ng-class="{'white': isState('Main.PostList.Popular')}"
+            >
+              인기
+            </p>
+          </div>
+
+          <div class="col h33px flex dark-bl"
+            ng-class="{'positive-bg': isState('Main.PostList.Contents')}"
+            ng-click="goToState('Main.PostList.Contents')"
+          >
+            <p class="zero f16px darker center bold"
+              ng-class="{'white': isState('Main.PostList.Contents')}"
+            >
+              컨텐츠
+            </p>
+          </div>
+        </div> -->
+
+        <!-- MyPage -->
+<!--         <p class="zero center w100p dark-grey f16px bold"
+          ng-if="isState('Main.MyPage')"
+        >
+          <span class="positive"> {{AppStorage.name || '이민지'}} </span>님의 페이지
+        </p>
+ -->
+      <!-- </ion-header-bar> -->

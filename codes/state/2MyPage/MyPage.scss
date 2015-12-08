@@ -1,0 +1,15 @@
+#my-page {
+  .trans.ng-enter {
+    transition: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0.6, 0.2, 1);
+    -webkit-transition-property: -webkit-transform;
+            transition-property: transform;
+  }
+  .trans.ng-enter-active {
+    transition: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0.6, 0.2, 1);
+    -webkit-transition-property: -webkit-transform;
+            transition-property: transform;
+
+  }
+}

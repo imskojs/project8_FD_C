@@ -1,0 +1,133 @@
+(function() {
+  'use strict';
+
+  angular.module('app')
+    .factory('FilterListModel', FilterListModel);
+
+  FilterListModel.$inject = [];
+
+  function FilterListModel() {
+
+    var model = {
+      filters: [{
+        name: 'running',
+        base: 'img/category_icon01_2.png',
+        selected: 'img/category_icon01.png'
+      }, {
+        name: 'pingPong',
+        base: 'img/category_icon02_2.png',
+        selected: 'img/category_icon02.png'
+      }, {
+        name: 'basketBall',
+        base: 'img/category_icon03_2.png',
+        selected: 'img/category_icon03.png'
+      }, {
+        name: 'bowling',
+        base: 'img/category_icon04_2.png',
+        selected: 'img/category_icon04.png'
+      }, {
+        name: 'soccer',
+        base: 'img/category_icon05_2.png',
+        selected: 'img/category_icon05.png'
+      }, {
+        name: 'hocky',
+        base: 'img/category_icon06_2.png',
+        selected: 'img/category_icon06.png'
+      }, {
+        name: 'baseBall',
+        base: 'img/category_icon07_2.png',
+        selected: 'img/category_icon07.png'
+      }, {
+        name: 'cycle',
+        base: 'img/category_icon08_2.png',
+        selected: 'img/category_icon08.png'
+      }, {
+        name: 'tennis',
+        base: 'img/category_icon09_2.png',
+        selected: 'img/category_icon09.png'
+      }, {
+        name: 'combat',
+        base: 'img/category_icon10_2.png',
+        selected: 'img/category_icon10.png'
+      }, {
+        name: 'gateBall',
+        base: 'img/category_icon11_2.png',
+        selected: 'img/category_icon11.png'
+      }, {
+        name: 'basketBall',
+        base: 'img/category_icon03_2.png',
+        selected: 'img/category_icon03.png'
+      }, {
+        name: 'swimming',
+        base: 'img/category_icon12_2.png',
+        selected: 'img/category_icon12.png'
+      }, {
+        name: 'shooting',
+        base: 'img/category_icon13_2.png',
+        selected: 'img/category_icon13.png'
+      }, {
+        name: 'archery',
+        base: 'img/category_icon14_2.png',
+        selected: 'img/category_icon14.png'
+      }, {
+        name: 'horseRacing',
+        base: 'img/category_icon15_2.png',
+        selected: 'img/category_icon15.png'
+      }, {
+        name: 'golf',
+        base: 'img/category_icon16_2.png',
+        selected: 'img/category_icon16.png'
+      }, {
+        name: 'yacht',
+        base: 'img/category_icon17_2.png',
+        selected: 'img/category_icon17.png'
+      }, {
+        name: 'skate',
+        base: 'img/category_icon18_2.png',
+        selected: 'img/category_icon18.png'
+      }, {
+        name: 'skiing',
+        base: 'img/category_icon19_2.png',
+        selected: 'img/category_icon19.png'
+      }, {
+        name: 'billiard',
+        base: 'img/category_icon20_2.png',
+        selected: 'img/category_icon20.png'
+      }, {
+        name: 'weights',
+        base: 'img/category_icon21_2.png',
+        selected: 'img/category_icon21.png'
+      }, {
+        name: 'waterLeisure',
+        base: 'img/category_icon22_2.png',
+        selected: 'img/category_icon22.png'
+      }, {
+        name: 'mountainLeisure',
+        base: 'img/category_icon23_2.png',
+        selected: 'img/category_icon23.png'
+      }, {
+        name: 'yoga',
+        base: 'img/category_icon24_2.png',
+        selected: 'img/category_icon24.png'
+      }, {
+        name: 'academy',
+        base: 'img/category_icon25_2.png',
+        selected: 'img/category_icon25.png'
+      }, {
+        name: 'sportsPark',
+        base: 'img/category_icon26_2.png',
+        selected: 'img/category_icon26.png'
+      }, {
+        name: 'stadium',
+        base: 'img/category_icon27_2.png',
+        selected: 'img/category_icon27.png'
+      }, {
+        name: 'etc',
+        base: 'img/category_icon28_2.png',
+        selected: 'img/category_icon28.png'
+      }],
+      selectedFilters: []
+    };
+    return model;
+  }
+})();

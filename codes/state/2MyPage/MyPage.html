@@ -1,0 +1,73 @@
+<ion-view id="my-page"
+    cache-view="true"
+    hide-back-button="true"
+>
+
+  <ion-nav-buttons side="left">
+    <button class="button button-icon icon ion-navicon"
+      ng-click="toggleSideMenu(true)"
+    >
+    </button>
+  </ion-nav-buttons>
+
+  <ion-nav-title>
+    <div class="row zero flex h44px">
+      <img class="h24px"
+        src="img/header_logo.png"
+      >
+    </div>
+  </ion-nav-title>
+
+  <ion-header-bar class="bar top88px zero white-bg flex-v light-grey-bb h250px shadow">
+    <div class="relative h250px white-bg shadow w100p">
+      <img class="w100p block h150px"
+        ng-src="{{MyPage.Model.page.photos[0].url}}">
+      <img class="block w70px h70px r70px absolute left10px top42p positive-b2px"
+        ng-src="{{MyPage.Model.page.owner.photos[0].url}}">
+      <p class="zero ml90px f16px bold positive mt5px">
+        {{MyPage.Model.page.owner.name}}
+      </p>
+      <p class="zero ml90px f16px bold positive mt2px grey">
+        {{MyPage.Model.page.owner.nickname}}
+      </p>
+      <div class="row zero positive-b2px w90p r5px auto mt5px">
+        <div class="col zero darker positive-br2px flex h40px"
+          ng-class="{'positive-bg': MyPage.selectedTab === 'myPosts'}"
+          ng-click="MyPage.selectedTab = 'myPosts'"
+        >
+          <p class="zero center f14px bold"
+            ng-class="{'white': MyPage.selectedTab === 'myPosts'}"
+          > 내가쓴글
+          </p>
+        </div>
+        <div class="col zero darker positive-br2px flex h40px"
+          ng-class="{'positive-bg': MyPage.selectedTab === 'favoritePlaces'}"
+          ng-click="MyPage.selectedTab = 'favoritePlaces'"
+        >
+          <p class="zero center f14px bold pre"
+            ng-class="{'white': MyPage.selectedTab === 'favoritePlaces'}"
+          > 좋아요한
+          시설 및 이벤트</p>
+        </div>
+        <div class="col zero darker flex h40px"
+          ng-class="{'positive-bg': MyPage.selectedTab === 'favoritePosts'}"
+          ng-click="MyPage.selectedTab = 'favoritePosts'"
+        >
+          <p class="zero center f14px bold pre"
+            ng-class="{'white': MyPage.selectedTab === 'favoritePosts'}"
+          > 좋아요한
+          피드글</p>
+        </div>
+      </div>
+    </div>
+  </ion-header-bar>
+
+  <ion-nav-view name="MyPage">
+  </ion-nav-view>
+
+
+  <div class="r60px w60px h60px absolute bottom70px right10px flex positive-b5px white-bg shadow">
+    <i class="ion-plus f40px positive"></i>
+  </div>
+
+ </ion-view>
