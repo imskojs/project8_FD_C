@@ -163,14 +163,14 @@
     //  MyPage
     //====================================================
     .state('Main.MainTab.MyPage', {
-      url: '/MyPage/:template',
+      url: '/MyPage',
       views: {
         MainTab: {
           templateUrl: 'state/MyPage/MyPage.html',
           controller: 'MyPageController as MyPage'
         }
       }
-    })
+    });
 
   } //route end
 })(angular);

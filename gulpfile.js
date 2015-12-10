@@ -69,6 +69,7 @@ var paths = {
     // Non-Angular 3rd Party Libraries
     './codes/lib/lodash/lodash.js',
     './codes/lib/moment/moment.js',
+    './codes/lib/jsSHA/src/sha1.js',
     // Ionic/Angular Core
     './codes/lib/ionic/js/ionic.bundle.js',
     // Angular 3rd Party Libraries

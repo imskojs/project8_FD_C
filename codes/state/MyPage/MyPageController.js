@@ -3,36 +3,106 @@
   angular.module('app')
     .controller('MyPageController', MyPageController);
 
-  MyPageController.$inject = ['$scope', 'MyPageModel', '$timeout', '$ionicScrollDelegate'];
+  MyPageController.$inject = [
+    '$scope', '$ionicScrollDelegate', '$timeout', '$q',
+    'MyPageModel', 'Preload', 'Post', 'U'
+  ];
 
-  function MyPageController($scope, MyPageModel, $timeout, $ionicScrollDelegate) {
+  function MyPageController(
+    $scope, $ionicScrollDelegate, $timeout, $q,
+    MyPageModel, Preload, Post, U
+  ) {
 
     var MyPage = this;
     MyPage.Model = MyPageModel;
-    MyPage.selectedTab = 'myPosts';
+    // Defaults to MyPostList
+    MyPage.selectedTab = 'MyPostList';
+    MyPage.templateUrl = 'state/MyPage/template/' + MyPage.selectedTab + '.html';
 
-    $scope.$on('$ionicView.afterEnter', onAfterEnter);
-    $scope.$on('$ionicView.beforeLeave', onBeforeLeave);
-    //------------------------
-    //  IMPLEMENTATIONS
-    //------------------------
-    //------------------------
-    //  IMPLEMENTATIONS
-    //------------------------
-    function onAfterEnter() {
-      $timeout(function() {
-        MyPage.loadPhotos = true;
-      }, 100);
-      $ionicScrollDelegate.resize();
-    }
-    $scope.$watch('MyPage.selectedTab', function(nv, ov) {
-      if (nv !== ov) {
-        $ionicScrollDelegate.resize();
+    MyPage.loadTemplate = loadTemplate;
+
+
+
+    function loadTemplate(tab) {
+      MyPageModel.loading = true;
+      $ionicScrollDelegate.$getByHandle('MyPage').freezeScroll(true);
+      MyPage.selectedTab = tab;
+      MyPage.templateUrl = 'state/MyPage/template/' + MyPage.selectedTab + '.html';
+      if (tab === 'MyPostList') {
+        return findMyPostList()
+          .then(function(postsWrapper) {
+            U.bindData(postsWrapper, MyPageModel.MyPostList, 'posts', /*loadingModel*/ MyPageModel);
+          })
+          .catch(U.error);
+      } else if (tab === 'FavoritePlaceList' /*Event and Places*/ ) {
+        return findFavoritePlaceList()
+          .then(function(postsWrapper) {
+            U.bindData(postsWrapper, MyPageModel.FavoritePlaceList, 'places', /*loadingModel*/ MyPageModel);
+          })
+          .catch(U.error);
+      } else if (tab === 'FavoritePostList') {
+        return findFavoritePostList()
+          .then(function(postsWrapper) {
+            U.bindData(postsWrapper, MyPageModel.FavoritePostList, 'posts', /*loadingModel*/ MyPageModel);
+          })
+          .catch(U.error);
       }
-    });
-
-    function onBeforeLeave() {
-      MyPage.loadPhotos = false;
     }
-  }
+
+    function findMyPostList(extraQuery) {
+      var query = {
+        category: 'notification',
+        limit: 20,
+        sort: 'id DESC'
+      };
+      angular.extend(query, extraQuery);
+      return Post.find(query).$promise
+        .then(function(postsWrapper) {
+          var photosPromise = Preload.photos(postsWrapper.posts, 'Cloudinary200', true);
+          return $q.all([postsWrapper, photosPromise]);
+        })
+        .then(function(array) {
+          var postsWrapper = array[0];
+          return postsWrapper;
+        });
+    }
+
+    //TODO: findPlace, findEvent all
+    function findFavoritePlaceList(extraQuery) { // and Event
+      var query = {
+        category: 'notification',
+        limit: 20,
+        sort: 'id DESC'
+      };
+      angular.extend(query, extraQuery);
+      return Post.find(query).$promise
+        .then(function(postsWrapper) {
+          var photosPromise = Preload.photos(postsWrapper.posts, 'Cloudinary200', true);
+          return $q.all([postsWrapper, photosPromise]);
+        })
+        .then(function(array) {
+          var postsWrapper = array[0];
+          return postsWrapper;
+        });
+    }
+
+    function findFavoritePostList(extraQuery) {
+      var query = {
+        category: 'notification',
+        limit: 20,
+        sort: 'id DESC'
+      };
+      angular.extend(query, extraQuery);
+      return Post.find(query).$promise
+        .then(function(postsWrapper) {
+          var photosPromise = Preload.photos(postsWrapper.posts, 'Cloudinary200', true);
+          return $q.all([postsWrapper, photosPromise]);
+        })
+        .then(function(array) {
+          var postsWrapper = array[0];
+          return postsWrapper;
+        });
+    }
+
+  } //end
 })();

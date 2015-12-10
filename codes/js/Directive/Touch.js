@@ -21,7 +21,7 @@
         element.addClass('touch');
         $timeout(function() {
           element.removeClass('touch');
-        }, 50);
+        }, 200);
 
       });
     }

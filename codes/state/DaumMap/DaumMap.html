@@ -15,6 +15,22 @@
     </div>
   </ion-nav-title>
 
+    <ion-pane class="absolute top132px h100p w7p custom-button-left stable-bg light-grey-b left0px"
+      ng-click="goToState('Main.MainTab.FilterList', null, 'back')"
+      touch
+    >
+      <div class="row zero flex mt20px">
+        <i class="ion-chevron-right f16px positive bold"></i>
+      </div>
+
+      <p class="pre dark-grey center f14px">
+        시
+        설
+        필
+        터
+        링
+      </p>
+    </ion-pane>
   <ion-content class="top132px"
     data-tap-disable="true"
     scroll="false"
@@ -41,21 +57,6 @@
       </div>
     </div>
 
-    <div class="absolute h100p w7p custom-button-left stable-bg light-grey-b top0px left0px"
-      ng-click="goToState('Main.MainTab.FilterList', null, 'back')"
-    >
-      <div class="row zero flex mt20px">
-        <i class="ion-chevron-right f16px positive bold"></i>
-      </div>
-
-      <p class="pre dark-grey center f14px">
-        시
-        설
-        필
-        터
-        링
-      </p>
-    </div>
 
     <div class="absolute h100p w7p custom-button-right stable-bg light-grey-b top0px right0px"
       ng-click="goToState('Main.MainTab.PlaceList')"

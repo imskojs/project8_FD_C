@@ -132,7 +132,7 @@
       console.log(err);
     }
 
-    function bindData(data, model, name) {
+    function bindData(data, model, name, loadingModel) {
       // if data is a dataWrapper
       if (name[name.length - 1] === 's') {
         model[name] = data[name];
@@ -142,9 +142,15 @@
         model[name] = data;
       }
       resize();
-      $timeout(function() {
-        model.loading = false;
-      }, 50);
+      if (!loadingModel) {
+        $timeout(function() {
+          model.loading = false;
+        }, 50);
+      } else {
+        $timeout(function() {
+          loadingModel.loading = false;
+        }, 50);
+      }
     }
 
     function appendData(dataWrapper, model, name) {

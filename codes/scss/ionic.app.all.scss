@@ -1030,9 +1030,13 @@ progress[value]::-webkit-progress-bar{
 //====================================================
 .platform-ios, .platform-android {
   .activated {
-    background-color: $positive !important;
+    // background-color: $positive !important;
     opacity: 0.7 !important;
   }
+}
+.touch {
+  // background-color: $positive !important;
+  opacity: 0.7 !important;
 }
 
 .tab-selected {

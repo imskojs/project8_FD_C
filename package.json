@@ -32,8 +32,7 @@
     "cordova-plugin-inappbrowser",
     "phonegap-plugin-push",
     "cordova-plugin-camera",
-    "cordova-plugin-file-transfer",
-    {
+    "cordova-plugin-file-transfer", {
       "locator": "https://github.com/wymsee/cordova-imagePicker.git",
       "id": "com.synconset.imagepicker"
     }

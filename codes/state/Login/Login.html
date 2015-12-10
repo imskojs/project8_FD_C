@@ -58,19 +58,25 @@
     </button>
 
     <div class="row zero mt30px">
-      <div class="col flex">
+      <div class="col flex"
+        ng-click="Login.loginWithFacebook()"
+      >
         <img class="w80p"
           src="img/login_icon03.png"
           alt="facebook"
         >
       </div>
-      <div class="col flex">
+      <div class="col flex"
+        ng-click="Login.loginWithTwitter()"
+      >
         <img class="w80p"
           src="img/login_icon04.png"
           alt="twitter"
         >
       </div>
-      <div class="col flex">
+      <div class="col flex"
+        ng-click="Login.loginWithGoogle()"
+      >
         <img class="w80p"
           src="img/login_icon05.png"
           alt="google"

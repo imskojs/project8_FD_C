@@ -47,7 +47,7 @@
         $state.go('Main.WalkThrough');
       } else if (!$rootScope.AppStorage.token) {
         // Not logged in user logic
-        $state.go('Main.MainTab.PlaceEvent.DaumMap');
+        $state.go('Main.Login');
       } else {
         // Normal user logic
         $state.go('Main.SampleList');
