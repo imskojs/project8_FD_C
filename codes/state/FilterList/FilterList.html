@@ -1,62 +1,56 @@
 <ion-view id="filter-list"
     cache-view="true"
     hide-back-button="true"
->
-  <ion-nav-buttons side="left">
-    <button class="button button-icon icon ion-navicon"
-      ng-click="toggleSideMenu(true)"
     >
-    </button>
-  </ion-nav-buttons>
-
-  <ion-nav-title>
-    <div class="row zero flex h44px">
-      <img class="h24px"
-        src="img/header_logo.png"
-      >
-    </div>
-  </ion-nav-title>
-
-  <ion-header-bar class="bar top88px zero white-bg flex-v light-grey-bb">
-    <p class="zero center w100p positive f16px bold">시설 필터링</p>
-  </ion-header-bar>
-
-
-  <ion-header-bar class="bar stable-bg left94p top132px w6p h100p zero light-grey-bl"
-    ng-click="goToState('Main.MainTab.PlaceEvent.DaumMap', null, 'forward')"
-  >
-    <div>
-      <div class="row zero flex-h mt20px">
-        <div class="col-auto">
-          <i class="ion-chevron-left f16px positive bold center"></i>
-        </div>
-      </div>
-      <p class="pre dark-grey center f14px zero">
-        시
-        설
-        리
-        스
-        트
-      </p>
-    </div>
-  </ion-header-bar>
-
-  <ion-content class="top132px pt3px"
-    scrollbar-y="false"
-  >
-    <div class="row zero pb30px">
-
-      <div class="col-93">
-        <div class="row zero wrap">
-          <div class="col-24 ml1p mt5px pt15px pb15px flex light-grey-bg r5px"
-            ng-repeat="filterObj in FilterList.Model.filters"
-          >
-            <img class="w80p"
-              ng-src="{{filterObj.base}}"
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-navicon"
+        ng-click="toggleSideMenu(true)"
+        >
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <div class="row zero flex h44px">
+            <img class="h24px"
+            src="img/header_logo.png"
             >
-          </div>
         </div>
-      </div>
-    </div>
-  </ion-content>
+    </ion-nav-title>
+    <ion-header-bar class="bar top88px zero white-bg flex-v light-grey-bb">
+        <p class="zero center w100p positive f16px bold">시설 필터링</p>
+    </ion-header-bar>
+    <ion-header-bar class="bar stable-bg left94p top132px w6p h100p zero light-grey-bl"
+        ng-click="goToState('Main.MainTab.PlaceEvent.DaumMap', null, 'forward')"
+        >
+        <div>
+            <div class="row zero flex-h mt20px">
+                <div class="col-auto">
+                    <i class="ion-chevron-left f16px positive bold center"></i>
+                </div>
+            </div>
+            <p class="pre dark-grey center f14px zero">
+            시
+            설
+            리
+            스
+            트
+            </p>
+        </div>
+    </ion-header-bar>
+    <ion-content class="top132px pt3px"
+        scrollbar-y="false"
+        >
+        <div class="row zero pb30px">
+            <div class="col-93">
+                <div class="row zero wrap">
+                    <div class="col-24 ml1p mt5px pt15px pb15px flex light-grey-bg r5px"
+                        ng-repeat="filterObj in FilterList.Model.filters"
+                        >
+                        <img class="w80p"
+                        ng-src="{{filterObj.base}}"
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>

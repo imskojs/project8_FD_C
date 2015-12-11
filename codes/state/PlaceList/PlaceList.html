@@ -1,76 +1,69 @@
 <ion-view id="place-list"
     cache-view="true"
     hide-back-button="true"
->
-  <ion-nav-buttons side="left">
-    <button class="button button-icon icon ion-navicon"
-      ng-click="toggleSideMenu(true)"
     >
-    </button>
-  </ion-nav-buttons>
-
-  <ion-nav-title>
-    <div class="row zero flex h44px">
-      <img class="h24px"
-        src="img/header_logo.png"
-      >
-    </div>
-  </ion-nav-title>
-
-  <ion-header-bar class="bar top88px zero white-bg flex-v light-grey-bb">
-    <p class="zero center w100p positive f16px bold">시설 리스트</p>
-  </ion-header-bar>
-
-  <ion-pane class="stable-bg left0p top132px w7p h100p zero light-grey-br"
-    ng-click="goToState('Main.MainTab.PlaceEvent.DaumMap', null, 'back')"
-    touch
-  >
-    <div>
-      <div class="row zero flex-h mt20px">
-        <div class="col-auto">
-          <i class="ion-chevron-right f16px positive bold center"></i>
-        </div>
-      </div>
-      <p class="pre dark-grey center f14px zero">
-        시
-        설
-        검
-        색
-      </p>
-    </div>
-  </ion-pane>
-
-  <ion-content class="top132px pt3px"
-    scrollbar-y="false"
-  >
-    <div class="row zero pb30px">
-      <div class="col-91 ml9p">
-
-        <p class="zero f14px positive bold mt5px mb5px">
-          현재위치 기준 / 거리순 정렬
-        </p>
-        <div class="row zero mt0px light-grey-bb"
-          collection-repeat="place in PlaceList.Model.places"
-          item-width="100%"
-          item-height="90"
-          item-render-buffer="20"
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-navicon"
+        ng-click="toggleSideMenu(true)"
         >
-          <div class="col-35 mt5px">
-            <img class="w100p block positive-b h80px"
-              ng-src="{{place.photos[0].url}}">
-          </div>
-          <div class="col zero ml3p mt5px">
-            <p class="zero f18px darker bold text-overflow">
-              {{place.name}}
-            </p>
-            <p class="zero mt5px dark-grey f16px">
-              {{place.address}}
-            </p>
-          </div>
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <div class="row zero flex h44px">
+            <img class="h24px"
+            src="img/header_logo.png"
+            >
         </div>
-
-
-      </div>
-    </div>
-  </ion-content>
+    </ion-nav-title>
+    <ion-header-bar class="bar top88px zero white-bg flex-v light-grey-bb">
+        <p class="zero center w100p positive f16px bold">시설 리스트</p>
+    </ion-header-bar>
+    <ion-pane class="stable-bg left0p top132px w7p h100p zero light-grey-br"
+        ng-click="goToState('Main.MainTab.PlaceEvent.DaumMap', null, 'back')"
+        touch
+        >
+        <div>
+            <div class="row zero flex-h mt20px">
+                <div class="col-auto">
+                    <i class="ion-chevron-right f16px positive bold center"></i>
+                </div>
+            </div>
+            <p class="pre dark-grey center f14px zero">
+            시
+            설
+            검
+            색
+            </p>
+        </div>
+    </ion-pane>
+    <ion-content class="top132px pt3px"
+        scrollbar-y="false"
+        >
+        <div class="row zero pb30px">
+            <div class="col-91 ml9p">
+                <p class="zero f14px positive bold mt5px mb5px">
+                현재위치 기준 / 거리순 정렬
+                </p>
+                <div class="row zero mt0px light-grey-bb"
+                    collection-repeat="place in PlaceList.Model.places"
+                    item-width="100%"
+                    item-height="90"
+                    item-render-buffer="20"
+                    >
+                    <div class="col-35 mt5px">
+                        <img class="w100p block positive-b h80px"
+                        ng-src="{{place.photos[0].url}}">
+                    </div>
+                    <div class="col zero ml3p mt5px">
+                        <p class="zero f18px darker bold text-overflow">
+                        {{place.name}}
+                        </p>
+                        <p class="zero mt5px dark-grey f16px">
+                        {{place.address}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>

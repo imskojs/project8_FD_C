@@ -19,10 +19,11 @@ var uglify = require('gulp-uglify');
 var ngTemplate = require('gulp-ng-template');
 var imageop = require('gulp-image-optimization');
 var rename = require('gulp-rename');
-//var sh = require('shelljs');
+var sh = require('shelljs');
 var argv = require('yargs').argv;
 var gulpif = require('gulp-if');
 var stripDebug = require('gulp-strip-debug');
+var filenames = require('gulp-filenames');
 
 var paths = {
   img: ['./codes/img/**/*.*'],
@@ -93,16 +94,6 @@ gulp.task('lib', function(done) {
     .on('end', done);
 });
 
-gulp.task('img', function(done) {
-  gulp.src(paths.img)
-    .pipe(imageop({
-      optimizationLevel: 5,
-      progressive: true,
-      interlaced: true
-    }))
-    .pipe(gulp.dest('./www/img'))
-    .on('end', done);
-});
 
 gulp.task('view', function() {
   return gulp.src(paths.view)
@@ -164,7 +155,33 @@ gulp.task('js', function(done) {
     .on('end', done);
 });
 
-gulp.task('compile', ['lib', 'img', 'view', 'sassLib', 'sass', 'js']);
+gulp.task('files', function(done) {
+  gulp.src('./codes/img/*')
+    .pipe(filenames('images'))
+    .pipe(gulp.dest('./www/img/'))
+    .on('end', function() {
+      var imageFileNames = filenames.get('images');
+      var imageFilePaths = imageFileNames.map(function(fileName) {
+        return 'img/' + fileName;
+      });
+      sh.sed('-i', /\[.*\]/, JSON.stringify(imageFilePaths), './codes/js/Config/Assets.js');
+      done();
+    });
+});
+
+gulp.task('img', ['files'], function(done) {
+  gulp.src(paths.img)
+    .pipe(imageop({
+      optimizationLevel: 5,
+      progressive: true,
+      interlaced: true
+    }))
+    .pipe(gulp.dest('./www/img'))
+    .on('end', done);
+});
+
+
+gulp.task('compile', ['files', 'img', 'lib']);
 gulp.task('default', ['view', 'sassLib', 'sass', 'js']);
 
 gulp.task('watch', function() {

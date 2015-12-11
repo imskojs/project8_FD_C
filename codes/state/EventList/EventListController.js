@@ -11,7 +11,7 @@
     EventListModel
   ) {
     var EventList = this;
-    EventList.Model = EventListModel;
+    EventList.Model =  EventListModel;
 
 
     //====================================================

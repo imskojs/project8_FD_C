@@ -1,53 +1,48 @@
 <ion-view id="event-list"
     cache-view="true"
     hide-back-button="true"
->
-  <ion-nav-buttons side="left">
-    <button class="button button-icon icon ion-navicon"
-      ng-click="toggleSideMenu(true)"
     >
-    </button>
-  </ion-nav-buttons>
-
-  <ion-nav-title>
-    <div class="row zero flex h44px">
-      <img class="h24px"
-        src="img/header_logo.png"
-      >
-    </div>
-  </ion-nav-title>
-
-  <ion-header-bar class="bar top132px zero white-bg flex-v light-grey-bb">
-    <p class="zero center w100p positive f16px bold">이벤트 리스트</p>
-  </ion-header-bar>
-
-  <ion-content class="top176px pt3px"
-    scrollbar-y="false"
-  >
-    <div class="row zero pb30px">
-      <div class="col-93 ml7p">
-        <div class="row zero mt0px light-grey-bb"
-          collection-repeat="place in PlaceList.Model.places"
-          item-width="100%"
-          item-height="90"
-          item-render-buffer="20"
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-navicon"
+        ng-click="toggleSideMenu(true)"
         >
-          <div class="col-35 mt5px">
-            <img class="w100p block positive-b h80px"
-              ng-src="{{place.photos[0].url}}">
-          </div>
-          <div class="col zero ml3p mt5px">
-            <p class="zero f18px darker bold text-overflow">
-              {{place.name}}
-            </p>
-            <p class="zero mt5px dark-grey f16px">
-              {{place.address}}
-            </p>
-          </div>
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <div class="row zero flex h44px">
+            <img class="h24px"
+            src="img/header_logo.png"
+            >
         </div>
-
-
-      </div>
-    </div>
-  </ion-content>
+    </ion-nav-title>
+    <ion-header-bar class="bar top132px zero white-bg flex-v light-grey-bb">
+        <p class="zero center w100p positive f16px bold">이벤트 리스트</p>
+    </ion-header-bar>
+    <ion-content class="top176px pt3px"
+        scrollbar-y="false"
+        >
+        <div class="row zero pb30px">
+            <div class="col-93 ml7p">
+                <div class="row zero mt0px light-grey-bb"
+                    collection-repeat="place in PlaceList.Model.places"
+                    item-width="100%"
+                    item-height="90"
+                    item-render-buffer="20"
+                    >
+                    <div class="col-35 mt5px">
+                        <img class="w100p block positive-b h80px"
+                        ng-src="{{place.photos[0].url}}">
+                    </div>
+                    <div class="col zero ml3p mt5px">
+                        <p class="zero f18px darker bold text-overflow">
+                        {{place.name}}
+                        </p>
+                        <p class="zero mt5px dark-grey f16px">
+                        {{place.address}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>

@@ -14,7 +14,7 @@
   ) {
 
     var Main = this;
-    Main.Model = MainModel;
+     Main.Model =  MainModel;
 
     Main.logout = logout;
     //====================================================

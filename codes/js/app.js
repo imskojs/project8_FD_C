@@ -12,13 +12,17 @@
 
   init.$inject = [
     '$ionicPlatform', '$window', '$rootScope', '$state',
-    'RootScope', 'DEV_MODE'
+    'RootScope', 'Preload',
+    'DEV_MODE', 'Assets'
   ];
 
   function init(
     $ionicPlatform, $window, $rootScope, $state,
-    RootScope, DEV_MODE
+    RootScope, Preload,
+    DEV_MODE, Assets
   ) {
+
+    Preload.assets(Assets);
 
     angular.extend($rootScope, RootScope);
     if (DEV_MODE) {

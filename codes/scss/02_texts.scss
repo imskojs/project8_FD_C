@@ -14,6 +14,7 @@
 input {
   width: 100%;
   padding-top: 0 !important;
+  padding-bottom: 0 !important;
   border: 0;
   background-color: transparent;
 }
@@ -132,18 +133,24 @@ textarea {
     &::-webkit-input-placeholder {
       line-height: 100%;
       font-size: #{$i}px;
+      padding-bottom: 0 !important;
+      padding-top: 0px !important
     }
-    &::-moz-placeholder {
-      line-height: 100%;
-      font-size: #{$i}px;
-    }
-    &:-ms-input-placeholder {
-      line-height: 100%;
-      font-size: #{$i}px;
-    }
+    // &::-moz-placeholder {
+    //   line-height: 100%;
+    //   font-size: #{$i}px;
+    //   padding: 0 !important;
+    // }
+    // &:-ms-input-placeholder {
+    //   line-height: 100%;
+    //   font-size: #{$i}px;
+    //   padding: 0 !important;
+    // }
     &::placeholder {
       line-height: 100%;
       font-size: #{$i}px;
+      padding-bottom: 0 !important;
+      padding-top: 5px !important
     }
   }
   .placeholder-f#{$i}rem {
