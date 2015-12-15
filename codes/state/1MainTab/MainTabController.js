@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
   angular.module('app')
     .controller('MainTabController', MainTabController);
@@ -13,9 +13,5 @@
     var MainTab = this;
     MainTab.Model = MainTabModel;
 
-
-    //====================================================
-    //  Implementation
-    //====================================================
   }
 })();
