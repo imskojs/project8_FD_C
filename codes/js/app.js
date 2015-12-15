@@ -11,25 +11,23 @@
     .run(init);
 
   init.$inject = [
-    '$ionicPlatform', '$window', '$rootScope', '$state',
+      '$ionicPlatform', '$window', '$rootScope', '$state',
     'RootScope', 'Preload',
     'DEV_MODE', 'Assets'
   ];
-
   function init(
     $ionicPlatform, $window, $rootScope, $state,
     RootScope, Preload,
     DEV_MODE, Assets
   ) {
 
-    Preload.assets(Assets);
+           Preload.assets(Assets);
 
     angular.extend($rootScope, RootScope);
     if (DEV_MODE) {
-      setInitialState();
+      setInitialState() ;
     }
-    $ionicPlatform.ready(onIonicPlatformReady);
-
+        $ionicPlatform.ready(onIonicPlatformReady);
     //====================================================
     //  Implementation
     //====================================================
@@ -51,7 +49,8 @@
         $state.go('Main.WalkThrough');
       } else if (!$rootScope.AppStorage.token) {
         // Not logged in user logic
-        $state.go('Main.Login');
+        // $state.go('Main.MainTab.PlaceEvent.DaumMap');
+        $state.go('Main.PlaceReview');
       } else {
         // Normal user logic
         $state.go('Main.SampleList');

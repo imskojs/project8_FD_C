@@ -8,7 +8,7 @@
   ];
 
   function PlaceEventController(
-    PlaceEventModel
+     PlaceEventModel
   ) {
     var PlaceEvent = this;
     PlaceEvent.Model = PlaceEventModel;

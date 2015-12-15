@@ -10,5 +10,5 @@
     .constant("DEV_MODE", true)
     .constant("SERVER_URL", "http://192.168.0.65:1337")
     .constant("APP_NAME", "FITNESS_DAY")
-    .constant("APP_ID", 0);
+    .constant("APP_ID", 9);
 })(angular);

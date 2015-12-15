@@ -42,11 +42,21 @@
         <div class="row zero pb30px">
             <div class="col-93">
                 <div class="row zero wrap">
-                    <div class="col-24 ml1p mt5px pt15px pb15px flex light-grey-bg r5px"
+                    <div class="col-24 ml1p mt5px pt15px pb15px flex r5px"
                         ng-repeat="filterObj in FilterList.Model.filters"
+                        ng-class="{
+                        'positive-bg': FilterList.isSelectedFilter(filterObj),
+                        'light-grey-bg': !FilterList.isSelectedFilter(filterObj)
+                        }"
+                        ng-click="FilterList.toggleSelectedFilter(filterObj)"
                         >
                         <img class="w80p"
+                        ng-if="!FilterList.isSelectedFilter(filterObj)"
                         ng-src="{{filterObj.base}}"
+                        >
+                        <img class="w80p"
+                        ng-if="FilterList.isSelectedFilter(filterObj)"
+                        ng-src="{{filterObj.selected}}"
                         >
                     </div>
                 </div>

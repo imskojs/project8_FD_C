@@ -215,6 +215,9 @@ textarea {
     white-space: nowrap;
     text-overflow: ellipsis
 }
+.word-wrap {
+  word-wrap: break-word;
+}
 .pre {
     white-space: pre-line;
     line-height: 125% !important;
@@ -936,6 +939,35 @@ progress[value]::-webkit-progress-bar{
   -ms-flex-align: center;
   align-items: center;
 }
+.flex-right {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: flex-end;
+  justify-content: flex-end;
+  -webkit-align-items: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+.flex-left {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: flex-start;
+  justify-content: flex-start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.aling-left {
+  -webkit-align-self: flex-start;  
+  -ms-flex-item-align: start;
+  align-self: flex-start;
+}
+
 .flex-v {
   display: -webkit-flex;
   display: -ms-flexbox;

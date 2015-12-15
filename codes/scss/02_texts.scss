@@ -45,6 +45,9 @@ textarea {
     white-space: nowrap;
     text-overflow: ellipsis
 }
+.word-wrap {
+  word-wrap: break-word;
+}
 .pre {
     white-space: pre-line;
     line-height: 125% !important;

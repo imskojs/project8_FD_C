@@ -11,7 +11,7 @@
 var gulp = require('gulp');
 //var gutil = require('gulp-util');
 //var bower = require('bower');
-var concat = require('gulp-concat');
+var concat = require('gulp-concat') ;
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var purify = require('gulp-purifycss');
@@ -94,7 +94,6 @@ gulp.task('lib', function(done) {
     .on('end', done);
 });
 
-
 gulp.task('view', function() {
   return gulp.src(paths.view)
     .pipe(ngTemplate({
@@ -155,11 +154,16 @@ gulp.task('js', function(done) {
     .on('end', done);
 });
 
-gulp.task('files', function(done) {
-  gulp.src('./codes/img/*')
+gulp.task('img', function(done) {
+  gulp.src(paths.img)
     .pipe(filenames('images'))
+    .pipe(imageop({
+      optimizationLevel: 5,
+      progressive: true,
+      interlaced: true
+    }))
     .pipe(gulp.dest('./www/img/'))
-    .on('end', function() {
+    .on('end', function(){
       var imageFileNames = filenames.get('images');
       var imageFilePaths = imageFileNames.map(function(fileName) {
         return 'img/' + fileName;
@@ -169,19 +173,7 @@ gulp.task('files', function(done) {
     });
 });
 
-gulp.task('img', ['files'], function(done) {
-  gulp.src(paths.img)
-    .pipe(imageop({
-      optimizationLevel: 5,
-      progressive: true,
-      interlaced: true
-    }))
-    .pipe(gulp.dest('./www/img'))
-    .on('end', done);
-});
-
-
-gulp.task('compile', ['files', 'img', 'lib']);
+gulp.task('compile', ['img', 'lib']);
 gulp.task('default', ['view', 'sassLib', 'sass', 'js']);
 
 gulp.task('watch', function() {

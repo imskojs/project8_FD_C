@@ -1,0 +1,53 @@
+<ion-view id="place-review-list"
+    cache-view="true"
+    hide-back-button="true"
+    >
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-android-arrow-back"
+        ng-click="goBack()"
+        >
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <div class="row zero flex h44px">
+            <img class="h24px"
+            src="img/header_logo.png"
+            >
+        </div>
+    </ion-nav-title>
+    <ion-content class="pt1px">
+
+        <ion-refresher
+            ng-if="!PlaceReview.Model.loading"
+            on-refresh="PlaceReview.refresh()"
+            >
+        </ion-refresher>
+
+        <div class="w100p h95vh flex light-grey-bg absolute"
+            style="z-index: 2"
+            ng-if="PlaceReview.Model.loading"
+            >
+            <ion-spinner class="spinner-40px mb88px" icon="ripple">
+            </ion-spinner>
+        </div>
+        <!-- row -->
+        <div class="black-b">
+            <div class="row zero pl5p light-grey-bb pt5px pr5p pb5px"
+                ng-repeat="review in PlaceReview.Model.reviews"
+            >
+                <div class="col-auto">
+                    <img ng-src="{{ review.createdBy.profile_picture }}">
+                </div>
+                
+            </div>
+        </div>
+
+        <ion-infinite-scroll
+            on-infinite="PlaceReview.loadMore()"
+            immediate-check="true"
+            ng-if="PlaceReview.Model.more"
+            >
+        </ion-infinite-scroll>
+
+    </ion-content>
+</ion-view>

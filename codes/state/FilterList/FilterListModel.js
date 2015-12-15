@@ -10,124 +10,149 @@
 
     var model = {
       filters: [{
-        name: 'running',
+        text: '육상',
         base: 'img/category_icon01_2.png',
-        selected: 'img/category_icon01.png'
+        selected: 'img/category_icon01.png',
+        alone: 'img/category_icon01_3.png'
       }, {
-        name: 'pingPong',
+        text: '탁구',
         base: 'img/category_icon02_2.png',
-        selected: 'img/category_icon02.png'
+        selected: 'img/category_icon02.png',
+        alone: 'img/category_icon02_3.png'
       }, {
-        name: 'basketBall',
+        text: '농구',
         base: 'img/category_icon03_2.png',
-        selected: 'img/category_icon03.png'
+        selected: 'img/category_icon03.png',
+        alone: 'img/category_icon03_3.png'
       }, {
-        name: 'bowling',
+        text: '볼링',
         base: 'img/category_icon04_2.png',
-        selected: 'img/category_icon04.png'
+        selected: 'img/category_icon04.png',
+        alone: 'img/category_icon04_3.png'
       }, {
-        name: 'soccer',
+        text: '축구',
         base: 'img/category_icon05_2.png',
-        selected: 'img/category_icon05.png'
+        selected: 'img/category_icon05.png',
+        alone: 'img/category_icon05_3.png'
       }, {
-        name: 'hocky',
+        text: '하키',
         base: 'img/category_icon06_2.png',
-        selected: 'img/category_icon06.png'
+        selected: 'img/category_icon06.png',
+        alone: 'img/category_icon06_3.png'
       }, {
-        name: 'baseBall',
+        text: '야구',
         base: 'img/category_icon07_2.png',
-        selected: 'img/category_icon07.png'
+        selected: 'img/category_icon07.png',
+        alone: 'img/category_icon07_3.png'
       }, {
-        name: 'cycle',
+        text: '자전거',
         base: 'img/category_icon08_2.png',
-        selected: 'img/category_icon08.png'
+        selected: 'img/category_icon08.png',
+        alone: 'img/category_icon08_3.png'
       }, {
-        name: 'tennis',
+        text: '테니스',
         base: 'img/category_icon09_2.png',
-        selected: 'img/category_icon09.png'
+        selected: 'img/category_icon09.png',
+        alone: 'img/category_icon09_3.png'
       }, {
-        name: 'combat',
+        text: '무도',
         base: 'img/category_icon10_2.png',
-        selected: 'img/category_icon10.png'
+        selected: 'img/category_icon10.png',
+        alone: 'img/category_icon10_3.png'
       }, {
-        name: 'gateBall',
+        text: '게이트볼',
         base: 'img/category_icon11_2.png',
-        selected: 'img/category_icon11.png'
+        selected: 'img/category_icon11.png',
+        alone: 'img/category_icon11_3.png'
       }, {
-        name: 'basketBall',
-        base: 'img/category_icon03_2.png',
-        selected: 'img/category_icon03.png'
-      }, {
-        name: 'swimming',
+        text: '수영',
         base: 'img/category_icon12_2.png',
-        selected: 'img/category_icon12.png'
+        selected: 'img/category_icon12.png',
+        alone: 'img/category_icon12_3.png'
       }, {
-        name: 'shooting',
+        text: '사격',
         base: 'img/category_icon13_2.png',
-        selected: 'img/category_icon13.png'
+        selected: 'img/category_icon13.png',
+        alone: 'img/category_icon13_3.png'
       }, {
-        name: 'archery',
+        text: '양궁',
         base: 'img/category_icon14_2.png',
-        selected: 'img/category_icon14.png'
+        selected: 'img/category_icon14.png',
+        alone: 'img/category_icon14_3.png'
       }, {
-        name: 'horseRacing',
+        text: '승마',
         base: 'img/category_icon15_2.png',
-        selected: 'img/category_icon15.png'
+        selected: 'img/category_icon15.png',
+        alone: 'img/category_icon15_3.png'
       }, {
-        name: 'golf',
+        text: '골프',
         base: 'img/category_icon16_2.png',
-        selected: 'img/category_icon16.png'
+        selected: 'img/category_icon16.png',
+        alone: 'img/category_icon16_3.png'
       }, {
-        name: 'yacht',
+        text: '요트',
         base: 'img/category_icon17_2.png',
-        selected: 'img/category_icon17.png'
+        selected: 'img/category_icon17.png',
+        alone: 'img/category_icon17_3.png'
       }, {
-        name: 'skate',
+        text: '빙상',
         base: 'img/category_icon18_2.png',
-        selected: 'img/category_icon18.png'
+        selected: 'img/category_icon18.png',
+        alone: 'img/category_icon18_3.png'
       }, {
-        name: 'skiing',
+        text: '스키',
         base: 'img/category_icon19_2.png',
-        selected: 'img/category_icon19.png'
+        selected: 'img/category_icon19.png',
+        alone: 'img/category_icon19_3.png'
       }, {
-        name: 'billiard',
+        text: '당구',
         base: 'img/category_icon20_2.png',
-        selected: 'img/category_icon20.png'
+        selected: 'img/category_icon20.png',
+        alone: 'img/category_icon20_3.png'
       }, {
-        name: 'weights',
+        text: '헬스',
         base: 'img/category_icon21_2.png',
-        selected: 'img/category_icon21.png'
+        selected: 'img/category_icon21.png',
+        alone: 'img/category_icon21_3.png'
       }, {
-        name: 'waterLeisure',
+        text: '수상레저',
         base: 'img/category_icon22_2.png',
-        selected: 'img/category_icon22.png'
+        selected: 'img/category_icon22.png',
+        alone: 'img/category_icon22_3.png'
       }, {
-        name: 'mountainLeisure',
+        text: '산악레저',
         base: 'img/category_icon23_2.png',
-        selected: 'img/category_icon23.png'
+        selected: 'img/category_icon23.png',
+        alone: 'img/category_icon23_3.png'
       }, {
-        name: 'yoga',
+        text: '요가',
         base: 'img/category_icon24_2.png',
-        selected: 'img/category_icon24.png'
+        selected: 'img/category_icon24.png',
+        alone: 'img/category_icon24_3.png'
       }, {
-        name: 'academy',
+        text: '아카데미',
         base: 'img/category_icon25_2.png',
-        selected: 'img/category_icon25.png'
+        selected: 'img/category_icon25.png',
+        alone: 'img/category_icon25_3.png'
       }, {
-        name: 'sportsPark',
+        text: '체육공원',
         base: 'img/category_icon26_2.png',
-        selected: 'img/category_icon26.png'
+        selected: 'img/category_icon26.png',
+        alone: 'img/category_icon26_3.png'
       }, {
-        name: 'stadium',
+        text: '스타디움',
         base: 'img/category_icon27_2.png',
-        selected: 'img/category_icon27.png'
+        selected: 'img/category_icon27.png',
+        alone: 'img/category_icon27_3.png'
       }, {
-        name: 'etc',
+        text: '기타',
         base: 'img/category_icon28_2.png',
-        selected: 'img/category_icon28.png'
+        selected: 'img/category_icon28.png',
+        alone: 'img/category_icon28_3.png'
       }],
       selectedFilters: []
     };
+    
     return model;
   }
 })();

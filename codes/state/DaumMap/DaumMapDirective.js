@@ -4,10 +4,16 @@
   angular.module('app')
     .directive('daumMap', daumMap);
 
-  // Products or Posts
-  daumMap.$inject = ['DaumMapModel', '$state', '$cordovaGeolocation', 'Message', '$q', '$stateParams', '$window'];
+  // Place or Posts
+  daumMap.$inject = [
+    '$state', '$cordovaGeolocation', '$q', '$stateParams', '$window',
+    'DaumMapModel', 'Message', 'Place'
+  ];
 
-  function daumMap(DaumMapModel, $state, $cordovaGeolocation, Message, $q, $stateParams, $window) {
+  function daumMap(
+    $state, $cordovaGeolocation, $q, $stateParams, $window,
+    DaumMapModel, Message, Place
+  ) {
 
     var daum = $window.daum;
 
@@ -60,13 +66,12 @@
           // Request server for places;
           var PlacesPromise = {};
           if ($stateParams.id) {
-            PlacesPromise = Products.findById({
+            PlacesPromise = Place.findById({
               id: $stateParams.id,
               populates: 'photos'
             }).$promise;
           } else {
-            PlacesPromise = Products.getProductWithin({
-              type: 'local',
+            PlacesPromise = Place.within({
               latitude: currentCenter.latitude,
               longitude: currentCenter.longitude,
               distance: currentCenter.distance || 5000,
@@ -108,7 +113,7 @@
                 // modal references DaumMapModel.selectedPlace to fill in the info
                 var index = Number(marker.getTitle());
                 Message.loading();
-                Products.findById({
+                Place.findById({
                   id: DaumMapModel.places[index].id,
                   populates: 'photos,createdBy'
                 }).$promise
@@ -172,7 +177,7 @@
 
         DaumMapModel.findPlaceByIdThenDrawAPlace = function(id) {
           Message.loading();
-          Products.findById({
+          Place.findById({
             id: id,
             populates: 'photos'
           }).$promise

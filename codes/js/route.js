@@ -74,6 +74,34 @@
     })
 
     //====================================================
+    //  PlaceDetail
+    //====================================================
+
+    .state('Main.PlaceDetail', {
+      url: '/PlaceDetail',
+      views: {
+        Main: {
+          templateUrl: 'state/PlaceDetail/PlaceDetail.html',
+          controller: 'PlaceDetailController as PlaceDetail'
+        }
+      }
+    })
+
+    //====================================================
+    // PlaceReview 
+    //====================================================
+
+    .state('Main.PlaceReview', {
+      url: '/PlaceReview',
+      views: {
+        Main: {
+          templateUrl: 'state/PlaceReview/PlaceReview.html',
+          controller: 'PlaceReviewController as PlaceReview'
+        }
+      }
+    })
+
+    //====================================================
     //  FilterList, PlaceEvent.DaumMap, PlaceEvent.EventList, PlaceList
     //====================================================
     .state('Main.MainTab.FilterList', {
