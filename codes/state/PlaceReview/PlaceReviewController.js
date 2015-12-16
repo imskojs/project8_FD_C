@@ -14,7 +14,7 @@
   ) {
     var PlaceReview = this;
     PlaceReview.Model = PlaceReviewModel;
-    var noLoadingStates = [];
+    // var noLoadingStates = [];
 
     PlaceReview.refresh = refresh;
     PlaceReview.loadMore = loadMore;

@@ -19,10 +19,7 @@
         scrollbar-y="false"
         >
         <div class="zero mt0px"
-            collection-repeat="post in PostListPopular.Model.posts"
-            item-width="100%"
-            item-height="480"
-            item-render-buffer="10"
+            ng-repeat="post in PostListPopular.Model.posts"
             >
             <div class="white-bg w98p auto r5px mt5px pt1px shadow">
                 <!--row start-->
@@ -119,7 +116,4 @@
             </div>
         </div>
     </ion-content>
-    <div class="r60px w60px h60px absolute bottom70px right10px flex positive-b5px white-bg shadow">
-        <i class="ion-plus f40px positive"></i>
-    </div>
 </ion-view>

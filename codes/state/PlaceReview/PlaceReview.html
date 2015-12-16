@@ -1,53 +1,150 @@
 <ion-view id="place-review-list"
-    cache-view="true"
-    hide-back-button="true"
+		cache-view="true"
+		hide-back-button="true"
+		>
+		<ion-nav-buttons side="left">
+				<button class="button button-icon icon ion-android-arrow-back"
+				ng-click="goBack()"
+				>
+				</button>
+		</ion-nav-buttons>
+		<ion-nav-title>
+			<div class="row zero flex h44px">
+				<img class="h24px"
+  				src="img/header_logo.png"
+				>
+			</div>
+		</ion-nav-title>
+    <ion-pane class="white-bg h33px top44px flex-v">
+      <p class="zero positive center f16px bold w100p">
+        대구 시민운동장 야구장
+      </p>
+    </ion-pane>
+		<ion-content class="pt1px bottom77px top77px"
+      scrollbar-y="false"
     >
-    <ion-nav-buttons side="left">
-        <button class="button button-icon icon ion-android-arrow-back"
-        ng-click="goBack()"
-        >
-        </button>
-    </ion-nav-buttons>
-    <ion-nav-title>
-        <div class="row zero flex h44px">
-            <img class="h24px"
-            src="img/header_logo.png"
-            >
+
+				<ion-refresher
+					ng-if="!PlaceReview.Model.loading"
+					on-refresh="PlaceReview.refresh()"
+				>
+				</ion-refresher>
+
+				<div class="w100p h95vh flex light-grey-bg absolute"
+					style="z-index: 2"
+					ng-if="PlaceReview.Model.loading"
+				>
+					<ion-spinner class="spinner-40px mb88px" icon="ripple">
+					</ion-spinner>
+				</div>
+				<!-- container -->
+				<div class="darker-b4px">
+						<div class="row zero pl5p light-grey-bb pt5px pr5p pb5px"
+								ng-repeat="review in PlaceReview.Model.reviews"
+						>
+								<div class="col-auto">
+										<img class="w60px h60px r60px"
+												ng-src="{{ review.createdBy.profile_picture }}"
+										>
+								</div>
+								<div class="col zero pt10px">
+										<div class="row zero flex-v">
+											<div class="col-auto ml5p pl5px pr5px">
+												<p class="zero f14px positive bold">
+													{{ review.createdBy.name}}
+												</p>
+											</div>
+											<div class="col-auto zero ml2px">
+  											<div class="ion-star f10px center positive"></div>
+											</div>
+                      <div class="col-auto zero ml2px">
+                        <div class="ion-star f10px center positive"></div>
+                      </div>
+                      <div class="col-auto zero ml2px">
+                        <div class="ion-star f10px center positive"></div>
+                      </div>
+                      <div class="col-auto zero ml2px">
+                        <div class="ion-star f10px center positive"></div>
+                      </div>
+                      <div class="col-auto zero ml2px">
+                        <div class="ion-android-star-outline f10px center positive"></div>
+                      </div>
+                      <div class="col-auto zero ml10px positive f14px bold">
+                        <p class="zero"> {{ review.stars }} </p>
+                      </div>
+                      <div class="col zero flex-right flex-v"
+                        ng-if="true"
+                      >
+                        <div class="col-auto pl8px pr8px positive-br2px"
+                          ng-click=""
+                        >
+                          <p class="zero f14px positive bold">
+                            수정
+                          </p>
+                        </div>
+                        <div class="col-auto pl8px pr8px"
+                          ng-click=""
+                        >
+                          <p class="zero f14px positive bold">
+                            삭제
+                          </p>
+                        </div>
+                      </div>
+										</div>
+                    <p class="zero f14px ml5p mt5px dark-grey letter-spacing-1">
+                      {{ review.content }}
+                    </p>
+                    <p class="zero f12px grey ml5p mt5px">
+                      {{ review.createdAt | date: 'yyyy.MM.dd HH:mm'}}
+                    </p>
+								</div>
+								
+						</div>
+
+				</div>
+
+				<ion-infinite-scroll
+						on-infinite="PlaceReview.loadMore()"
+						immediate-check="true"
+						ng-if="PlaceReview.Model.more"
+						>
+				</ion-infinite-scroll>
+
+		</ion-content>
+    <ion-pane class="h33px absolute top-none bottom44px light-grey-bg">
+      <div class="row zero flex-v h33px ml5p mr10p">
+        <div class="col-30">
+          <p class="zero f14px positive bold">별점 주기</p>
         </div>
-    </ion-nav-title>
-    <ion-content class="pt1px">
-
-        <ion-refresher
-            ng-if="!PlaceReview.Model.loading"
-            on-refresh="PlaceReview.refresh()"
-            >
-        </ion-refresher>
-
-        <div class="w100p h95vh flex light-grey-bg absolute"
-            style="z-index: 2"
-            ng-if="PlaceReview.Model.loading"
-            >
-            <ion-spinner class="spinner-40px mb88px" icon="ripple">
-            </ion-spinner>
+        <div class="col zero flex-v flex-right pr15p">
+          <div class="col-auto pl5px pr5px">
+            <div class="ion-star f18px center positive"></div>
+          </div>
+          <div class="col-auto pl5px pr5px">
+            <div class="ion-star f18px center positive"></div>
+          </div>
+          <div class="col-auto pl5px pr5px">
+            <div class="ion-star f18px center positive"></div>
+          </div>
+          <div class="col-auto pl5px pr5px">
+            <div class="ion-star f18px center positive"></div>
+          </div>
+          <div class="col-auto pl5px pr5px">
+            <div class="ion-android-star-outline f18px center positive"></div>
+          </div>
         </div>
-        <!-- row -->
-        <div class="black-b">
-            <div class="row zero pl5p light-grey-bb pt5px pr5p pb5px"
-                ng-repeat="review in PlaceReview.Model.reviews"
-            >
-                <div class="col-auto">
-                    <img ng-src="{{ review.createdBy.profile_picture }}">
-                </div>
-                
-            </div>
+      </div>
+    </ion-pane>
+    <ion-footer-bar class="zero positive-bg">
+      <div class="row zero h44px pt8px pb8px pl5p pr5p flex-v">
+        <div class="col-80">
+          <input class="darker-b2px h30px light-bg r3px f14px placeholder-f14px placeholder-grey pl5px" type="text"
+            placeholder="리뷰를 입력해주세요."
+          >
         </div>
-
-        <ion-infinite-scroll
-            on-infinite="PlaceReview.loadMore()"
-            immediate-check="true"
-            ng-if="PlaceReview.Model.more"
-            >
-        </ion-infinite-scroll>
-
-    </ion-content>
+        <div class="col-20 flex">
+          <div class="ion-chatbubble-working f26px white"></div>
+        </div>
+      </div>
+    </ion-footer-bar>
 </ion-view>

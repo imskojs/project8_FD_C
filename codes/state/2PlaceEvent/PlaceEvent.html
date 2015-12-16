@@ -18,21 +18,21 @@
     <ion-header-bar class="bar top88px zero white-bg flex-v light-grey-bb">
         <div class="row zero h34px dark-b w90p r5px auto">
             <div class="col h33px flex darker"
-                ng-class="{'positive-bg': !Main.DaumMapModel.filterByEvent}"
-                ng-click="Main.DaumMapModel.filterByEvent = false"
+                ng-class="{'positive-bg': isState('Main.MainTab.PlaceEvent.DaumMap')}"
+                ng-click="goToState('Main.MainTab.PlaceEvent.DaumMap',{},'back')"
                 >
                 <p class="zero f16px center bold"
-                ng-class="{'white': !Main.DaumMapModel.filterByEvent}"
+                ng-class="{'white': isState('Main.MainTab.PlaceEvent.DaumMap')}"
                 >
                 다모여스포츠 시설
                 </p>
             </div>
             <div class="col h33px flex dark-bl"
-                ng-class="{'positive-bg': Main.DaumMapModel.filterByEvent}"
-                ng-click="Main.DaumMapModel.filterByEvent = true"
+                ng-class="{'positive-bg': isState('Main.MainTab.PlaceEvent.EventList')}"
+                ng-click="goToState('Main.MainTab.PlaceEvent.EventList', {}, 'forward')"
                 >
                 <p class="zero f16px darker center bold"
-                ng-class="{'white': Main.DaumMapModel.filterByEvent}"
+                ng-class="{'white': isState('Main.MainTab.PlaceEvent.EventList')}"
                 >
                 다모여스포츠 이벤트
                 </p>

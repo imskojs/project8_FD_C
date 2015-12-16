@@ -1,0 +1,81 @@
+<ion-view id="post-create"
+    cache-view="true"
+    hide-back-button="true"
+    >
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-android-arrow-back"
+        ng-click="goBack()"
+        >
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <div class="row zero flex h44px">
+            <img class="h24px"
+            src="img/header_logo.png"
+            >
+        </div>
+    </ion-nav-title>
+    <ion-content class="pt1px bottom45px"
+      scrollbar-y="false"
+    >
+
+        <ion-refresher
+            ng-if="!PostCreate.Model.loading"
+            on-refresh="PostCreate.refresh()"
+            >
+        </ion-refresher>
+
+        <div class="w100p h95vh flex light-grey-bg absolute"
+            style="z-index: 2"
+            ng-if="PostCreate.Model.loading"
+            >
+            <ion-spinner class="spinner-40px mb88px" icon="ripple">
+            </ion-spinner>
+        </div>
+        <!-- container -->
+        <div class="darker-b4px">
+            <div class="row zero pl1p pt5px pr5p pb5px">
+                <div class="col-auto">
+                    <img class="w60px h60px r60px"
+                        ng-src="{{'http://placehold.it/180x180'}}"
+                    >
+                </div>
+                <div class="col zero pt10px">
+                    <div class="row zero flex-v">
+                      <div class="col-auto ml5p">
+                        <p class="zero f14px positive bold">
+                            오미자
+                        </p>
+                      </div>
+                    </div>
+                    <textarea class="placeholder-grey placeholder-f14px placeholder-para f14px dark-grey h200px w100p r5px p5px light-grey-bg ml2p"
+                    placeholder="내용을 입력해주세요."></textarea>
+                </div>
+            </div>
+            <p class="zero ml5p bold positive f14px mt5px mb5px">
+                이미지 업로드(최대 5개까지 가능합니다)
+            </p>
+
+        </div>
+
+        <ion-infinite-scroll
+            on-infinite="PostCreate.loadMore()"
+            immediate-check="true"
+            ng-if="PostCreate.Model.more"
+            >
+        </ion-infinite-scroll>
+
+    </ion-content>
+    <ion-footer-bar class="zero positive-bg">
+      <div class="row zero h44px pt8px pb8px pl5p pr5p flex-v">
+        <div class="col-80">
+          <input class="darker-b2px h30px light-bg r3px f14px placeholder-f14px placeholder-grey pl5px" type="text"
+            placeholder="리뷰를 입력해주세요."
+          >
+        </div>
+        <div class="col-20 flex">
+          <div class="ion-chatbubble-working f26px white"></div>
+        </div>
+      </div>
+    </ion-footer-bar>
+</ion-view>

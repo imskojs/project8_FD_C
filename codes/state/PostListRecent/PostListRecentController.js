@@ -4,10 +4,12 @@
     .controller('PostListRecentController', PostListRecentController);
 
   PostListRecentController.$inject = [
+    '$scope',
     'PostListRecentModel'
   ];
 
   function PostListRecentController(
+    $scope,
     PostListRecentModel
   ) {
     var PostListRecent = this;

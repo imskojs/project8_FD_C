@@ -24,6 +24,7 @@
     return interceptor;
 
     function request(req) {
+
       var token = AppStorage.token;
       if (token) {
         req.headers.Authorization = 'Bearer ' + token;

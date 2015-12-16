@@ -52,7 +52,11 @@
     </ion-header-bar>
     <ion-nav-view name="PostList">
     </ion-nav-view>
-    <div class="r60px w60px h60px absolute bottom70px right10px flex positive-b5px white-bg shadow">
+
+    <ion-pane class="r60px w60px h60px absolute bottom33px top-none left-none right5p flex positive-b5px white-bg shadow z-index3"
+        ng-click="PostList.goToCreatePost();"
+    >
         <i class="ion-plus f40px positive"></i>
-    </div>
+    </ion-pane>
+
 </ion-view>

@@ -8,10 +8,10 @@
  * Written by Seunghoon Ko <imskojs@gmail.com>, 10/10/2015
  *
  */
+
 //====================================================
 //  Positions
 //====================================================
-
 @for $i from 0 through 600 {
   @each $app-direction in $app-directions {
     // .top0px, ..., .left300px
@@ -32,37 +32,68 @@
     }
   }
 }
+
+@for $i from 0 through 100 {
+  .z-index#{$i} {
+    z-index: #{$i} !important;
+  }
+}
+
 .relative {
-    position: relative;
+  position: relative;
 }
+
 .absolute {
-    position: absolute;
+  position: absolute;
 }
+
 .block {
   display: block;
 }
+
 .inline {
   display: block;
 }
+
 .inline-block {
   display: inline-block;
 }
+
 .fixed {
   display: fixed;
 }
+
 .table {
   display: table;
 }
+
 .table-cell {
   display: table-cell;
 }
 
 .zero {
-    margin: 0;
-    padding: 0;
-    border: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
+
 .auto {
   margin-left: auto !important;
   margin-right: auto !important;
+}
+
+.top-none {
+  top: auto !important;
+}
+
+.bottom-none {
+  bottom: auto !important;
+}
+
+.left-none {
+  left: auto !important;
+}
+
+.right-none {
+  right: auto !important;
 }

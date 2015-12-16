@@ -1,33 +1,36 @@
 (function(angular) {
   'use strict';
   angular.module('app', [
-    'ionic',
-    'ngCordova',
-    'ngResource',
-    'ngFileUpload',
-    'ngTemplates',
-    'ngStorage'
-  ])
+      'ionic',
+      'ngCordova',
+      'ngResource',
+      'ngFileUpload',
+      'ngTemplates',
+      'ngStorage'
+    ])
     .run(init);
 
   init.$inject = [
-      '$ionicPlatform', '$window', '$rootScope', '$state',
+    '$ionicPlatform', '$window', '$rootScope', '$state',
     'RootScope', 'Preload',
     'DEV_MODE', 'Assets'
   ];
+
   function init(
     $ionicPlatform, $window, $rootScope, $state,
     RootScope, Preload,
     DEV_MODE, Assets
   ) {
 
-           Preload.assets(Assets);
+    Preload.assets(Assets);
 
     angular.extend($rootScope, RootScope);
+
     if (DEV_MODE) {
-      setInitialState() ;
+      setInitialState();
     }
-        $ionicPlatform.ready(onIonicPlatformReady);
+
+    $ionicPlatform.ready(onIonicPlatformReady);
     //====================================================
     //  Implementation
     //====================================================
@@ -50,7 +53,7 @@
       } else if (!$rootScope.AppStorage.token) {
         // Not logged in user logic
         // $state.go('Main.MainTab.PlaceEvent.DaumMap');
-        $state.go('Main.PlaceReview');
+        $state.go('Main.PostCreate');
       } else {
         // Normal user logic
         $state.go('Main.SampleList');

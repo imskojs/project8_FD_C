@@ -19,10 +19,7 @@
         scrollbar-y="false"
         >
         <div class="zero mt0px"
-            collection-repeat="post in PostListRecent.Model.posts"
-            item-width="100%"
-            item-height="480"
-            item-render-buffer="10"
+            ng-repeat="post in PostListRecent.Model.posts"
             >
             <div class="white-bg w98p auto r5px mt5px pt1px shadow">
                 <!--row start-->
@@ -62,16 +59,23 @@
                 <p class="pre para f14px dark-grey w90p auto mt8px lines-4"> {{post.content}}
                 </p>
                 <!-- row end-->
+
                 <!--row start-->
+<!--                 
                 <div class="w90p auto h240px flex"
                     ng-if="!PostListRecent.loadPhotos"
                     >
                     <ion-spinner class="spinner-100px" icon="ripple">
                     </ion-spinner>
                 </div>
+ -->
+
+
+
+
+                    <!-- ng-if="PostListRecent.loadPhotos" -->
                 <ion-slide-box class="w90p auto"
                     show-pager="true"
-                    ng-if="PostListRecent.loadPhotos"
                     >
                     <ion-slide
                         ng-repeat="photo in post.photos"
@@ -81,6 +85,7 @@
                         >
                     </ion-slide>
                 </ion-slide-box>
+                
                 <!--row end-->
                 <!-- row start -->
                 <div class="row zero w90p ml5p mt5px mb5px">
@@ -119,7 +124,7 @@
             </div>
         </div>
     </ion-content>
-    <div class="r60px w60px h60px absolute bottom70px right10px flex positive-b5px white-bg shadow">
+<!--     <div class="r60px w60px h60px absolute bottom70px right10px flex positive-b5px white-bg shadow">
         <i class="ion-plus f40px positive"></i>
     </div>
-</ion-view>
+ --></ion-view>

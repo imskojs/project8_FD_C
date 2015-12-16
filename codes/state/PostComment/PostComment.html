@@ -1,0 +1,104 @@
+<ion-view id="post-comment"
+    cache-view="true"
+    hide-back-button="true"
+    >
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-android-arrow-back"
+        ng-click="goBack()"
+        >
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+        <div class="row zero flex h44px">
+            <img class="h24px"
+            src="img/header_logo.png"
+            >
+        </div>
+    </ion-nav-title>
+    <ion-content class="pt1px bottom45px"
+      scrollbar-y="false"
+    >
+
+        <ion-refresher
+            ng-if="!PostComment.Model.loading"
+            on-refresh="PostComment.refresh()"
+            >
+        </ion-refresher>
+
+        <div class="w100p h95vh flex light-grey-bg absolute"
+            style="z-index: 2"
+            ng-if="PostComment.Model.loading"
+            >
+            <ion-spinner class="spinner-40px mb88px" icon="ripple">
+            </ion-spinner>
+        </div>
+        <!-- container -->
+        <div class="darker-b4px">
+            <div class="row zero pl5p light-grey-bb pt5px pr5p pb5px"
+                ng-repeat="comment in PostComment.Model.comments"
+            >
+                <div class="col-auto">
+                    <img class="w60px h60px r60px"
+                        ng-src="{{ comment.createdBy.profile_picture }}"
+                    >
+                </div>
+                <div class="col zero pt10px">
+                    <div class="row zero flex-v">
+                      <div class="col-auto ml5p">
+                        <p class="zero f14px positive bold">
+                          {{ comment.createdBy.name}}
+                        </p>
+                      </div>
+
+                      <div class="col zero flex-right flex-v"
+                        ng-if="true"
+                      >
+                        <div class="col-auto pl8px pr8px positive-br2px"
+                          ng-click=""
+                        >
+                          <p class="zero f14px positive bold">
+                            수정
+                          </p>
+                        </div>
+                        <div class="col-auto pl8px pr8px"
+                          ng-click=""
+                        >
+                          <p class="zero f14px positive bold">
+                            삭제
+                          </p>
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <p class="zero f14px ml5p mt5px dark-grey letter-spacing-1">
+                      {{ comment.content }}
+                    </p>
+                    <p class="zero f12px grey ml5p mt5px">
+                      {{ comment.createdAt | date: 'yyyy.MM.dd HH:mm'}}
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <ion-infinite-scroll
+            on-infinite="PostComment.loadMore()"
+            immediate-check="true"
+            ng-if="PostComment.Model.more"
+            >
+        </ion-infinite-scroll>
+
+    </ion-content>
+    <ion-footer-bar class="zero positive-bg">
+      <div class="row zero h44px pt8px pb8px pl5p pr5p flex-v">
+        <div class="col-80">
+          <input class="darker-b2px h30px light-bg r3px f14px placeholder-f14px placeholder-grey pl5px" type="text"
+            placeholder="리뷰를 입력해주세요."
+          >
+        </div>
+        <div class="col-20 flex">
+          <div class="ion-chatbubble-working f26px white"></div>
+        </div>
+      </div>
+    </ion-footer-bar>
+</ion-view>

@@ -4,12 +4,12 @@
     .controller('MyPageController', MyPageController);
 
   MyPageController.$inject = [
-    '$scope', '$ionicScrollDelegate', '$timeout', '$q',
+    '$scope', '$ionicScrollDelegate', '$timeout', '$q', '$ionicHistory',
     'MyPageModel', 'Preload', 'Post', 'U'
   ];
 
   function MyPageController(
-    $scope, $ionicScrollDelegate, $timeout, $q,
+    $scope, $ionicScrollDelegate, $timeout, $q, $ionicHistory,
     MyPageModel, Preload, Post, U
   ) {
 
@@ -20,8 +20,6 @@
     MyPage.templateUrl = 'state/MyPage/template/' + MyPage.selectedTab + '.html';
 
     MyPage.loadTemplate = loadTemplate;
-
-
 
     function loadTemplate(tab) {
       MyPageModel.loading = true;

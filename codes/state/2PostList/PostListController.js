@@ -3,27 +3,36 @@
   angular.module('app')
     .controller('PostListController', PostListController);
 
-  PostListController.$inject = ['$scope', 'PostListModel', '$timeout'];
+  PostListController.$inject = [
+    '$scope',
+    'PostListModel', 'U'
+  ];
 
-  function PostListController($scope, PostListModel, $timeout) {
+  function PostListController(
+    $scope,
+    PostListModel, U
+  ) {
 
     var PostList = this;
     PostList.Model = PostListModel;
+    PostList.goToCreatePost = goToCreatePost;
 
-
-    $scope.$on('$ionicView.afterEnter', onAfterEnter);
-    $scope.$on('$ionicView.beforeLeave', onBeforeLeave);
     //------------------------
     //  IMPLEMENTATIONS
     //------------------------
-    function onAfterEnter() {
-      $timeout(function() {
-        PostList.loadPhotos = true;
-      }, 100);
-    }
-
-    function onBeforeLeave() {
-      PostList.loadPhotos = false;
+    function goToCreatePost() {
+      var params = {};
+      if (U.isState('Main.MainTab.PostList.PostListRecent')) {
+        params.category = 'NORMAL-POST';
+      } else if (U.isState('Main.MainTab.PostList.PostListPopular')) {
+        params.category = 'NORMAL-POST';
+      } else if (U.isState('Main.MainTab.PostList.PostListContent')) {
+        params.category = 'CONTENTS-POST';
+      } else {
+        console.log('No PostList Child State');
+        return false;
+      }
+      return U.goToState('Main.PostCreate', params, 'forward');
     }
   }
 })();

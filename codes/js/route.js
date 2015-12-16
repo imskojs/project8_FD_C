@@ -2,22 +2,31 @@
   'use strict';
   angular.module('app')
     .config(route);
-  route.$inject = ['$stateProvider', '$httpProvider'];
+  route.$inject = [
 
-  function route($stateProvider, $httpProvider) {
+    '$stateProvider', '$httpProvider', '$ionicConfigProvider'
+
+  ];
+
+  function route(
+
+    $stateProvider, $httpProvider, $ionicConfigProvider
+
+  ) {
+
+    $ionicConfigProvider.scrolling.jsScrolling(false);
 
     $httpProvider.interceptors.push('AuthInterceptor');
 
     $stateProvider
-
-    .state('Main', {
-      abstract: true,
-      url: '/Main',
-      templateUrl: 'state/0Main/Main.html',
-      controller: 'MainController as Main'
-    })
+      .state('Main', {
+        // abstract: true,
+        url: '/Main',
+        templateUrl: 'state/0Main/Main.html',
+        controller: 'MainController as Main'
+      })
       .state('Main.MainTab', { // Tab Sub Header
-        abstract: true,
+        // abstract: true,
         url: '/MainTab',
         views: {
           Main: {
@@ -27,7 +36,7 @@
         }
       })
       .state('Main.MainTab.PlaceEvent', {
-        abstract: true,
+        // abstract: true,
         url: '/PlaceEvent',
         views: {
           MainTab: {
@@ -37,7 +46,7 @@
         }
       })
       .state('Main.MainTab.PostList', {
-        abstract: true,
+        // abstract: true,
         url: '/PostList',
         views: {
           MainTab: {
@@ -101,21 +110,69 @@
       }
     })
 
-    //====================================================
-    //  FilterList, PlaceEvent.DaumMap, PlaceEvent.EventList, PlaceList
-    //====================================================
-    .state('Main.MainTab.FilterList', {
-      params: {
-        prev: ''
-      },
-      url: '/FilterList',
+    .state('Main.EventReview', {
+      url: '/EventReview',
       views: {
-        MainTab: {
-          templateUrl: 'state/FilterList/FilterList.html',
-          controller: 'FilterListController as FilterList'
+        Main: {
+          templateUrl: 'state/EventReview/EventReview.html',
+          controller: 'EventReviewController as EventReview'
         }
       }
     })
+
+    /**
+     * EventDetail
+     */
+    .state('Main.EventDetail', {
+      url: '/EventDetail',
+      views: {
+        Main: {
+          templateUrl: 'state/EventDetail/EventDetail.html',
+          controller: 'EventDetailController as EventDetail'
+        }
+      }
+    })
+
+    /*
+      PostCreate
+     */
+    .state('Main.PostCreate', {
+        url: '/PostCreate/:category',
+        views: {
+          Main: {
+            templateUrl: 'state/PostCreate/PostCreate.html',
+            controller: 'PostCreateController as PostCreate'
+          }
+        }
+      })
+      /*
+        PostComment
+       */
+
+    .state('Main.PostComment', {
+        url: '/PostComment/:id',
+        views: {
+          Main: {
+            templateUrl: 'state/PostComment/PostComment.html',
+            controller: 'PostCommentController as PostComment'
+          }
+        }
+      })
+      //====================================================
+      //  FilterList, PlaceEvent.DaumMap, PlaceEvent.EventList, PlaceList
+      //====================================================
+      .state('Main.MainTab.FilterList', {
+        params: {
+          prev: ''
+        },
+        url: '/FilterList',
+        views: {
+          MainTab: {
+            templateUrl: 'state/FilterList/FilterList.html',
+            controller: 'FilterListController as FilterList'
+          }
+        }
+      })
 
     .state('Main.MainTab.PlaceEvent.DaumMap', {
       params: {
@@ -160,14 +217,14 @@
     //  Timeline
     //====================================================
     .state('Main.MainTab.PostList.PostListRecent', {
-      url: '/PostListRecent',
-      views: {
-        PostList: {
-          templateUrl: 'state/PostListRecent/PostListRecent.html',
-          controller: 'PostListRecentController as PostListRecent'
+        url: '/PostListRecent',
+        views: {
+          PostList: {
+            templateUrl: 'state/PostListRecent/PostListRecent.html',
+            controller: 'PostListRecentController as PostListRecent'
+          }
         }
-      }
-    })
+      })
       .state('Main.MainTab.PostList.PostListPopular', {
         url: '/PostListPopular',
         views: {

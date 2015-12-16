@@ -1,0 +1,109 @@
+<ion-view id="event-detail"
+  cache-view="true"
+  hide-back-button="true"
+  >
+  <ion-nav-buttons side="left">
+    <button class="button button-icon icon ion-android-arrow-back"
+    ng-click="goBack()"
+    >
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <div class="row zero flex h44px">
+      <img class="h24px"
+      src="img/header_logo.png"
+      >
+    </div>
+  </ion-nav-title>
+  <ion-content class="bottom44px black-bg"
+    scrollbar-y="false"
+  >
+    <ion-refresher
+      ng-if="!EventDetail.Model.loading"
+      on-refresh="EventDetail.refresh()"
+      >
+    </ion-refresher>
+
+    <!-- Loading overlay -->
+    <div class="w100p h95vh flex light-grey-bg absolute"
+      style="z-index: 2"
+      ng-if="EventDetail.Model.loading"
+      >
+      <ion-spinner class="spinner-40px mb88px" icon="ripple">
+      </ion-spinner>
+    </div>
+
+    <!-- img -->
+    <img class="w100p block" alt="이벤트 이미지"
+      ng-src="{{EventDetail.Model.event.photos[0].url}}"
+    >
+
+   <!-- stars -->
+   <div class="row zero dark-grey-bb pl5p pr5p flex-v mt2px h66px">
+
+     <div class="col zero">
+       <p class="f14px light-grey center mb5px">
+       별점
+       </p>
+       <div class="row zero mb5px">
+         <div class="col zero">
+           <div class="ion-star f10px center positive"></div>
+         </div>
+         <div class="col zero">
+           <div class="ion-star f10px center positive"></div>
+         </div>
+         <div class="col zero">
+           <div class="ion-star f10px center positive"></div>
+         </div>
+         <div class="col zero">
+           <div class="ion-star f10px center positive"></div>
+         </div>
+         <div class="col zero">
+           <div class="ion-android-star-outline f10px center positive"></div>
+         </div>
+       </div>
+       <p class="zero positive center f14px">
+         {{ EventDetail.Model.event.averageStars }}
+       </p>
+     </div>
+
+     <div class="col zero flex">
+       <div>
+         <p class="f14px light-grey center mb10px">
+         좋아요
+         </p>
+         <div class="row zero mb5px">
+           <div class="col zero right">
+             <div class="ion-heart positive f18px"></div>
+           </div>
+           <div class="col zero left ml5px">
+             <div class="positive f16px">
+               {{ EventDetail.event.likes || 0 }}
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+   </div>
+
+  </ion-content>
+
+  <ion-footer-bar class="bar-positive footer zero">
+    <div class="row zero">
+      <div class="col-50 flex">
+        <div class="ion-heart f26px"></div>
+        <p class="zero left ml10px f18px">
+          좋아요
+        </p>
+      </div>
+      <div class="col-50 flex light-grey-bl">
+        <div class="ion-chatbubble-working f26px"></div>
+        <p class="zero left ml10px f18px">
+          리뷰보기
+        </p>
+      </div>
+    </div>
+  </ion-footer-bar>
+  
+</ion-view>
