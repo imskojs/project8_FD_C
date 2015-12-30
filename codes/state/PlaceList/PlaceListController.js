@@ -5,37 +5,42 @@
 
   PlaceListController.$inject = [
     '$scope', '$q',
-    'PlaceListModel', 'Preload', 'Place', 'Message', 'U'
+    'PlaceListModel', 'Preload', 'DaumMapModel', 'U'
   ];
 
   function PlaceListController(
     $scope, $q,
-    PlaceListModel, Preload, Place, Message, U
+    PlaceListModel, Preload, DaumMapModel, U
   ) {
 
     var PlaceList = this;
     PlaceList.Model = PlaceListModel;
-    var noLoadingStates = ['']
 
+    $scope.$on('$ionicView.afterEnter', onAfterEnter);
+    $scope.$on('$ionicView.beforeEnter', onBeforeEnter);
+
+    function onBeforeEnter() {
+      PlaceListModel.loading = true;
+    }
+
+    function onAfterEnter() {
+      return getFromDaumMapModel()
+        .then(function(placesWrapper) {
+          U.bindData(placesWrapper, PlaceListModel, 'places');
+        })
+        .catch(U.error);
+    }
 
     //------------------------
     //  IMPLEMENTATIONS
     //------------------------
-    function find(extraQuery) {
-      var query = {
-        category: 'notification',
-        limit: 20,
-        sort: 'id DESC'
-      };
-      angular.extend(query, extraQuery);
-      return Place.within(query).$promise
-        .then(function(postsWrapper) {
-          var photosPromise = Preload.photos(postsWrapper.posts, 'Cloudinary200', true);
-          return $q.all([postsWrapper, photosPromise]);
-        })
-        .then(function(array) {
-          var postsWrapper = array[0];
-          return postsWrapper;
+    function getFromDaumMapModel() {
+      return Preload.photos(DaumMapModel.places, 'Cloudinary300', true)
+        .then(function() {
+          var placesWrapper = {
+            places: DaumMapModel.places
+          };
+          return placesWrapper;
         });
     }
   }

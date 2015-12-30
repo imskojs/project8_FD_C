@@ -10,8 +10,7 @@
 
     var model = {
       form: {
-        username: null,
-        email: null,
+        identifier: null,
         password: null
       }
     };

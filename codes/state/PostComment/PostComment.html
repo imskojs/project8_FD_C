@@ -39,7 +39,7 @@
             >
                 <div class="col-auto">
                     <img class="w60px h60px r60px"
-                        ng-src="{{ comment.createdBy.profile_picture }}"
+                        ng-src="{{ comment.createdBy | GetPhoto | Cloudinary200}}"
                     >
                 </div>
                 <div class="col zero pt10px">
@@ -51,17 +51,19 @@
                       </div>
 
                       <div class="col zero flex-right flex-v"
-                        ng-if="true"
+                        ng-if="AppStorage.user.id === comment.owner"
                       >
+<!--                         
                         <div class="col-auto pl8px pr8px positive-br2px"
-                          ng-click=""
+                          ng-click="PostComment.updateComment(comment)"
                         >
                           <p class="zero f14px positive bold">
                             수정
                           </p>
                         </div>
-                        <div class="col-auto pl8px pr8px"
-                          ng-click=""
+ -->                        
+                        <div class="col-auto pl10px pr10px pt5px pb5px"
+                          ng-click="PostComment.deleteComment(comment, $index)"
                         >
                           <p class="zero f14px positive bold">
                             삭제
@@ -93,10 +95,13 @@
       <div class="row zero h44px pt8px pb8px pl5p pr5p flex-v">
         <div class="col-80">
           <input class="darker-b2px h30px light-bg r3px f14px placeholder-f14px placeholder-grey pl5px" type="text"
-            placeholder="리뷰를 입력해주세요."
+            placeholder="댓글을 입력해주세요."
+            ng-model="PostComment.Model.form.content"
           >
         </div>
-        <div class="col-20 flex">
+        <div class="col-20 flex"
+          ng-click="PostComment.createComment()"
+        >
           <div class="ion-chatbubble-working f26px white"></div>
         </div>
       </div>

@@ -8,43 +8,46 @@
     },
     "installed_plugins": {
         "com.synconset.imagepicker": {
-            "PACKAGE_NAME": "com.ionicframework.clientfitnessday148089"
+            "PACKAGE_NAME": "kr.co.fitnessday"
         },
         "cordova-plugin-camera": {
-            "PACKAGE_NAME": "com.ionicframework.clientfitnessday148089"
+            "PACKAGE_NAME": "kr.co.fitnessday"
         },
         "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.ionicframework.clientfitnessday148089"
+            "PACKAGE_NAME": "kr.co.fitnessday"
+        },
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "kr.co.fitnessday"
         },
         "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.ionicframework.clientfitnessday148089"
+            "PACKAGE_NAME": "kr.co.fitnessday"
         },
         "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.ionicframework.clientfitnessday148089"
+            "PACKAGE_NAME": "kr.co.fitnessday"
         },
         "cordova-plugin-file-transfer": {
-            "PACKAGE_NAME": "com.ionicframework.clientfitnessday148089"
+            "PACKAGE_NAME": "kr.co.fitnessday"
         },
         "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "com.ionicframework.clientfitnessday148089"
+            "PACKAGE_NAME": "kr.co.fitnessday"
         },
         "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "com.ionicframework.clientfitnessday148089"
+            "PACKAGE_NAME": "kr.co.fitnessday"
         },
         "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.ionicframework.clientfitnessday148089"
+            "PACKAGE_NAME": "kr.co.fitnessday"
         },
         "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.ionicframework.clientfitnessday148089"
+            "PACKAGE_NAME": "kr.co.fitnessday"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.clientfitnessday148089"
+            "PACKAGE_NAME": "kr.co.fitnessday"
         },
         "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.clientfitnessday148089"
+            "PACKAGE_NAME": "kr.co.fitnessday"
         },
         "phonegap-plugin-push": {
-            "PACKAGE_NAME": "com.ionicframework.clientfitnessday148089"
+            "PACKAGE_NAME": "kr.co.fitnessday"
         }
     },
     "dependent_plugins": {}

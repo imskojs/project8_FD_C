@@ -8,6 +8,7 @@
     >
     </button>
   </ion-nav-buttons>
+
   <ion-nav-title>
     <div class="row zero flex h44px">
       <img class="h24px"
@@ -15,64 +16,90 @@
       >
     </div>
   </ion-nav-title>
+
   <ion-content class="has-subheader"
     delegate-handle="MyPage"
+    scrollbar-y="false"
   >
     <!-- Navigation -->
     <div class="relative h250px white-bg shadow">
       <img class="w100p block h150px"
-      ng-src="{{MyPage.Model.page.photos[0].url}}">
-      <img class="block w70px h70px r70px absolute left10px top42p positive-b2px"
-      ng-src="{{MyPage.Model.page.owner.photos[0].url}}">
+        alt="MyPage BG"
+        ng-src="{{MyPage.Model.MyPage.form.myPageBg || 'img/suji.png'}}"
+        ng-click="MyPage.setMyPageBg();"
+      >
+      <img class="block w70px h70px r70px absolute left10px top45p positive-b2px"
+        ng-src="{{AppStorage.user.profilePhoto.url}}"
+      >
       <p class="zero ml90px f16px bold positive mt5px">
-      {{MyPage.Model.MyPage.owner.name}}
+      {{AppStorage.user.name || '오미자'}}
       </p>
       <p class="zero ml90px f16px bold positive mt2px grey">
-      {{MyPage.Model.MyPage.owner.nickname}}
+      {{AppStorage.user.nickname || '여신'}}
       </p>
-      <div class="row zero positive-b2px w90p r5px auto mt5px">
+      <div class="row zero positive-b2px w95p r5px auto mt5px">
         <div class="col zero darker positive-br2px flex h40px"
-          ng-class="{'positive-bg': MyPage.selectedTab === 'MyPostList'}"
+          ng-class="{'positive-bg': MyPage.Model.selectedTab === 'MyPostList'}"
           ng-click="MyPage.loadTemplate('MyPostList')"
           >
           <p class="zero center f14px bold"
-          ng-class="{'white': MyPage.selectedTab === 'MyPostList'}"
+          ng-class="{'white': MyPage.Model.selectedTab === 'MyPostList'}"
           > 내가쓴글
           </p>
         </div>
         <div class="col zero darker positive-br2px flex h40px"
-          ng-class="{'positive-bg': MyPage.selectedTab === 'FavoritePlaceList'}"
+          ng-class="{'positive-bg': MyPage.Model.selectedTab === 'FavoritePlaceList'}"
           ng-click="MyPage.loadTemplate('FavoritePlaceList')"
           >
           <p class="zero center f14px bold pre"
-          ng-class="{'white': MyPage.selectedTab === 'FavoritePlaceList'}"
+          ng-class="{'white': MyPage.Model.selectedTab === 'FavoritePlaceList'}"
           > 좋아요한
-          시설 및 이벤트</p>
+          시설</p>
+        </div>
+        <div class="col zero darker positive-br2px flex h40px"
+          ng-class="{'positive-bg': MyPage.Model.selectedTab === 'FavoriteEventList'}"
+          ng-click="MyPage.loadTemplate('FavoriteEventList')"
+          >
+          <p class="zero center f14px bold pre"
+          ng-class="{'white': MyPage.Model.selectedTab === 'FavoriteEventList'}"
+          > 좋아요한
+          이벤트</p>
         </div>
         <div class="col zero darker flex h40px"
-          ng-class="{'positive-bg': MyPage.selectedTab === 'FavoritePostList'}"
+          ng-class="{'positive-bg': MyPage.Model.selectedTab === 'FavoritePostList'}"
           ng-click="MyPage.loadTemplate('FavoritePostList')"
           >
           <p class="zero center f14px bold pre"
-          ng-class="{'white': MyPage.selectedTab === 'FavoritePostList'}"
+          ng-class="{'white': MyPage.Model.selectedTab === 'FavoritePostList'}"
           > 좋아요한
           피드글</p>
         </div>
       </div>
     </div>
-    <div class="w100p flex-h h95vh light-grey-bg absolute"
-      style="z-index: 2"
+
+    <!-- Loading icon -->
+    <div class="w100p flex-h h95vh light-grey-bg absolute z-index2"
       ng-if="MyPage.Model.loading"
       >
       <ion-spinner class="spinner-40px mt80px" icon="ripple">
       </ion-spinner>
     </div>
-    <div
-      ng-include="MyPage.templateUrl"
-      ng-if="!MyPage.Model.loading"
-    ></div>
+
+    <!-- Include templates -->
+    <div class="template-container"
+      ng-include="MyPage.Model.templateUrl"
+    >
+    </div>
   </ion-content>
-  <div class="r60px w60px h60px absolute bottom70px right10px flex positive-b5px white-bg shadow">
+  <ion-pane class="r60px w60px h60px absolute bottom33px top-none left-none right5p flex positive-b5px white-bg shadow z-index3"
+    ng-if="MyPage.Model.selectedTab === 'MyPostList' && MyPage.Model.loading === false"
+    ng-click="
+      goToState('Main.PostCreate', {
+        category: 'NORMAL-POST'
+      }, 'forward')
+    "
+  >
     <i class="ion-plus f40px positive"></i>
-  </div>
+  </ion-pane>
+
 </ion-view>

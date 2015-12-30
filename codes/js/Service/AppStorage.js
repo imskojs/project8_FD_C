@@ -36,8 +36,8 @@
         $localStorage[APP_NAME] = {};
       }
       var storage = $localStorage[APP_NAME];
-      if (storage.firstTime === undefined) {
-        storage.firstTime = true;
+      if (storage.isFirstTime === undefined) {
+        storage.isFirstTime = true;
       }
     }
 

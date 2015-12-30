@@ -15,27 +15,33 @@
 
   Post.$inject = [
     '$resource',
+    'Photo',
     'SERVER_URL'
   ];
 
   function Post(
     $resource,
+    Photo,
     SERVER_URL
   ) {
 
     var postUrl = SERVER_URL + '/post' +
       '/:find' +
+      '/:findMyPosts' +
+      '/:findLikedPosts' +
       '/:findOne' +
-      '/:create' +
       '/:update' +
-      '/:destroy';
+      '/:destroy' +
+      '/:like';
 
     var params = {
       find: '@find',
+      findMyPosts: '@findMyPosts',
+      findLikedPosts: '@findLikedPosts',
       findOne: '@findOne',
-      create: '@create',
       update: '@update',
-      destroy: '@destroy'
+      destroy: '@destroy',
+      like: '@like'
     };
 
     var actions = {
@@ -45,35 +51,68 @@
           find: 'find'
         }
       },
+
+      findMyPosts: {
+        method: 'GET',
+        params: {
+          findMyPosts: 'findMyPosts'
+        }
+      },
+
+      findLikedPosts: {
+        method: 'GET',
+        params: {
+          findLikedPosts: 'findLikedPosts'
+        }
+      },
+
       findOne: {
         method: 'GET',
         params: {
           findOne: 'findOne'
         }
       },
-      create: {
-        method: 'POST',
-        params: {
-          create: 'create'
-        }
-      },
+
       update: {
         method: 'PUT',
         params: {
           update: 'update'
         }
       },
+
       destroy: {
         method: 'DELETE',
         params: {
           destroy: 'destroy'
+        }
+      },
+
+      like: {
+        method: 'POST',
+        params: {
+          like: 'like'
         }
       }
     };
 
     var service = $resource(postUrl, params, actions);
 
+    service.create = create;
+
     return service;
+
+    //====================================================
+    //  Non Resource methods
+    //====================================================
+    function create(params, query) {
+      var promise = Photo.post('/post/create', query, 'POST')
+        .then(function(postWrapper) {
+          return postWrapper.data;
+        });
+      return {
+        $promise: promise
+      };
+    }
 
   }
 })(angular);

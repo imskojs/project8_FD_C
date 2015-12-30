@@ -17,9 +17,9 @@
 
   function AppText() {
     return function(input) {
-      if (input === true){
+      if (input === true || input === "true") {
         return '유';
-      } else if (input === false){
+      } else if (input === false || input === "false") {
         return '무';
       }
     };

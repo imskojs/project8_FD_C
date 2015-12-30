@@ -1,81 +1,301 @@
 <ion-view id="post-create"
-    cache-view="true"
-    hide-back-button="true"
+  cache-view="true"
+  hide-back-button="true"
+  >
+  <ion-nav-buttons side="left">
+    <button class="button button-icon icon ion-android-arrow-back"
+    ng-click="goBack()"
     >
-    <ion-nav-buttons side="left">
-        <button class="button button-icon icon ion-android-arrow-back"
-        ng-click="goBack()"
-        >
-        </button>
-    </ion-nav-buttons>
-    <ion-nav-title>
-        <div class="row zero flex h44px">
-            <img class="h24px"
-            src="img/header_logo.png"
-            >
-        </div>
-    </ion-nav-title>
-    <ion-content class="pt1px bottom45px"
-      scrollbar-y="false"
-    >
-
-        <ion-refresher
-            ng-if="!PostCreate.Model.loading"
-            on-refresh="PostCreate.refresh()"
-            >
-        </ion-refresher>
-
-        <div class="w100p h95vh flex light-grey-bg absolute"
-            style="z-index: 2"
-            ng-if="PostCreate.Model.loading"
-            >
-            <ion-spinner class="spinner-40px mb88px" icon="ripple">
-            </ion-spinner>
-        </div>
-        <!-- container -->
-        <div class="darker-b4px">
-            <div class="row zero pl1p pt5px pr5p pb5px">
-                <div class="col-auto">
-                    <img class="w60px h60px r60px"
-                        ng-src="{{'http://placehold.it/180x180'}}"
-                    >
-                </div>
-                <div class="col zero pt10px">
-                    <div class="row zero flex-v">
-                      <div class="col-auto ml5p">
-                        <p class="zero f14px positive bold">
-                            오미자
-                        </p>
-                      </div>
-                    </div>
-                    <textarea class="placeholder-grey placeholder-f14px placeholder-para f14px dark-grey h200px w100p r5px p5px light-grey-bg ml2p"
-                    placeholder="내용을 입력해주세요."></textarea>
-                </div>
-            </div>
-            <p class="zero ml5p bold positive f14px mt5px mb5px">
-                이미지 업로드(최대 5개까지 가능합니다)
-            </p>
-
-        </div>
-
-        <ion-infinite-scroll
-            on-infinite="PostCreate.loadMore()"
-            immediate-check="true"
-            ng-if="PostCreate.Model.more"
-            >
-        </ion-infinite-scroll>
-
-    </ion-content>
-    <ion-footer-bar class="zero positive-bg">
-      <div class="row zero h44px pt8px pb8px pl5p pr5p flex-v">
-        <div class="col-80">
-          <input class="darker-b2px h30px light-bg r3px f14px placeholder-f14px placeholder-grey pl5px" type="text"
-            placeholder="리뷰를 입력해주세요."
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <div class="row zero flex h44px">
+      <img class="h24px"
+      src="img/header_logo.png"
+      >
+    </div>
+  </ion-nav-title>
+  <ion-content class="pt1px bottom45px"
+    scrollbar-y="false"
+  >
+    <!-- container -->
+    <div class="darker-b4px">
+      <div class="row zero pl1p pt5px pr5p pb5px">
+        <div class="col-auto">
+          <img class="w60px h60px r60px"
+            ng-src="{{ AppStorage.user.profilePhoto.url }}"
           >
         </div>
-        <div class="col-20 flex">
-          <div class="ion-chatbubble-working f26px white"></div>
+        <div class="col zero pt10px ml2p">
+          <div class="row zero flex-v">
+            <div class="col-auto">
+            <p class="zero f14px positive bold">
+              {{AppStorage.user.name}}
+            </p>
+            </div>
+          </div>
+
+          <!-- form.content -->
+          <textarea class="placeholder-grey placeholder-f14px placeholder-para f14px dark-grey h200px w100p r5px p5px light-grey-bg"
+            placeholder="글내용을 입력해주세요."
+            ng-model="PostCreate.Model.form.content"
+          >
+          </textarea>
+
         </div>
       </div>
-    </ion-footer-bar>
+      <p class="zero ml5p bold positive f14px mt10px mb5px">
+        이미지 업로드(최대 5개까지 가능합니다)
+      </p>
+
+      <!-- camera 1 -->
+      <div class="row zero mt5px mb5px">
+        <div class="col-65 ml3p">
+          <div class="ion-camera f50px h43vw flex light-grey-bg positive"
+            ng-if="!PostCreate.Model.form.files[0]"
+          >
+          </div>
+          <div class="fast-delete"
+            ng-if="PostCreate.Model.form.files[0]"
+          >
+            <img class="h43vw w100p block b0px fit lazy-show"
+              alt="소스 1"
+              ng-src="{{PostCreate.Model.form.files[0]}}"
+            >
+          </div>
+        </div>
+        <div class="col-30 ml2p flex-h">
+          <div class="update"
+            ng-if="PostCreate.Model.form.files[0]"
+          >
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px mb10px"
+              ng-click="PostCreate.updatePhoto(0)"
+            >
+              사진수정
+            </button>
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px"
+              ng-click="PostCreate.deletePhoto(0)"
+            >
+              삭제하기
+            </button>
+          </div>
+          <div class="create"
+            ng-if="!PostCreate.Model.form.files[0]"
+          >
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px mb10px"
+              ng-click="PostCreate.getPhoto('camera', 0)"
+            >
+              사진촬영
+            </button>
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px"
+              ng-click="PostCreate.getPhoto('gallery', 0)"
+            >
+              앨범선택
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- camera 2 -->
+      <div class="row zero mt5px mb5px">
+        <div class="col-65 ml3p">
+          <div class="ion-camera f50px h43vw flex light-grey-bg positive"
+            ng-if="!PostCreate.Model.form.files[1]"
+          >
+          </div>
+          <div class="fast-delete"
+            ng-if="PostCreate.Model.form.files[1]"
+          >
+            <img class="h43vw w100p block b0px fit lazy-show"
+              alt="소스 1"
+              ng-src="{{PostCreate.Model.form.files[1]}}"
+            >
+          </div>
+        </div>
+        <div class="col-30 ml2p flex-h">
+          <div class="update"
+            ng-if="PostCreate.Model.form.files[1]"
+          >
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px mb10px"
+              ng-click="PostCreate.updatePhoto(1)"
+            >
+              사진수정
+            </button>
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px"
+              ng-click="PostCreate.deletePhoto(1)"
+            >
+              삭제하기
+            </button>
+          </div>
+          <div class="create"
+            ng-if="!PostCreate.Model.form.files[1]"
+          >
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px mb10px"
+              ng-click="PostCreate.getPhoto('camera', 1)"
+            >
+              사진촬영
+            </button>
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px"
+              ng-click="PostCreate.getPhoto('gallery', 1)"
+            >
+              앨범선택
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- camera 3 -->
+      <div class="row zero mt5px mb5px">
+        <div class="col-65 ml3p">
+          <div class="ion-camera f50px h43vw flex light-grey-bg positive"
+            ng-if="!PostCreate.Model.form.files[2]"
+          >
+          </div>
+          <div class="fast-delete"
+            ng-if="PostCreate.Model.form.files[2]"
+          >
+            <img class="h43vw w100p block b0px fit lazy-show"
+              alt="소스 2"
+              ng-src="{{PostCreate.Model.form.files[2]}}"
+            >
+          </div>
+        </div>
+        <div class="col-30 ml2p flex-h">
+          <div class="update"
+            ng-if="PostCreate.Model.form.files[2]"
+          >
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px mb10px"
+              ng-click="PostCreate.updatePhoto(2)"
+            >
+              사진수정
+            </button>
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px"
+              ng-click="PostCreate.deletePhoto(2)"
+            >
+              삭제하기
+            </button>
+          </div>
+          <div class="create"
+            ng-if="!PostCreate.Model.form.files[2]"
+          >
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px mb10px"
+              ng-click="PostCreate.getPhoto('camera', 2)"
+            >
+              사진촬영
+            </button>
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px"
+              ng-click="PostCreate.getPhoto('gallery', 2)"
+            >
+              앨범선택
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- camera 4 -->
+      <div class="row zero mt5px mb5px">
+        <div class="col-65 ml3p">
+          <div class="ion-camera f50px h43vw flex light-grey-bg positive"
+            ng-if="!PostCreate.Model.form.files[3]"
+          >
+          </div>
+          <div class="fast-delete"
+            ng-if="PostCreate.Model.form.files[3]"
+          >
+            <img class="h43vw w100p block b0px fit lazy-show"
+              alt="소스 3"
+              ng-src="{{PostCreate.Model.form.files[3]}}"
+            >
+          </div>
+        </div>
+        <div class="col-30 ml2p flex-h">
+          <div class="update"
+            ng-if="PostCreate.Model.form.files[3]"
+          >
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px mb10px"
+              ng-click="PostCreate.updatePhoto(3)"
+            >
+              사진수정
+            </button>
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px"
+              ng-click="PostCreate.deletePhoto(3)"
+            >
+              삭제하기
+            </button>
+          </div>
+          <div class="create"
+            ng-if="!PostCreate.Model.form.files[3]"
+          >
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px mb10px"
+              ng-click="PostCreate.getPhoto('camera', 3)"
+            >
+              사진촬영
+            </button>
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px"
+              ng-click="PostCreate.getPhoto('gallery', 3)"
+            >
+              앨범선택
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- camera 5 -->
+      <div class="row zero mt5px mb5px">
+        <div class="col-65 ml3p">
+          <div class="ion-camera f50px h43vw flex light-grey-bg positive"
+            ng-if="!PostCreate.Model.form.files[4]"
+          >
+          </div>
+          <div class="fast-delete"
+            ng-if="PostCreate.Model.form.files[4]"
+          >
+            <img class="h43vw w100p block b0px fit lazy-show"
+              alt="소스 4"
+              ng-src="{{PostCreate.Model.form.files[4]}}"
+            >
+          </div>
+        </div>
+        <div class="col-30 ml2p flex-h">
+          <div class="update"
+            ng-if="PostCreate.Model.form.files[4]"
+          >
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px mb10px"
+              ng-click="PostCreate.updatePhoto(4)"
+            >
+              사진수정
+            </button>
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px"
+              ng-click="PostCreate.deletePhoto(4)"
+            >
+              삭제하기
+            </button>
+          </div>
+          <div class="create"
+            ng-if="!PostCreate.Model.form.files[4]"
+          >
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px mb10px"
+              ng-click="PostCreate.getPhoto('camera', 4)"
+            >
+              사진촬영
+            </button>
+            <button class="button-icon f16px white positive-bg h30px r5px ml10px"
+              ng-click="PostCreate.getPhoto('gallery', 4)"
+            >
+              앨범선택
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- / container -->
+
+  </ion-content>
+
+  <ion-footer-bar class="zero positive-bg flex"
+    ng-click="PostCreate.sendForm()"
+  >
+    <p class="f18px white zero bold">
+      게시하기
+    </p>
+  </ion-footer-bar>
 </ion-view>

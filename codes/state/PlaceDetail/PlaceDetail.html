@@ -16,21 +16,29 @@
     </div>
   </ion-nav-title>
   <ion-content class="pt2px black-bg">
-    <ion-refresher
-      ng-if="!PlaceDetail.Model.loading"
-      on-refresh="PlaceDetail.refresh()"
-      >
-    </ion-refresher>
     <div class="w100p h100p flex light-grey-bg absolute"
       style="z-index: 2"
       ng-if="PlaceDetail.Model.loading"
-      >
+    >
       <ion-spinner class="spinner-40px mb88px" icon="ripple">
       </ion-spinner>
     </div>
     <!-- photos -->
-    <ion-slide-box show-pager="true">
-      <ion-slide class="h61vw zero"
+    <ion-slide-box class="w100p auto"
+      show-pager="true"
+      ng-if="PlaceDetail.Model.loadPhotos"
+    >
+      <ion-slide
+        ng-repeat="photo in PlaceDetail.Model.place.photos"
+      >
+        <img class="w100p block h240px lazy-show"
+        ng-src="{{photo.url | Cloudinary600}}"
+        >
+      </ion-slide>
+    </ion-slide-box>
+
+<!--     <ion-slide-box show-pager="true">
+      <ion-slide
         ng-repeat="photo in PlaceDetail.Model.place.photos"
         >
         <img class="h100p w100p"
@@ -38,7 +46,7 @@
         >
       </ion-slide>
     </ion-slide-box>
-    <!-- placeName -->
+ -->    <!-- placeName -->
     <div class="row dark-grey-bb flex-v h30px zero pl5p">
       <p class="positive f18px zero">
       {{ PlaceDetail.Model.place.name }}
@@ -52,19 +60,54 @@
         </p>
         <div class="row zero mb5px">
           <div class="col zero">
-            <div class="ion-star f10px center positive"></div>
+            <div class="f10px center positive"
+              ng-class="{
+                'ion-star': Number(PlaceDetail.Model.place.averageStars) >= 1,
+                'ion-android-star-outline': 
+                  (Number(PlaceDetail.Model.place.averageStars) < 1) ||
+                  !Placedetail.Model.place.averageStars
+              }"
+            ></div>
           </div>
           <div class="col zero">
-            <div class="ion-star f10px center positive"></div>
+            <div class="f10px center positive"
+              ng-class="{
+                'ion-star': Number(PlaceDetail.Model.place.averageStars) >= 2,
+                'ion-android-star-outline': 
+                  (Number(PlaceDetail.Model.place.averageStars) < 2) ||
+                  !Placedetail.Model.place.averageStars
+              }"
+            ></div>
           </div>
           <div class="col zero">
-            <div class="ion-star f10px center positive"></div>
+            <div class="f10px center positive"
+              ng-class="{
+                'ion-star': Number(PlaceDetail.Model.place.averageStars) >= 3,
+                'ion-android-star-outline': 
+                  (Number(PlaceDetail.Model.place.averageStars) < 3) ||
+                  !Placedetail.Model.place.averageStars
+              }"
+            ></div>
           </div>
           <div class="col zero">
-            <div class="ion-star f10px center positive"></div>
+            <div class="f10px center positive"
+              ng-class="{
+                'ion-star': Number(PlaceDetail.Model.place.averageStars) >= 4,
+                'ion-android-star-outline': 
+                  (Number(PlaceDetail.Model.place.averageStars) < 4) ||
+                  !Placedetail.Model.place.averageStars
+              }"
+            ></div>
           </div>
           <div class="col zero">
-            <div class="ion-android-star-outline f10px center positive"></div>
+            <div class="f10px center positive"
+              ng-class="{
+                'ion-star': Number(PlaceDetail.Model.place.averageStars) >= 5,
+                'ion-android-star-outline': 
+                  (Number(PlaceDetail.Model.place.averageStars) < 5) ||
+                  !Placedetail.Model.place.averageStars
+              }"
+            ></div>
           </div>
         </div>
         <p class="zero positive mb5px center f14px">
@@ -73,22 +116,24 @@
       </div>
       <div class="col zero flex">
         <div>
-          <p class="f14px light-grey center mb10px">
-          좋아요
+          <p class="zero f14px light-grey center mb5px">
+            좋아요
           </p>
-          <div class="row zero mb5px">
+          <div class="row zero mb10px">
             <div class="col zero right">
               <div class="ion-heart positive f18px"></div>
             </div>
             <div class="col zero left ml5px">
               <div class="positive f16px">
-                {{ PlaceDetail.place.likes || 0 }}
+                {{ PlaceDetail.Model.place.likes || 0 }}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col zero flex">
+      <div class="col zero flex"
+        ng-click="goToState('Main.MainTab.PlaceEvent.DaumMap', {id: PlaceDetail.Model.place.id}, 'forward')"
+      >
         <div>
           <p class="f14px light-grey center mb3px">
           지도보기
@@ -124,7 +169,7 @@
           >
           <div class="col-auto">
             <img class="h24px block"
-            ng-src="{{ PlaceDetail.getImage(filterObj) }}">
+            ng-src="{{ PlaceDetail.getCategoryIconImage(filterObj) }}">
           </div>
           <div class="col-auto ml5px">
             <p class="zero f16px light-grey">
@@ -135,7 +180,7 @@
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero flex-v mb5px mt1px">
+      <div class="row zero mb5px mt1px">
         <div class="col-22">
           <p class="zero f16px positive">시설유형</p>
         </div>
@@ -145,7 +190,7 @@
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero flex-v mb5px mt5px">
+      <div class="row zero mb5px mt5px">
         <div class="col-22">
           <p class="zero f16px positive">이용시간</p>
         </div>
@@ -155,7 +200,7 @@
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero flex-v mb5px mt5px">
+      <div class="row zero mb5px mt5px">
         <div class="col-22">
           <p class="zero f16px positive">가격</p>
         </div>
@@ -165,7 +210,7 @@
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero flex-v mb5px mt5px">
+      <div class="row zero mb5px mt5px">
         <div class="col-22">
           <p class="zero f16px positive">이용방법</p>
         </div>
@@ -175,7 +220,7 @@
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero flex-v mb5px mt5px">
+      <div class="row zero mb5px mt5px">
         <div class="col-22">
           <p class="zero f16px positive">주소</p>
         </div>
@@ -187,7 +232,7 @@
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero flex-v mb5px mt5px">
+      <div class="row zero mb5px mt5px">
         <div class="col-22">
           <p class="zero f16px positive">문의전화</p>
         </div>
@@ -197,17 +242,18 @@
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero flex-v mb5px mt5px">
+      <div class="row zero mb5px mt5px">
         <div class="col-22">
-          <p class="zero f16px positive">홈패이지</p>
+          <p class="zero f16px positive">홈페이지</p>
         </div>
-        <div class="col zero ml5px light-grey f16px">
+        <div class="col zero ml5px light-grey f16px"
+        >
           {{ PlaceDetail.Model.place.homepage }}
         </div>
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero flex-v mb5px mt5px">
+      <div class="row zero mb5px mt5px">
         <div class="col-22">
           <p class="zero f16px positive">부대시설</p>
         </div>
@@ -217,7 +263,7 @@
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero flex-v mb5px mt5px">
+      <div class="row zero mb5px mt5px">
         <div class="col-22">
           <p class="zero f16px positive">주차시설</p>
         </div>
@@ -227,30 +273,39 @@
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero flex-v mb10px mt5px">
+      <div class="row zero mb10px mt5px">
         <div class="col-22">
           <p class="zero f16px positive">기타</p>
         </div>
         <div class="col zero ml5px light-grey f16px">
-          {{ PlaceDetail.Model.place.etc }}
+          {{ PlaceDetail.Model.place.etc || '-'}}
         </div>
       </div>
       <!-- row end -->
     </div>
-    <p class="zero f16px positive center pt15px pb15px">
+    <p class="zero f16px positive center pt15px pb15px"
+      ng-click="PlaceDetail.openLink();"
+    >
     자세히 보기 >
     </p>
   </ion-content>
 
   <ion-footer-bar class="bar-positive footer zero">
     <div class="row zero">
-      <div class="col-50 flex">
+      <div class="col-50 flex"
+        ng-click="PlaceDetail.likePlace()"
+      >
         <div class="ion-heart f26px"></div>
         <p class="zero left ml10px f18px">
         좋아요
         </p>
       </div>
-      <div class="col-50 flex light-grey-bl">
+      <div class="col-50 flex light-grey-bl"
+        ng-click="goToState('Main.PlaceReview', {
+          place: PlaceDetail.Model.place.id,
+          placeTitle: PlaceDetail.Model.place.name
+        }, 'forward')"
+      >
         <div class="ion-chatbubble-working f26px"></div>
         <p class="zero left ml10px f18px">
           리뷰보기

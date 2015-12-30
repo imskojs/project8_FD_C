@@ -87,6 +87,9 @@
         },
         "com.synconset.imagepicker": {
             "PACKAGE_NAME": "com.ionicframework.clientfitnessday148089"
+        },
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "com.ionicframework.clientfitnessday148089"
         }
     },
     "dependent_plugins": {

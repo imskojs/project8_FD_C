@@ -8,18 +8,37 @@
  * Written by Seunghoon Ko <imskojs@gmail.com>, 10/10/2015
  *
  */
+
 //====================================================
 //  Images
 //====================================================
-.app-slide-image {
-  display: block;
-  height: 66.6666666vw;
-  width: 100%;
+.fit {
+  object-fit: cover !important;
 }
-@for $i from 0 through 300 {
-  .app-slide-image#{$i}vw {
-    display: block;
-    height: #{$i}vw;
-    width: 100%;
+
+img {
+  display: block;
+}
+
+.lazy-show {
+  -webkit-animation: lazyShowAnimation 1s;
+  animation: lazyShowAnimation 1s;
+}
+
+@-webkit-keyframes lazyShowAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes lazyShowAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

@@ -24,14 +24,16 @@
 
   RootScope.$inject = [
     '$state', '$stateParams', '$ionicHistory', '$ionicSideMenuDelegate', '$timeout',
-    '$rootScope', '$ionicViewSwitcher',
-    'DEV_MODE', 'Message', 'AppStorage'
+    '$rootScope', '$ionicViewSwitcher', '$ionicModal',
+    'Message', 'AppStorage', 'Favorite',
+    'DEV_MODE'
   ];
 
   function RootScope(
     $state, $stateParams, $ionicHistory, $ionicSideMenuDelegate, $timeout,
-    $rootScope, $ionicViewSwitcher,
-    DEV_MODE, Message, AppStorage
+    $rootScope, $ionicViewSwitcher, $ionicModal,
+    Message, AppStorage, Favorite,
+    DEV_MODE
   ) {
     var service = {
       AppStorage: AppStorage,
@@ -49,7 +51,10 @@
       toggleSideMenu: toggleSideMenu,
       closeSideMenu: closeSideMenu,
       comingSoon: comingSoon,
-      DEV_MODE: DEV_MODE
+      DEV_MODE: DEV_MODE,
+
+      likePost: Favorite.likePost,
+      likePlace: Favorite.likePlace
     };
 
     return service;
@@ -92,7 +97,7 @@
       return $state.params[key];
     }
     //====================================================
-    //  $rootScope.goToState('Main.Home', {category: 'apple', theme: 'drink'})
+    //  $rootScope.goToState('Main.Home', {category: 'apple', theme: 'drink'}, 'forward | back')
     //====================================================
     function goToState(state, params, direction) {
       Message.hide();
@@ -132,11 +137,11 @@
     //  $rootScope.toggleSideMenu();
     //====================================================
     function toggleSideMenu(requireLoggedIn) {
-      if (requireLoggedIn) {
-        if (!AppStorage.token) {
-          return Message.alert('둘러보기 알림', '로그인을 하셔야 볼수있는 내용입니다.');
-        }
-      }
+      // if (requireLoggedIn) {
+      //   if (!AppStorage.token) {
+      //     return Message.alert('둘러보기 알림', '로그인을 하셔야 볼수있는 내용입니다.');
+      //   }
+      // }
       $ionicSideMenuDelegate.toggleLeft();
     }
     //====================================================

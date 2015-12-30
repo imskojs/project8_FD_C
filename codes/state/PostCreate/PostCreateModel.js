@@ -9,7 +9,11 @@
   function PostCreateModel() {
 
     var model = {
-      form: {}
+      form: {
+        files: [null, null, null, null, null],
+        category: 'NORMAL-POST',
+        content: ''
+      }
     };
     return model;
   }

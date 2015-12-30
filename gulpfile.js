@@ -11,7 +11,7 @@
 var gulp = require('gulp');
 //var gutil = require('gulp-util');
 //var bower = require('bower');
-var concat = require('gulp-concat') ;
+var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var purify = require('gulp-purifycss');
@@ -29,6 +29,9 @@ var paths = {
   img: ['./codes/img/**/*.*'],
   view: ['./codes/**/*.html', '!./codes/lib/**'],
   sassLib: [
+    // 3rd Part lib 
+    './codes/lib/ng-img-crop/source/scss/ng-img-crop.scss',
+    // ionic lib (imports)
     './codes/scss/00_variables.scss',
     './codes/scss/00_functions.scss',
     './codes/scss/00_ionicLib.scss',
@@ -77,7 +80,8 @@ var paths = {
     './codes/lib/ngstorage/ngStorage.js',
     './codes/lib/angular-resource/angular-resource.js',
     './codes/lib/ngCordova/dist/ng-cordova.js',
-    './codes/lib/ng-file-upload//ng-file-upload.js'
+    './codes/lib/ng-file-upload//ng-file-upload.js',
+    './codes/lib/ng-img-crop/compile/unminified/ng-img-crop.js'
   ]
 };
 
@@ -163,7 +167,7 @@ gulp.task('img', function(done) {
       interlaced: true
     }))
     .pipe(gulp.dest('./www/img/'))
-    .on('end', function(){
+    .on('end', function() {
       var imageFileNames = filenames.get('images');
       var imageFilePaths = imageFileNames.map(function(fileName) {
         return 'img/' + fileName;

@@ -7,14 +7,15 @@
   // Place or Posts
   daumMap.$inject = [
     '$state', '$cordovaGeolocation', '$q', '$stateParams', '$window',
-    'DaumMapModel', 'Message', 'Place'
+    'DaumMapModel', 'Message', 'Place', 'U', 'FilterListModel'
   ];
 
   function daumMap(
     $state, $cordovaGeolocation, $q, $stateParams, $window,
-    DaumMapModel, Message, Place
+    DaumMapModel, Message, Place, U, FilterListModel
   ) {
 
+    var _ = $window._;
     var daum = $window.daum;
 
     return {
@@ -29,14 +30,25 @@
         //              Global Map Property
         //==========================================================================
         var DOM = element[0];
+        var latitude;
+        var longitude;
+        if (DaumMapModel.lastCenter && DaumMapModel.lastCenter.longitude) {
+          latitude = DaumMapModel.lastCenter.latitude;
+          longitude = DaumMapModel.lastCenter.longitude;
+        } else {
+          latitude = 37.5;
+          longitude = 127;
+        }
         var mapOptions = {
-          center: new daum.maps.LatLng(37.5, 127),
+          center: new daum.maps.LatLng(latitude, longitude),
           level: 4,
           draggable: true
         };
         daum.maps.disableHD();
         var map = new daum.maps.Map(DOM, mapOptions);
         var ps = new daum.maps.services.Places();
+        map.setCopyrightPosition(daum.maps.CopyrightPosition.BOTTOMRIGHT, false);
+        // var geocoder = new daum.maps.services.Geocoder();
 
         //====================================================
         //  IMPLEMENTATIONS COMPILE
@@ -64,19 +76,32 @@
 
         function requestPlacesWithin(currentCenter) {
           // Request server for places;
+          DaumMapModel.selectedPlace = {};
           var PlacesPromise = {};
+          var query = {};
+          var categories;
           if ($stateParams.id) {
-            PlacesPromise = Place.findById({
+            PlacesPromise = Place.findOne({
               id: $stateParams.id,
               populates: 'photos'
             }).$promise;
           } else {
-            PlacesPromise = Place.within({
+            query = {
               latitude: currentCenter.latitude,
               longitude: currentCenter.longitude,
               distance: currentCenter.distance || 5000,
               limit: currentCenter.limit || 50,
-            }).$promise;
+              populates: 'photos'
+            };
+            if (FilterListModel.selectedFilters.length > 0) {
+              categories = _.map(FilterListModel.selectedFilters, function(filter) {
+                return filter.text;
+              });
+              query.categories = angular.toJson(categories);
+            }
+            console.log("---------- query ----------");
+            console.log(query);
+            PlacesPromise = Place.within(query).$promise;
           }
           return PlacesPromise;
         }
@@ -85,8 +110,10 @@
           if ($stateParams.id) {
             DaumMapModel.places = [placesWrapper];
           } else {
-            DaumMapModel.places = placesWrapper.products;
+            DaumMapModel.places = placesWrapper.places;
           }
+          console.log("---------- DaumMapModel.places ----------");
+          console.log(DaumMapModel.places);
           angular.forEach(DaumMapModel.places, function(place, i) {
             //place = {location:{type:'Point', coordinates:[126.10101, 27.101010]}, ...}
             var placeLongitude = place.geoJSON.coordinates[0];
@@ -113,21 +140,24 @@
                 // modal references DaumMapModel.selectedPlace to fill in the info
                 var index = Number(marker.getTitle());
                 Message.loading();
-                Place.findById({
-                  id: DaumMapModel.places[index].id,
-                  populates: 'photos,createdBy'
-                }).$promise
-                  .then(function success(data) {
-                    Message.hide();
-                    DaumMapModel.selectedPlace = data;
-                    console.log(data);
-                    DaumMapModel.modal.show();
-                  }, function error(err) {
-                    console.log(err);
-                    Message.hide();
-                    Message.alert();
-                  });
-                // DaumMapModel.selectedPlace = DaumMapModel.places[index];
+                U.goToState('Main.PlaceDetail', {
+                  id: DaumMapModel.places[index].id
+                }, 'forward');
+                // Place.findOne({
+                //     id: DaumMapModel.places[index].id,
+                //     populates: 'photos,createdBy'
+                //   }).$promise
+                //   .then(function success(data) {
+                //     Message.hide();
+                //     DaumMapModel.selectedPlace = data;
+                //     console.log(data);
+                //     DaumMapModel.modal.show();
+                //   }, function error(err) {
+                //     console.log(err);
+                //     Message.hide();
+                //     Message.alert();
+                //   });
+                DaumMapModel.selectedPlace = DaumMapModel.places[index];
               });
             });
             // Save converted place with click event added.
@@ -140,11 +170,12 @@
         //  Functions Exposed to controller via DaumMapModel
         //====================================================
         DaumMapModel.findMeThenSearchNearBy = function(justFindAndDontSearch) {
+          DaumMapModel.selectedPlace = {};
           Message.loading();
           $cordovaGeolocation.getCurrentPosition({
-            maximumAge: 3000,
-            timeout: 5000
-          })
+              maximumAge: 3000,
+              timeout: 5000
+            })
             .then(function success(position) {
               Message.hide();
               if (position.coords == null) {
@@ -176,11 +207,12 @@
 
 
         DaumMapModel.findPlaceByIdThenDrawAPlace = function(id) {
+          DaumMapModel.selectedPlace = {};
           Message.loading();
-          Place.findById({
-            id: id,
-            populates: 'photos'
-          }).$promise
+          Place.findOne({
+              id: id,
+              populates: 'photos'
+            }).$promise
             .then(function success(place) {
               //-------------------------------------------------------
               //  Hacky fix: when coming back to map if the map's center is the same as the
@@ -210,6 +242,7 @@
         };
 
         DaumMapModel.searchLocationNearBy = function(value) {
+          DaumMapModel.selectedPlace = {};
           Message.loading();
           if (!value) {
             Message.hide();
@@ -242,7 +275,7 @@
           });
         };
 
-        return function(scope) {
+        return function link(scope) {
           // Marker style properties.
           var markerSize = new daum.maps.Size(Number(scope.markerWidth), Number(scope.markerHeight));
           var markerImg = new daum.maps.MarkerImage(scope.markerSrc, markerSize);
@@ -259,8 +292,9 @@
               longitude: map.getCenter().getLng(),
               latitude: map.getCenter().getLat()
             };
+            DaumMapModel.lastCenter = currentCenter;
             angular.extend(currentCenter, {
-              distance: 2000,
+              distance: 5000,
               limit: 20
             });
             drawMarkers(currentCenter, markerImg, markerClickedImg, scope);

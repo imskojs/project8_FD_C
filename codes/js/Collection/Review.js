@@ -15,15 +15,17 @@
 
     var reviewUrl = SERVER_URL + '/review' +
       '/:find' +
+      '/:findPlaceReviews' +
       '/:findOne' +
-      '/:create' +
+      '/:createPlaceReview' +
       '/:update' +
       '/:destroy';
 
     var params = {
       find: '@find',
+      findPlaceReviews: '@findPlaceReviews',
       findOne: '@findOne',
-      create: '@create',
+      createPlaceReview: '@createPlaceReview',
       update: '@update',
       destroy: '@destroy'
     };
@@ -35,16 +37,22 @@
           find: 'find'
         }
       },
+      findPlaceReviews: {
+        method: 'GET',
+        params: {
+          findPlaceReviews: 'findPlaceReviews'
+        }
+      },
       findOne: {
         method: 'GET',
         params: {
           findOne: 'findOne'
         }
       },
-      create: {
+      createPlaceReview: {
         method: 'POST',
         params: {
-          create: 'create'
+          createPlaceReview: 'createPlaceReview'
         }
       },
       update: {

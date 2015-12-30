@@ -1,0 +1,80 @@
+<ion-view id="notification-detail"
+  cache-view="true"
+  hide-back-button="true"
+>
+  <ion-nav-buttons side="left">
+    <button class="button button-icon icon ion-android-arrow-back"
+    ng-click="goBack()"
+    >
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <div class="row zero flex h44px">
+      <img class="h24px"
+      src="img/header_logo.png"
+      >
+    </div>
+  </ion-nav-title>
+  <ion-content class="top77px light-bg"
+    scrollbar-y="false"
+    >
+    <div class="w100p h95vh flex light-grey-bg absolute"
+        style="z-index: 2"
+        ng-if="NotificationDetail.Model.loading"
+        >
+        <ion-spinner class="spinner-40px mb88px" icon="ripple">
+        </ion-spinner>
+    </div>
+    <div class="white-bg w98p auto r5px mt15px pt1px shadow pb15px mb15px">
+      <!--row start-->
+      <div class="row zero mt5px flex-v">
+        <div class="col-auto flex ml3p">
+          <img class="w60px h60px r60px"
+            src="img/noprofile.png"
+          >
+        </div>
+        <div class="col zero f16px ml2p">
+          <p class="zero positive bold">
+            관리자
+          </p>
+          <p class="zero darker bold f14px mt2px">
+            운동하는날 관리자
+          </p>
+        </div>
+        <div class="col-auto align-top mr3p mt5px">
+          <p class="zero dark-grey f14px letter-spacing-1">
+            {{ NotificationDetail.Model.post.createdAt | date: 'yyyy.MM.dd'}}
+          </p>
+        </div>
+      </div>
+      <!-- row end-->
+      <!--row start-->
+      <p class="zero f16px darker w90p auto center bold">
+        {{NotificationDetail.Model.post.title}}
+      </p>
+      <!-- row end-->
+      <!--row start-->
+      <p class="pre para f14px dark-grey w90p auto mt8px lines-4"> {{NotificationDetail.Model.post.content}}
+      </p>
+      <!-- row end-->
+
+      <!--row start-->
+        <!-- ng-if="PostListRecent.loadPhotos" -->
+      <ion-slide-box class="w90p auto"
+        show-pager="true"
+        >
+        <ion-slide
+          ng-repeat="photo in NotificationDetail.Model.post.photos"
+          >
+          <img class="w100p block h240px fit lazy-show"
+          ng-src="{{photo.url | Cloudinary600}}"
+          >
+        </ion-slide>
+      </ion-slide-box>
+      <!--row end-->
+    </div>
+  </ion-content>
+<!--     <div class="r60px w60px h60px absolute bottom70px right10px flex positive-b5px white-bg shadow">
+    <i class="ion-plus f40px positive"></i>
+  </div>
+ --></ion-view>

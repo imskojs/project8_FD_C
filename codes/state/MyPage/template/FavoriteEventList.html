@@ -1,0 +1,21 @@
+<div class="row zero pb30px ml5p">
+  <div class="col zero">
+    <div class="row zero mt0px light-grey-bb flex-v"
+      ng-repeat="event in MyPage.Model.FavoriteEventList.events"
+    >
+      <div class="col-30 mt5px">
+        <img class="w100p block positive-b h70px"
+        ng-src="{{event.photos[0].url}}">
+      </div>
+      <div class="col zero ml3p mt5px">
+
+        <p class="zero f16px darker bold text-overflow">
+        {{event.name}}
+        </p>
+        <p class="zero mt5px dark-grey f14px">
+        {{event.address}}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

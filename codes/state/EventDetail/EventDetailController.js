@@ -30,25 +30,25 @@
     $scope.$on('$ionicView.afterEnter', function() {
       U.resize();
     });
-    // $scope.$on('$ionicView.beforeEnter', onBeforeEnter);
-    // $scope.$on('$ionicView.afterEnter', onAfterEnter);
+    $scope.$on('$ionicView.beforeEnter', onBeforeEnter);
+    $scope.$on('$ionicView.afterEnter', onAfterEnter);
 
     //====================================================
     // Initial Loading of a state;
     //====================================================
-    // function onBeforeEnter() {
-    //   EventDetailModel.loading = true;
-    // }
+    function onBeforeEnter() {
+      EventDetailModel.loading = true;
+    }
 
-    // function onAfterEnter() {
-    //   return findOne()
-    //     .then(function(event) {
-    //       console.log(event);
-    //       U.bindData(event, EventDetailModel, 'event');
-    //     })
-    //     .catch(U.error);
-    // }
-    // 
+    function onAfterEnter() {
+      return findOne()
+        .then(function(event) {
+          console.log(event);
+          U.bindData(event, EventDetailModel, 'event');
+        })
+        .catch(U.error);
+    }
+
 
     function refresh() {
       return findOne()
@@ -67,12 +67,13 @@
     //====================================================
     function findOne(extraQuery) {
       var query = {
-        id: $state.params.id
+        id: $state.params.id,
+        populates: 'photos'
       };
       angular.extend(query, extraQuery);
       return Event.findOne(query).$promise
         .then(function(event) {
-          var photosPromise = Preload.photos(event, 'Cloudinary200', false);
+          var photosPromise = Preload.photos(event, 'Cloudinary600', false);
           return $q.all([event, photosPromise]);
         })
         .then(function(array) {

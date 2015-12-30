@@ -18,11 +18,6 @@
   <ion-content class="bottom44px black-bg"
     scrollbar-y="false"
   >
-    <ion-refresher
-      ng-if="!EventDetail.Model.loading"
-      on-refresh="EventDetail.refresh()"
-      >
-    </ion-refresher>
 
     <!-- Loading overlay -->
     <div class="w100p h95vh flex light-grey-bg absolute"
@@ -35,7 +30,7 @@
 
     <!-- img -->
     <img class="w100p block" alt="이벤트 이미지"
-      ng-src="{{EventDetail.Model.event.photos[0].url}}"
+      ng-src="{{EventDetail.Model.event.photos[0].url | Cloudinary600}}"
     >
 
    <!-- stars -->
@@ -46,21 +41,56 @@
        별점
        </p>
        <div class="row zero mb5px">
-         <div class="col zero">
-           <div class="ion-star f10px center positive"></div>
-         </div>
-         <div class="col zero">
-           <div class="ion-star f10px center positive"></div>
-         </div>
-         <div class="col zero">
-           <div class="ion-star f10px center positive"></div>
-         </div>
-         <div class="col zero">
-           <div class="ion-star f10px center positive"></div>
-         </div>
-         <div class="col zero">
-           <div class="ion-android-star-outline f10px center positive"></div>
-         </div>
+          <div class="col zero">
+            <div class="f10px center positive"
+              ng-class="{
+                'ion-star': Number(EventDetail.Model.event.averageStars) >= 1,
+                'ion-android-star-outline': 
+                  (Number(EventDetail.Model.event.averageStars) < 1) ||
+                  !Eventdetail.Model.event.averageStars
+              }"
+            ></div>
+          </div>
+          <div class="col zero">
+            <div class="f10px center positive"
+              ng-class="{
+                'ion-star': Number(EventDetail.Model.event.averageStars) >= 2,
+                'ion-android-star-outline': 
+                  (Number(EventDetail.Model.event.averageStars) < 2) ||
+                  !Eventdetail.Model.event.averageStars
+              }"
+            ></div>
+          </div>
+          <div class="col zero">
+            <div class="f10px center positive"
+              ng-class="{
+                'ion-star': Number(EventDetail.Model.event.averageStars) >= 3,
+                'ion-android-star-outline': 
+                  (Number(EventDetail.Model.event.averageStars) < 3) ||
+                  !Eventdetail.Model.event.averageStars
+              }"
+            ></div>
+          </div>
+          <div class="col zero">
+            <div class="f10px center positive"
+              ng-class="{
+                'ion-star': Number(EventDetail.Model.event.averageStars) >= 4,
+                'ion-android-star-outline': 
+                  (Number(EventDetail.Model.event.averageStars) < 4) ||
+                  !Eventdetail.Model.event.averageStars
+              }"
+            ></div>
+          </div>
+          <div class="col zero">
+            <div class="f10px center positive"
+              ng-class="{
+                'ion-star': Number(EventDetail.Model.event.averageStars) >= 5,
+                'ion-android-star-outline': 
+                  (Number(EventDetail.Model.event.averageStars) < 5) ||
+                  !Eventdetail.Model.event.averageStars
+              }"
+            ></div>
+          </div>
        </div>
        <p class="zero positive center f14px">
          {{ EventDetail.Model.event.averageStars }}

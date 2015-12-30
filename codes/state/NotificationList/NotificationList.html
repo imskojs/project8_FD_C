@@ -1,0 +1,68 @@
+<ion-view id="notification-list"
+  cache-view="true"
+  hide-back-button="true"
+  >
+  <ion-nav-buttons side="left">
+    <button class="button button-icon icon ion-android-arrow-back"
+    ng-click="goBack()"
+    >
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <div class="row zero flex h44px">
+      <img class="h24px"
+        src="img/header_logo.png"
+      >
+    </div>
+  </ion-nav-title>
+  <ion-content class="pt2px top77px light-bg">
+    <!-- loading -->
+    <div class="w100p h95vh flex light-grey-bg absolute"
+      style="z-index: 2"
+      ng-if="NotificationList.Model.loading"
+      >
+      <ion-spinner class="spinner-40px mb88px" icon="ripple">
+      </ion-spinner>
+    </div>
+
+    <!-- row -->
+    <div class="row zero pl5p flex-v shadow mt5px mb5px white-bg r5px w98p auto p10px"
+      ng-click="goToState('Main.Notification.NotificationDetail', {id: post.id })"
+      ng-repeat="post in NotificationList.Model.posts"
+    >
+      <div class="col-auto">
+        <img class="w50px h50px block"
+          alt="관리자 이미지"
+          src="img/noprofile.png" 
+        >
+      </div>
+
+      <div class="col zero ml10px">
+
+        <div class="row zero">
+          <div class="col-auto">
+            <p class="zero positive f14px bold">
+              관리자
+            </p>
+          </div>
+          <p class="zero w100p right mr5px f14px grey">
+            {{post.createdAt | date: 'yyyy.MM.dd'}}
+          </p>
+        </div>
+
+        <p class="zero f14px dark bold mt5px">
+          {{post.title}}
+        </p>
+
+      </div>
+
+
+    <!-- loadMore -->
+    <ion-infinite-scroll
+      on-infinite="NotificationList.loadMore()"
+      immediate-check="true"
+      ng-if="NotificationList.Model.more"
+      >
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

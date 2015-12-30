@@ -15,20 +15,23 @@
 
     var placeUrl = SERVER_URL + '/place' +
       '/:find' +
+      '/:findLikedPlaces' +
       '/:findOne' +
       '/:create' +
       '/:update' +
       '/:destroy' +
+      '/:like' +
 
-      '/:within'
-      ;
+      '/:within';
 
     var params = {
       find: '@find',
+      findLikedPlaces: '@findLikedPlaces',
       findOne: '@findOne',
       create: '@create',
       update: '@update',
       destroy: '@destroy',
+      like: '@like',
 
       within: '@within'
     };
@@ -39,6 +42,13 @@
         method: 'GET',
         params: {
           find: 'find'
+        }
+      },
+
+      findLikedPlaces: {
+        method: 'GET',
+        params: {
+          findLikedPlaces: 'findLikedPlaces'
         }
       },
 
@@ -67,6 +77,13 @@
         method: 'DELETE',
         params: {
           destroy: 'destroy'
+        }
+      },
+
+      like: {
+        method: 'POST',
+        params: {
+          like: 'like'
         }
       },
 

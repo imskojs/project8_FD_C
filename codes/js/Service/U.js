@@ -82,6 +82,7 @@
     function resetSlides() {
       $ionicSlideBoxDelegate.slide(0, 0);
       $ionicSlideBoxDelegate.update();
+      $ionicScrollDelegate.scrollTop(false);
     }
 
     function reset(model) {
@@ -117,11 +118,11 @@
       if (!loadingModel) {
         $timeout(function() {
           model.loading = false;
-        }, 50);
+        }, 10);
       } else {
         $timeout(function() {
           loadingModel.loading = false;
-        }, 50);
+        }, 10);
       }
     }
 

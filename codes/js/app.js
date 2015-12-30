@@ -6,7 +6,8 @@
       'ngResource',
       'ngFileUpload',
       'ngTemplates',
-      'ngStorage'
+      'ngStorage',
+      'ngImgCrop'
     ])
     .run(init);
 
@@ -47,16 +48,14 @@
     //  Helper
     //====================================================
     function setInitialState() {
-      if ($rootScope.AppStorage.firstTime && $state.get('Main.WalkThrough')) {
+      if ($rootScope.AppStorage.isFirstTime && $state.get('Main.WalkThrough')) {
         // First time user logic
         $state.go('Main.WalkThrough');
       } else if (!$rootScope.AppStorage.token) {
         // Not logged in user logic
-        // $state.go('Main.MainTab.PlaceEvent.DaumMap');
-        $state.go('Main.PostCreate');
+        $state.go('Main.Login');
       } else {
-        // Normal user logic
-        $state.go('Main.SampleList');
+        $state.go('Main.MainTab.PlaceEvent.DaumMap');
       }
     }
 

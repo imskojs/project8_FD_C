@@ -1,84 +1,84 @@
 <ion-view id="daum-map"
-    hide-back-button="true"
+  hide-back-button="true"
+  >
+  <ion-nav-buttons side="left">
+    <button class="button button-icon icon ion-navicon"
+    ng-click="toggleSideMenu(true)"
     >
-    <ion-nav-buttons side="left">
-        <button class="button button-icon icon ion-navicon"
-        ng-click="toggleSideMenu(true)"
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <div class="row zero flex h44px">
+      <img class="h24px"
+      src="img/header_logo.png"
+      >
+    </div>
+  </ion-nav-title>
+  <ion-pane class="absolute top132px h100p w7p custom-button-left stable-bg light-grey-b left0px"
+    ng-click="goToState('Main.MainTab.FilterList', null, 'back')"
+    touch
+    >
+    <div class="row zero flex mt20px">
+      <i class="ion-chevron-right f16px positive bold"></i>
+    </div>
+    <p class="pre dark-grey center f14px">
+    시
+    설
+    필
+    터
+    링
+    </p>
+  </ion-pane>
+  <ion-content class="top132px"
+    data-tap-disable="true"
+    scroll="false"
+    >
+    <div class="absolute custom-search-bar zero row w80p h36px mt3px left10p flex light-grey-bg dark-b r5px">
+      <div class="col-auto zero pl5px pr5px flex-v positive-bg h36px dark-br"
+        ng-click="DaumMap.findMeThenSearchNearBy()"
         >
-        </button>
-    </ion-nav-buttons>
-    <ion-nav-title>
-        <div class="row zero flex h44px">
-            <img class="h24px"
-            src="img/header_logo.png"
-            >
-        </div>
-    </ion-nav-title>
-    <ion-pane class="absolute top132px h100p w7p custom-button-left stable-bg light-grey-b left0px"
-        ng-click="goToState('Main.MainTab.FilterList', null, 'back')"
-        touch
+        <i class="ion-android-locate f20px white"></i>
+        <p class="zero f14px ml5px white">현재위치</p>
+      </div>
+      <div class="col zero">
+        <input class="h33px placeholder-f14px placeholder-dark-grey pt5px f14px pl5p"
+        type="text"
+        placeholder="검색할 지역을 입력해주세요"
+        ng-model="DaumMap.searchWord"
+        ng-enter="DaumMap.searchLocationNearBy(DaumMap.searchWord);"
         >
-        <div class="row zero flex mt20px">
-            <i class="ion-chevron-right f16px positive bold"></i>
-        </div>
-        <p class="pre dark-grey center f14px">
-        시
-        설
-        필
-        터
-        링
-        </p>
-    </ion-pane>
-    <ion-content class="top132px"
-        data-tap-disable="true"
-        scroll="false"
+      </div>
+      <div class="col-12 flex h36px"
+        ng-click="DaumMap.searchLocationNearBy(DaumMap.searchWord)"
         >
-        <div class="absolute custom-search-bar zero row w80p h36px mt3px left10p flex light-grey-bg dark-b r5px">
-            <div class="col-auto zero pl5px pr5px flex-v positive-bg h36px dark-br"
-                ng-click="DaumMap.findMeThenSearchNearBy()"
-                >
-                <i class="ion-android-locate f20px white"></i>
-                <p class="zero f14px ml5px white">현재위치</p>
-            </div>
-            <div class="col zero">
-                <input class="h33px placeholder-f14px placeholder-dark-grey pt5px f14px pl5p"
-                type="text"
-                placeholder="검색할 지역을 입력해주세요"
-                ng-model="DaumMap.searchWord"
-                ng-enter="DaumMap.searchLocationNearBy(DaumMap.searchWord);"
-                >
-            </div>
-            <div class="col-12 flex h36px"
-                ng-click="DaumMap.searchLocationNearBy(DaumMap.searchWord)"
-                >
-                <i class="ion-search f24px positive"></i>
-            </div>
+        <i class="ion-search f24px positive"></i>
+      </div>
+    </div>
+    <div class="absolute h100p w7p custom-button-right stable-bg light-grey-b top0px right0px"
+      ng-click="goToState('Main.MainTab.PlaceList', null, 'forward')"
+      >
+      <div class="row zero flex mt20px">
+        <i class="ion-chevron-left f16px positive bold"></i>
+      </div>
+      <p class="pre dark-grey center f14px">
+      시
+      설
+      리
+      스
+      트
+      </p>
+    </div>
+    <div class="row zero h100p">
+      <div class="col h100p">
+        <div class="h100p"
+          daum-map
+          marker-src="img/map_locationicon.png"
+          marker-clicked-src="img/map_locationicon.png"
+          marker-width="30"
+          marker-height="40"
+          >
         </div>
-        <div class="absolute h100p w7p custom-button-right stable-bg light-grey-b top0px right0px"
-            ng-click="goToState('Main.MainTab.PlaceList', null, 'forward')"
-            >
-            <div class="row zero flex mt20px">
-                <i class="ion-chevron-left f16px positive bold"></i>
-            </div>
-            <p class="pre dark-grey center f14px">
-            시
-            설
-            리
-            스
-            트
-            </p>
-        </div>
-        <div class="row zero h100p">
-            <div class="col h100p">
-                <div class="h100p"
-                    daum-map
-                    marker-src="img/map_locationicon.png"
-                    marker-clicked-src="img/map_locationicon.png"
-                    marker-width="30"
-                    marker-height="40"
-                    >
-                </div>
-            </div>
-        </div>
-    </ion-content>
+      </div>
+    </div>
+  </ion-content>
 </ion-view>

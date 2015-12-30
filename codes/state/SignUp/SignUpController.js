@@ -5,19 +5,19 @@
 
   SignUpController.$inject = [
     '$scope', '$timeout', '$window',
-    'SignUpModel', 'Photo'
+    'SignUpModel', 'Photo', 'User', 'U', 'Message'
   ];
 
   function SignUpController(
     $scope, $timeout, $window,
-    SignUpModel, Photo
+    SignUpModel, Photo, User, U, Message
   ) {
 
     var SignUp = this;
     SignUp.Model = SignUpModel;
 
     SignUp.getPicture = getPicture;
-    SignUp.registerWithImage = SignUpModel.registerWithImage;
+    SignUp.register = register;
 
     $scope.$on('$ionicView.beforeEnter', onBeforeEnter);
     $scope.$on('$ionicView.afterEnter', onAfterEnter);
@@ -27,14 +27,15 @@
     //  Implementation
     //====================================================
     function getPicture() {
-      return Photo.get('gallery', 300)
-        .then(function(filePath) {
-          console.log("---------- filePath ----------");
-          console.log(filePath);
-          console.log("HAS TYPE: " + typeof filePath);
+      SignUp.imgLoading = true;
+      return Photo.get('gallery', 800, true, 'square')
+        .then(function(base64) {
+
+          SignUpModel.form.files[0] = base64;
+
           $timeout(function() {
-            SignUpModel.form.files.push(filePath);
-          }, 0);
+            SignUp.imgLoading = false;
+          }, 2000);
         })
         .catch(function(err) {
           console.log("---------- err ----------");
@@ -44,13 +45,32 @@
     }
 
     function onBeforeEnter() {
-      SignUpModel.loading = true;
+      // SignUpModel.loading = true;
     }
 
     function onAfterEnter() {
       $timeout(function() {
         SignUpModel.loading = false;
       }, 20);
+    }
+
+    function register() {
+      Message.loading();
+      SignUpModel.form.username = SignUpModel.form.email;
+      return User
+        .register({}, SignUpModel.form).$promise
+        .then(function(data) {
+          console.log("---------- data ----------");
+          console.log(data);
+          Message.hide();
+          U.goToState('Main.Login', null, 'back');
+        })
+        .catch(function(err) {
+          Message.hide();
+          Message.alert();
+          console.log("---------- err ----------");
+          console.log(err);
+        });
     }
 
     function test() {

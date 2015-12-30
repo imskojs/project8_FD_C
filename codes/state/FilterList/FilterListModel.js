@@ -9,6 +9,7 @@
   function FilterListModel() {
 
     var model = {
+      selectedFilters: [],
       filters: [{
         text: '육상',
         base: 'img/category_icon01_2.png',
@@ -149,10 +150,9 @@
         base: 'img/category_icon28_2.png',
         selected: 'img/category_icon28.png',
         alone: 'img/category_icon28_3.png'
-      }],
-      selectedFilters: []
+      }]
     };
-    
+
     return model;
   }
 })();

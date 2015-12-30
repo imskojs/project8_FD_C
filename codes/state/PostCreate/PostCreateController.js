@@ -14,67 +14,88 @@
     .controller('PostCreateController', PostCreateController);
 
   PostCreateController.$inject = [
-    '$scope', '$state', '$q',
-    'PostCreateModel', 'Post', 'Message', 'U', 'Preload'
+    '$scope', '$state', '$q', '$timeout',
+    'PostCreateModel', 'Photo', 'Message', 'Post', 'U'
   ];
 
   function PostCreateController(
-    $scope, $state, $q,
-    PostCreateModel, Post, Message, U, Preload
+    $scope, $state, $q, $timeout,
+    PostCreateModel, Photo, Message, Post, U
   ) {
     var PostCreate = this;
     PostCreate.Model = PostCreateModel;
 
-    PostCreate.refresh = refresh;
-
-    // $scope.$on('$ionicView.beforeEnter', onBeforeEnter);
-    // $scope.$on('$ionicView.afterEnter', onAfterEnter);
+    PostCreate.getPhoto = getPhoto;
+    PostCreate.updatePhoto = updatePhoto;
+    PostCreate.deletePhoto = deletePhoto;
+    PostCreate.sendForm = sendForm;
 
     //====================================================
-    // Initial Loading of a state;
+    //  Implementation
     //====================================================
-    // function onBeforeEnter() {
-    //   PostCreateModel.loading = true;
-    // }
-
-    // function onAfterEnter() {
-    //   return findOne()
-    //     .then(function(post) {
-    //       console.log(post);
-    //       U.bindData(post, PostCreateModel, 'post');
-    //     })
-    //     .catch(U.error);
-    // }
-
-    function refresh() {
-      return findOne()
-        .then(function(post) {
-          console.log(post);
-          U.bindData(post, PostCreateModel, 'post');
+    function getPhoto(sourceType, $index) {
+      return Photo.get(sourceType, 1000, true, 600, 'square')
+        .then(function(base64) {
+          $timeout(function() {
+            PostCreateModel.form.files[$index] = base64;
+          }, 0);
         })
-        .catch(U.error)
-        .finally(function() {
-          U.broadcast($scope);
+        .catch(function(err) {
+          console.log("---------- err ----------");
+          console.log(err);
+          console.log("HAS TYPE: " + typeof err);
+          Message.alert('사진 고르기 실패', '다시 시도해주세요.');
         });
     }
 
-    //====================================================
-    //  Implementations
-    //====================================================
-    function findOne(extraQuery) {
-      var query = {
-        id: $state.params.id
-      };
-      angular.extend(query, extraQuery);
-      return Post.findOne(query).$promise
-        .then(function(post) {
-          var photosPromise = Preload.photos(post, 'Cloudinary200', false);
-          return $q.all([post, photosPromise]);
+
+    function updatePhoto($index) {
+      PostCreateModel.form.files[$index] = null;
+      return Photo.get('gallery', 1000, true, 600, 'square')
+        .then(function(base64) {
+          $timeout(function() {
+            PostCreateModel.form.files[$index] = base64;
+          });
         })
-        .then(function(array) {
-          var post = array[0];
-          return post;
+        .catch(function(err) {
+          console.log("---------- err ----------");
+          console.log(err);
+          console.log("HAS TYPE: " + typeof err);
+          Message.alert('사진 고릑 실패', '다시 시도해주세요.');
         });
+    }
+
+    function deletePhoto($index) {
+      PostCreateModel.form.files[$index] = null;
+    }
+
+    function sendForm() {
+      Message.loading();
+      return Post.create({}, PostCreateModel.form).$promise
+        .then(function(post) {
+          console.log("---------- post ----------");
+          console.log(post);
+          console.log("HAS TYPE: " + typeof post);
+          Message.hide();
+          return Message.alert('글작성 알림', '글이 성공적으로 작성 되었습니다.');
+        })
+        .then(function() {
+          U.goToState('Main.MainTab.MyPage', null, 'forward');
+        })
+        .catch(function(err) {
+          console.log("---------- err ----------");
+          console.log(err);
+          console.log("HAS TYPE: " + typeof err);
+          Message.hide();
+          Message.alert();
+        })
+        .finally(function() {
+          reset();
+        });
+    }
+
+    function reset() {
+      PostCreateModel.form.files = [null, null, null, null, null];
     }
 
   } //end

@@ -14,13 +14,22 @@
   angular.module('app')
     .factory('Favorite', Favorite);
 
-  Favorite.$inject = ['AppStorage'];
+  Favorite.$inject = [
+    '$timeout',
+    'AppStorage', 'Post', 'Message', 'Place'
+  ];
 
-  function Favorite(AppStorage) {
+  function Favorite(
+    $timeout,
+    AppStorage, Post, Message, Place
+  ) {
 
     var service = {
       toggleSaveToFavorite: toggleSaveToFavorite,
-      isFavorite: isFavorite
+      isFavorite: isFavorite,
+
+      likePost: likePost,
+      likePlace: likePlace
     };
 
     return service;
@@ -44,7 +53,6 @@
       return AppStorage.favorites;
     }
 
-
     //====================================================
     //  Favorite.isFavorite
     //====================================================
@@ -62,6 +70,56 @@
         }
       }
       return false;
+    }
+
+    function likePost(postObj) {
+      Message.loading();
+      Post.like({}, {
+          post: postObj.id
+        }).$promise
+        .then(function(post) {
+          if (post.message) {
+            Message.alert('좋아요 알림', post.message);
+          } else {
+            $timeout(function() {
+              postObj.likes = post.likes;
+              Message.alert('좋아요 알림', '좋아요 성공!');
+            }, 0);
+          }
+          console.log("---------- post ----------");
+          console.log(post);
+        })
+        .catch(function(err) {
+          Message.hide();
+          Message.alert();
+          console.log("---------- err ----------");
+          console.log(err);
+        });
+    }
+
+    function likePlace(placeObj) {
+      Message.loading();
+      Place.like({}, {
+          place: placeObj.id
+        }).$promise
+        .then(function(place) {
+          if (place.message) {
+            Message.alert('좋아요 알림', place.message);
+          } else {
+            $timeout(function() {
+              placeObj.likes = place.likes;
+              Message.alert('좋아요 알림', '좋아요 성공!');
+            }, 0);
+          }
+          console.log("---------- place ----------");
+          console.log(place);
+        })
+        .catch(function(err) {
+          Message.hide();
+          Message.alert();
+          console.log("---------- err ----------");
+          console.log(err);
+        });
     }
 
   } // Service END

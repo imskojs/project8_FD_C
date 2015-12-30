@@ -15,7 +15,7 @@
                 <input  class="positive-bg stable f16px placeholder-f16px h25px"
                 type="email"
                 placeholder="이메일을 입력해주세요"
-                ng-model="Login.Model.form.email"
+                ng-model="Login.Model.form.identifier"
                 >
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="row zero">
             <div class="col-30 ml60p">
                 <p class="zero f14px center stable mt10px mb10px right bold darker pt10px pb20px"
-                ng-click="goToState('Main.SignUp')"
+                ng-click="goToState('Main.SignUp', null, 'forward')"
                 >
                 회원가입
                 </p>
@@ -43,10 +43,11 @@
         </div>
         <!-- ng-click="Login.login();" -->
         <button class="darker-bg button-icon w100p zero center stable f20px pt10px pb10px mt20px radius bold"
-        ng-click="goToState('Main.MainTab.PostList.PostListRecent')"
+        ng-click="Login.localLogin();"
         >
-        로그인
+            로그인
         </button>
+<!-- 
         <div class="row zero mt30px">
             <div class="col flex"
                 ng-click="Login.loginWithFacebook()"
@@ -73,5 +74,6 @@
                 >
             </div>
         </div>
+ -->        
     </ion-content>
 </ion-view>

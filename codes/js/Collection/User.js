@@ -1,36 +1,50 @@
 (function(angular) {
   'use strict';
   angular.module('app')
-    .factory('Users', Users);
+    .factory('User', User);
 
-  Users.$inject = [
+  User.$inject = [
     '$resource',
-    'SERVER_URL', 'Photo'
+    'Photo',
+    'SERVER_URL'
   ];
 
-  function Users(
+  function User(
     $resource,
-    SERVER_URL, Photo
+    Photo,
+    SERVER_URL
   ) {
 
-    var postUrl = SERVER_URL + '/user';
+    var postUrl = SERVER_URL + '/user' +
+      '/:login';
 
-    var params = {};
+    var params = {
+      login: '@login'
+    };
 
-    var actions = {};
+    var actions = {
+      login: {
+        method: 'POST',
+        params: {
+          login: 'login'
+        }
+      }
+    };
 
     var service = $resource(postUrl, params, actions);
 
-    service.registerWithImage = registerWithImage;
+    service.register = register;
 
     return service;
 
-    function registerWithImage(param, query) {
-      var promise = Photo.post(
-        '/user/registerWithImage',
-        query,
-        'POST'
-      );
+    function register(param, query) {
+      console.log("---------- User.register Service Query ----------");
+      console.log(query);
+
+      var promise = Photo.post('/user/register', query, 'POST')
+        .then(function(dataWrapper) {
+          return dataWrapper.data;
+        });
       return {
         $promise: promise
       };

@@ -17,18 +17,12 @@
 		</ion-nav-title>
     <ion-pane class="white-bg h33px top44px flex-v">
       <p class="zero positive center f16px bold w100p">
-        대구 시민운동장 야구장
+        {{getParam('placeTitle')}}
       </p>
     </ion-pane>
-		<ion-content class="pt1px bottom77px top77px"
+		<ion-content class="pt1px bottom100px top77px"
       scrollbar-y="false"
     >
-
-				<ion-refresher
-					ng-if="!PlaceReview.Model.loading"
-					on-refresh="PlaceReview.refresh()"
-				>
-				</ion-refresher>
 
 				<div class="w100p h95vh flex light-grey-bg absolute"
 					style="z-index: 2"
@@ -44,7 +38,7 @@
 						>
 								<div class="col-auto">
 										<img class="w60px h60px r60px"
-												ng-src="{{ review.createdBy.profile_picture }}"
+												ng-src="{{ review.createdBy | GetPhoto}}"
 										>
 								</div>
 								<div class="col zero pt10px">
@@ -67,14 +61,15 @@
                         <div class="ion-star f10px center positive"></div>
                       </div>
                       <div class="col-auto zero ml2px">
-                        <div class="ion-android-star-outline f10px center positive"></div>
+                        <div class="ion-star f10px center positive"></div>
                       </div>
                       <div class="col-auto zero ml10px positive f14px bold">
-                        <p class="zero"> {{ review.stars }} </p>
+                        <p class="zero"> {{ review.rate }} </p>
                       </div>
                       <div class="col zero flex-right flex-v"
                         ng-if="true"
                       >
+<!--                       
                         <div class="col-auto pl8px pr8px positive-br2px"
                           ng-click=""
                         >
@@ -82,8 +77,10 @@
                             수정
                           </p>
                         </div>
+ -->
                         <div class="col-auto pl8px pr8px"
-                          ng-click=""
+                          ng-if="AppStorage.user.id === review.owner"
+                          ng-click="PlaceReview.deleteReview(review, $index)"
                         >
                           <p class="zero f14px positive bold">
                             삭제
@@ -98,9 +95,7 @@
                       {{ review.createdAt | date: 'yyyy.MM.dd HH:mm'}}
                     </p>
 								</div>
-								
 						</div>
-
 				</div>
 
 				<ion-infinite-scroll
@@ -111,7 +106,7 @@
 				</ion-infinite-scroll>
 
 		</ion-content>
-    <ion-pane class="h33px absolute top-none bottom44px light-grey-bg">
+    <ion-pane class="h33px absolute top-none bottom66px light-grey-bg">
       <div class="row zero flex-v h33px ml5p mr10p">
         <div class="col-30">
           <p class="zero f14px positive bold">별점 주기</p>
@@ -130,19 +125,23 @@
             <div class="ion-star f18px center positive"></div>
           </div>
           <div class="col-auto pl5px pr5px">
-            <div class="ion-android-star-outline f18px center positive"></div>
+            <div class="ion-star f18px center positive"></div>
           </div>
         </div>
       </div>
     </ion-pane>
-    <ion-footer-bar class="zero positive-bg">
-      <div class="row zero h44px pt8px pb8px pl5p pr5p flex-v">
+
+    <ion-footer-bar class="zero positive-bg h66px">
+      <div class="row zero h66px pt8px pb8px pl5p pr5p flex-v">
         <div class="col-80">
-          <input class="darker-b2px h30px light-bg r3px f14px placeholder-f14px placeholder-grey pl5px" type="text"
-            placeholder="리뷰를 입력해주세요."
-          >
+          <textarea class="darker-b2px light-bg r3px f14px placeholder-f14px placeholder-grey pl5px h55px" type="text"
+            placeholder="별점과 함께 리뷰를 입력해주세요."
+            ng-model="PlaceReview.Model.form.content"
+          ></textarea>
         </div>
-        <div class="col-20 flex">
+        <div class="col-20 flex h55px"
+          ng-click="PlaceReview.createReview();"
+        >
           <div class="ion-chatbubble-working f26px white"></div>
         </div>
       </div>

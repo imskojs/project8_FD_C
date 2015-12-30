@@ -435,19 +435,38 @@ textarea {
  * Written by Seunghoon Ko <imskojs@gmail.com>, 10/10/2015
  *
  */
+
 //====================================================
 //  Images
 //====================================================
-.app-slide-image {
-  display: block;
-  height: 66.6666666vw;
-  width: 100%;
+.fit {
+  object-fit: cover !important;
 }
-@for $i from 0 through 300 {
-  .app-slide-image#{$i}vw {
-    display: block;
-    height: #{$i}vw;
-    width: 100%;
+
+img {
+  display: block;
+}
+
+.lazy-show {
+  -webkit-animation: lazyShowAnimation 1s;
+  animation: lazyShowAnimation 1s;
+}
+
+@-webkit-keyframes lazyShowAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes lazyShowAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
@@ -461,56 +480,70 @@ textarea {
  * Written by Seunghoon Ko <imskojs@gmail.com>, 10/10/2015
  *
  */
+
 //====================================================
 //  Icons
 //====================================================
 .ion-android-arrow-back {
-    padding: {
-        left: 10px !important;
-        right: 8px !important;
-    }
-} .ion-android-arrow-back::before{
-    font-size: 24px !important;
-    color: $stable;
+  padding: {
+    left: 10px !important;
+    right: 8px !important;
+  }
 }
+
+.ion-android-arrow-back::before {
+  font-size: 24px !important;
+  color: $stable;
+}
+
 .ion-close-round::before {
   font-size: 24px !important;
   color: $stable;
 }
+
 .ion-android-share-alt::before {
-    font-size: 24px !important;
-    color: $stable;
+  font-size: 24px !important;
+  color: $stable;
 }
+
 .ion-pinpoint::before {
   font-size: 24px !important;
   color: $stable;
 }
+
 .ion-home::before {
-    font-size: 24px !important;
-    color: $stable;
+  font-size: 24px !important;
+  color: $stable;
 }
+
 .ion-navicon::before {
-    color: $stable;
+  color: $stable;
 }
+
 .ion-ios-search-strong::before {
-    font-size: 20px !important;
-    color: $stable;
+  font-size: 20px !important;
+  color: $stable;
 }
+
 .icon.ion-record {
-    color: $stable;
+  color: $positive;
 }
+
 .spinner {
   svg {
     fill: $positive;
     stroke: $positive;
   }
 }
+
 .loading {
   background-color: $stable;
 }
 
-@for $i from 20 through 200 {
+@for $i from 1 through 200 {
   .spinner-#{$i}px {
+    width: #{$i}px;
+    height: #{$i}px;
     &.spinner svg {
       width: #{$i}px;
       height: #{$i}px;
@@ -557,11 +590,12 @@ progress[value]::-webkit-progress-bar{
  * Written by Seunghoon Ko <imskojs@gmail.com>, 10/10/2015
  *
  */
+
 //====================================================
 //  Shadows
 //====================================================
 .shadow {
-    box-shadow: 0px 1px 2px #555;
+  box-shadow: 1px 1px 2px 1px #555;
 }
 
 /**
@@ -1114,21 +1148,57 @@ progress[value]::-webkit-progress-bar{
  * Written by Seunghoon Ko <imskojs@gmail.com>, 10/10/2015
  *
  */
+
+//====================================================
+//  Scale Out Slide
+//====================================================
 .mh-slide {
   -webkit-transform: translate3d(0, 0, 0) scale(0);
   transform: translate3d(0, 0, 0) scale(0);
   opacity: 0
 }
-.mh-slide.ng-enter, .mh-slide > .ng-enter {
+
+.mh-slide.ng-enter,
+.mh-slide > .ng-enter {
   transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 100ms;
 }
-.mh-slide.ng-enter-active, .mh-slide > .ng-enter-active {
+
+.mh-slide.ng-enter-active,
+.mh-slide > .ng-enter-active {
   -webkit-transform: translate3d(0, 0, 0) scale(1);
   transform: translate3d(0, 0, 0) scale(1);
   opacity: 1;
 }
-.mh-slide.ng-leave, .mh-slide > .ng-leave {
+
+.mh-slide.ng-leave,
+.mh-slide > .ng-leave {
   transition: all ease-in-out 50ms;
+}
+
+//====================================================
+//  Instant Slide
+//====================================================
+.instant-slide {
+  -webkit-transform: translate3d(0, 0, 0) scale(0);
+  transform: translate3d(0, 0, 0) scale(0);
+  opacity: 0
+}
+
+.instant-slide.ng-enter,
+.instant-slide > .ng-enter {
+  transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 1ms;
+}
+
+.instant-slide.ng-enter-active,
+.instant-slide > .ng-enter-active {
+  -webkit-transform: translate3d(0, 0, 0) scale(1);
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 1;
+}
+
+.instant-slide.ng-leave,
+.instant-slide > .ng-leave {
+  transition: all ease-in-out 1ms;
 }
 
 /**
@@ -1299,6 +1369,23 @@ progress[value]::-webkit-progress-bar{
   }
 }
 
-#place-list {
-
+.preload-spinner.load-done {
+  opacity: 0;
+  transition: all 0.3s;
 }
+
+.preload-spinner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: white;
+}
+#test1 {}

@@ -35,6 +35,16 @@
           }
         }
       })
+      .state('Main.Notification', {
+        // abstract: true
+        url: '/Notification',
+        views: {
+          Main: {
+            templateUrl: 'state/1Notification/Notification.html',
+            controller: 'NotificationController as Notification'
+          }
+        }
+      })
       .state('Main.MainTab.PlaceEvent', {
         // abstract: true,
         url: '/PlaceEvent',
@@ -55,6 +65,70 @@
           }
         }
       })
+
+    //====================================================
+    //  Terms
+    //====================================================
+    .state('Main.Terms', {
+        url: '/Terms',
+        views: {
+          Main: {
+            templateUrl: 'state/Terms/Terms.html',
+            controller: 'TermsController as Terms'
+          }
+        }
+      })
+      //====================================================
+      //  Profile
+      //====================================================
+      .state('Main.Profile', {
+        url: '/Profile',
+        views: {
+          Main: {
+            templateUrl: 'state/Profile/Profile.html',
+            controller: 'ProfileController as Profile'
+          }
+        }
+      })
+
+    //====================================================
+    // Password 
+    //====================================================
+    .state('Main.Password', {
+      url: '/Password',
+      views: {
+        Main: {
+          templateUrl: 'state/Password/Password.html',
+          controller: 'PasswordController as Password'
+        }
+      }
+    })
+
+    //====================================================
+    // NotificationList 
+    //====================================================
+    .state('Main.Notification.NotificationList', {
+      url: '/NotificationList',
+      views: {
+        Notification: {
+          templateUrl: 'state/NotificationList/NotificationList.html',
+          controller: 'NotificationListController as NotificationList'
+        }
+      }
+    })
+
+    //====================================================
+    // NotificationDetail
+    //====================================================
+    .state('Main.Notification.NotificationDetail', {
+      url: '/NotificationDetail/:id',
+      views: {
+        Notification: {
+          templateUrl: 'state/NotificationDetail/NotificationDetail.html',
+          controller: 'NotificationDetailController as NotificationDetail'
+        }
+      }
+    })
 
     //====================================================
     //  Login
@@ -87,7 +161,7 @@
     //====================================================
 
     .state('Main.PlaceDetail', {
-      url: '/PlaceDetail',
+      url: '/PlaceDetail/:id',
       views: {
         Main: {
           templateUrl: 'state/PlaceDetail/PlaceDetail.html',
@@ -101,7 +175,7 @@
     //====================================================
 
     .state('Main.PlaceReview', {
-      url: '/PlaceReview',
+      url: '/PlaceReview/:placeTitle/:place',
       views: {
         Main: {
           templateUrl: 'state/PlaceReview/PlaceReview.html',
@@ -124,7 +198,7 @@
      * EventDetail
      */
     .state('Main.EventDetail', {
-      url: '/EventDetail',
+      url: '/EventDetail/:id',
       views: {
         Main: {
           templateUrl: 'state/EventDetail/EventDetail.html',
@@ -150,7 +224,7 @@
        */
 
     .state('Main.PostComment', {
-        url: '/PostComment/:id',
+        url: '/PostComment/:post',
         views: {
           Main: {
             templateUrl: 'state/PostComment/PostComment.html',
@@ -175,10 +249,7 @@
       })
 
     .state('Main.MainTab.PlaceEvent.DaumMap', {
-      params: {
-        prev: ''
-      },
-      url: '/DaumMap',
+      url: '/DaumMap/:id',
       views: {
         PlaceEvent: {
           templateUrl: 'state/DaumMap/DaumMap.html',
@@ -255,7 +326,21 @@
           controller: 'MyPageController as MyPage'
         }
       }
+    })
+
+    //====================================================
+    //  Test1
+    //====================================================
+    .state('Main.Test1', {
+      url: '/Test1',
+      views: {
+        Main: {
+          templateUrl: 'state/Test1/Test1.html',
+          controller: 'Test1Controller as Test1'
+        }
+      }
     });
+
 
   } //route end
 })(angular);

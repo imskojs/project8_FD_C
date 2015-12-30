@@ -1,0 +1,28 @@
+<div class="row zero pb30px ml5p">
+  <div class="col zero">
+    <div class="row zero mt0px light-grey-bb flex-v"
+      ng-repeat="place in MyPage.Model.FavoritePlaceList.places"
+      ng-click="goToState('Main.PlaceDetail', {id: place.id}, 'forward')"
+    >
+      <div class="col-30 mt5px">
+        <img class="w100p block positive-b h70px fit lazy-show"
+        ng-src="{{place.photos[0].url | Cloudinary300}}">
+      </div>
+      <div class="col zero ml3p mt5px">
+
+        <p class="zero f16px darker bold text-overflow">
+        {{place.name}}
+        </p>
+        <p class="zero mt5px dark-grey f14px">
+        {{place.address}}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<ion-infinite-scroll
+  on-infinite="MyPage.loadMoreFavoritePlaceList()"
+  immediate-check="false"
+  ng-if="MyPage.Model.FavoritePlaceList.more"
+>
+</ion-infinite-scroll>

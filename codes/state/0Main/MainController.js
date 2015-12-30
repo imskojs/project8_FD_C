@@ -14,7 +14,7 @@
   ) {
 
     var Main = this;
-     Main.Model =  MainModel;
+    Main.Model = MainModel;
 
     Main.logout = logout;
     //====================================================
@@ -22,7 +22,7 @@
     //====================================================
     function logout(stateAfterLogout) {
       AppStorage = {
-        firstTime: true
+        isFirstTime: true
       };
       $ionicSideMenuDelegate.toggleLeft(false);
       $state.go(stateAfterLogout);

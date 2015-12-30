@@ -39,6 +39,13 @@
     <ion-content class="top132px pt3px"
         scrollbar-y="false"
         >
+        <div class="w100p h100p flex light-grey-bg absolute"
+            style="z-index: 2"
+            ng-if="PlaceList.Model.loading"
+            >
+            <ion-spinner class="spinner-40px mb88px" icon="ripple">
+            </ion-spinner>
+        </div>
         <div class="row zero pb30px">
             <div class="col-91 ml9p">
                 <p class="zero f14px positive bold mt5px mb5px">
@@ -46,10 +53,11 @@
                 </p>
                 <div class="row zero mt0px light-grey-bb flex-v"
                   ng-repeat="place in PlaceList.Model.places"
+                  ng-click="goToState('Main.PlaceDetail', {id: place.id}, 'forward')"
                 >
                     <div class="col-30 mt5px">
-                        <img class="w100p block positive-b h70px"
-                        ng-src="{{place.photos[0].url}}">
+                        <img class="w100p block positive-b h70px fit lazy-show"
+                        ng-src="{{ place.photos[0].url | Cloudinary300 }}">
                     </div>
                     <div class="col zero ml3p mt5px">
 
