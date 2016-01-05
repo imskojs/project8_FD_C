@@ -13,7 +13,8 @@
     "ngCordova": "~0.1.23-alpha",
     "jsSHA": "https://github.com/Caligatio/jsSHA.git#1.6.0",
     "ng-img-crop": "ngImgCrop#~0.3.2",
-    "angular-google-maps": "~2.2.1"
+    "angular-google-maps": "~2.2.1",
+    "ng-img-crop-full-extended": "ngImgCropFullExtended#~0.4.7"
   },
   "resolutions": {
     "angular": ">1.2.0"

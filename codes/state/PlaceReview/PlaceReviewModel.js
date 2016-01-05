@@ -13,7 +13,7 @@
       loadPhotos: true,
       reviews: [],
       form: {
-        rate: 5,
+        rate: null,
         place: '',
         content: ''
       }

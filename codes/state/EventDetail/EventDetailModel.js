@@ -9,12 +9,7 @@
   function EventDetailModel() {
 
     var model = {
-      event: {
-        averageStars: 4,
-        photos: [{
-          url: 'http://placehold.it/800x1200'
-        }]
-      }
+      event: {}
     };
     return model;
   }

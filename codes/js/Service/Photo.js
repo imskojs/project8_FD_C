@@ -110,8 +110,8 @@
       if (cropTrue) {
         $rootScope.ImageCropAttribute.sourceImageBase64 = null;
         $rootScope.ImageCropAttribute.areaType = areaType || 'square';
-        $rootScope.ImageCropAttribute.aspectRatio = aspectRatio;
-        $rootScope.ImageCropAttribute.resultImageSize = resultImageSize;
+        $rootScope.ImageCropAttribute.aspectRatio = aspectRatio || 1;
+        $rootScope.ImageCropAttribute.resultImageSize = resultImageSize || 600;
         $rootScope.ImageCropModal.show();
         promise = promise
           .then(function(base64) {

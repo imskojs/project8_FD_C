@@ -62,9 +62,9 @@
           <div class="col zero">
             <div class="f10px center positive"
               ng-class="{
-                'ion-star': Number(PlaceDetail.Model.place.averageStars) >= 1,
+                'ion-star': PlaceDetail.Model.place.averageStars >= 0.5,
                 'ion-android-star-outline': 
-                  (Number(PlaceDetail.Model.place.averageStars) < 1) ||
+                  (PlaceDetail.Model.place.averageStars < 0.5) ||
                   !Placedetail.Model.place.averageStars
               }"
             ></div>
@@ -72,9 +72,9 @@
           <div class="col zero">
             <div class="f10px center positive"
               ng-class="{
-                'ion-star': Number(PlaceDetail.Model.place.averageStars) >= 2,
+                'ion-star': PlaceDetail.Model.place.averageStars >= 1.5,
                 'ion-android-star-outline': 
-                  (Number(PlaceDetail.Model.place.averageStars) < 2) ||
+                  (PlaceDetail.Model.place.averageStars < 1.5) ||
                   !Placedetail.Model.place.averageStars
               }"
             ></div>
@@ -82,9 +82,9 @@
           <div class="col zero">
             <div class="f10px center positive"
               ng-class="{
-                'ion-star': Number(PlaceDetail.Model.place.averageStars) >= 3,
+                'ion-star': PlaceDetail.Model.place.averageStars >= 2.5,
                 'ion-android-star-outline': 
-                  (Number(PlaceDetail.Model.place.averageStars) < 3) ||
+                  (PlaceDetail.Model.place.averageStars < 2.5) ||
                   !Placedetail.Model.place.averageStars
               }"
             ></div>
@@ -92,9 +92,9 @@
           <div class="col zero">
             <div class="f10px center positive"
               ng-class="{
-                'ion-star': Number(PlaceDetail.Model.place.averageStars) >= 4,
+                'ion-star': PlaceDetail.Model.place.averageStars >= 3.5,
                 'ion-android-star-outline': 
-                  (Number(PlaceDetail.Model.place.averageStars) < 4) ||
+                  (PlaceDetail.Model.place.averageStars < 3.5) ||
                   !Placedetail.Model.place.averageStars
               }"
             ></div>
@@ -102,9 +102,9 @@
           <div class="col zero">
             <div class="f10px center positive"
               ng-class="{
-                'ion-star': Number(PlaceDetail.Model.place.averageStars) >= 5,
+                'ion-star': PlaceDetail.Model.place.averageStars >= 4.5,
                 'ion-android-star-outline': 
-                  (Number(PlaceDetail.Model.place.averageStars) < 5) ||
+                  (PlaceDetail.Model.place.averageStars < 4.5) ||
                   !Placedetail.Model.place.averageStars
               }"
             ></div>

@@ -1,52 +1,113 @@
-(function(angular) {
+(function() {
   'use strict';
   angular.module('app')
     .controller('EventReviewController', EventReviewController);
 
   EventReviewController.$inject = [
-    '$scope', '$q',
-    'EventReviewModel', 'Review', 'Message', 'U', 'Preload'
+    '$scope', '$q', '$ionicScrollDelegate', '$state', '$timeout',
+    'EventReviewModel', 'U', 'Review', 'Preload', 'Message'
   ];
 
   function EventReviewController(
-    $scope, $q,
-    EventReviewModel, Review, Message, U, Preload
+    $scope, $q, $ionicScrollDelegate, $state, $timeout,
+    EventReviewModel, U, Review, Preload, Message
   ) {
     var EventReview = this;
     EventReview.Model = EventReviewModel;
-    // var noLoadingStates = [];
+    var noLoadingStates = [];
 
     EventReview.refresh = refresh;
     EventReview.loadMore = loadMore;
+    EventReview.createReview = createReview;
+    EventReview.deleteReview = deleteReview;
 
-    // $scope.$on('$ionicView.beforeEnter', onBeforeEnter);
-    // $scope.$on('$ionicView.afterEnter', onAfterEnter);
+    $scope.$on('$ionicView.beforeEnter', onBeforeEnter);
+    $scope.$on('$ionicView.afterEnter', onAfterEnter);
 
     //====================================================
     // Initial Loading of a state;
     //====================================================
-    // function onBeforeEnter() {
-    //   if (!U.areSiblingViews(noLoadingStates)) {
-    //     EventReviewModel.loading = true;
-    //   }
-    // }
+    function createReview() {
+      var ok = validate();
+      if (!ok) {
+        return false;
+      }
+      Message.loading();
+      Review.createEventReview({}, {
+          rate: EventReviewModel.form.rate,
+          event: $state.params.event,
+          content: EventReviewModel.form.content
+        }).$promise
+        .then(function(review) {
+          console.log("---------- review ----------");
+          console.log(review);
+          $timeout(function() {
+            EventReviewModel.reviews.push(review);
+            reset();
+            U.resize();
+            Message.alert('댓글달기 알림', '댓글이 성공적으로 작성되었습니다.');
+          }, 0);
+        })
+        .catch(function(err) {
+          console.log("---------- err ----------");
+          console.log(err);
+          Message.alert();
+        });
+    }
 
-    // function onAfterEnter() {
-    //   if (!U.areSiblingViews(noLoadingStates)) {
-    //     return find()
-    //       .then(function(reviewsWrapper) {
-    //         console.log(reviewsWrapper);
-    //         U.bindData(reviewsWrapper, EventReviewModel, 'reviews');
-    //       })
-    //       .catch(U.error);
-    //   }
-    // }
+    function deleteReview(review, $index) {
+      Message.loading();
+      Review.destroyEventReview({
+          id: review.id
+        }).$promise
+        .then(function(updatedEvent) {
+          console.log("---------- updatedEvent ----------");
+          console.log(updatedEvent);
+          $timeout(function() {
+            EventReviewModel.reviews.splice($index, 1);
+            U.resize();
+            Message.hide();
+          }, 0);
+        })
+        .catch(function(err) {
+          console.log("---------- err ----------");
+          console.log(err);
+          Message.hide();
+          Message.alert();
+        });
+    }
+
+    function onBeforeEnter() {
+      if (!U.areSiblingViews(noLoadingStates)) {
+        EventReviewModel.reviews = [];
+        $ionicScrollDelegate.scrollTop(false);
+        EventReviewModel.loading = true;
+      }
+    }
+
+    function onAfterEnter() {
+      if (!U.areSiblingViews(noLoadingStates)) {
+        return find()
+          .then(function(eventsWrapper) {
+            console.log(eventsWrapper);
+            U.bindData(eventsWrapper, EventReviewModel, 'reviews');
+            console.log("---------- EventReviewModel.form.rate ----------");
+            console.log(EventReviewModel.form.rate);
+          })
+          .catch(U.error);
+      }
+
+      console.log("---------- $state.params.event ----------");
+      console.log($state.params.event);
+      console.log("HAS TYPE: " + typeof $state.params.event);
+
+    }
 
     function refresh() {
       return find()
-        .then(function(reviewsWrapper) {
-          console.log(reviewsWrapper);
-          U.bindData(reviewsWrapper, EventReviewModel, 'reviews');
+        .then(function(eventsWrapper) {
+          console.log(eventsWrapper);
+          U.bindData(eventsWrapper, EventReviewModel, 'reviews');
         })
         .catch(U.error)
         .finally(function() {
@@ -59,8 +120,8 @@
       return find({
           olderThan: EventReviewModel.reviews[last]
         })
-        .then(function(reviewsWrapper) {
-          U.appendData(reviewsWrapper, EventReviewModel, 'reviews');
+        .then(function(eventsWrapper) {
+          U.appendData(eventsWrapper, EventReviewModel, 'reviews');
         })
         .catch(U.error)
         .finally(function() {
@@ -72,21 +133,38 @@
     //====================================================
     function find(extraQuery) {
       var query = {
-        category: 'notification',
-        limit: 20,
-        sort: 'id DESC'
+        event: $state.params.event,
+        sort: 'id asc',
+        limit: 900,
+        populates: 'createdBy,event'
       };
       angular.extend(query, extraQuery);
-      return Review.find(query).$promise
-        .then(function(reviewsWrapper) {
-          var photosPromise = Preload.photos(reviewsWrapper.reviews, 'Cloudinary200', true);
-          return $q.all([reviewsWrapper, photosPromise]);
+      return Review.findEventReviews(query).$promise
+        .then(function(eventsWrapper) {
+          var photosPromise = Preload.photos(eventsWrapper.reviews, 'Cloudinary200', true);
+          return $q.all([eventsWrapper, photosPromise]);
         })
         .then(function(array) {
-          var reviewsWrapper = array[0];
-          return reviewsWrapper;
+          var eventsWrapper = array[0];
+          return eventsWrapper;
         });
     }
 
-  } //end
-})(angular);
+    function validate() {
+      var form = EventReviewModel.form;
+      if (!form.rate) {
+        Message.alert('리뷰쓰기 알림.', '별점을 입력해주세요.');
+        return false;
+      } else if (!form.content) {
+        Message.alert('리뷰쓰기 알림.', '내용을 입력해주세요.');
+        return false;
+      }
+      return true;
+    }
+
+    function reset() {
+      EventReviewModel.form.content = '';
+    }
+
+  }
+})();

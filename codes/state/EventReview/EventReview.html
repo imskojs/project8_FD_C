@@ -1,123 +1,214 @@
-<ion-view id="event-review"
-		cache-view="true"
-		hide-back-button="true"
-		>
-		<ion-nav-buttons side="left">
-				<button class="button button-icon icon ion-android-arrow-back"
-				ng-click="goBack()"
-				>
-				</button>
-		</ion-nav-buttons>
-		<ion-nav-title>
-				<div class="row zero flex h44px">
-						<img class="h24px"
-						src="img/header_logo.png"
-						>
-				</div>
-		</ion-nav-title>
-		<ion-content class="pt1px bottom77px">
+<ion-view id="event-review-list"
+    cache-view="true"
+    hide-back-button="true"
+    >
+    <ion-nav-buttons side="left">
+        <button class="button button-icon icon ion-android-arrow-back"
+        ng-click="goBack()"
+        >
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-title>
+      <div class="row zero flex h44px">
+        <img class="h24px"
+          src="img/header_logo.png"
+        >
+      </div>
+    </ion-nav-title>
+    <ion-pane class="white-bg h33px top44px flex-v">
+      <p class="zero positive center f16px bold w100p">
+        {{getParam('eventTitle')}}
+      </p>
+    </ion-pane>
+    <ion-content class="pt1px bottom100px top77px"
+      scrollbar-y="false"
+    >
 
-				<ion-refresher
-						ng-if="!EventReview.Model.loading"
-						on-refresh="EventReview.refresh()"
-						>
-				</ion-refresher>
-
-				<div class="w100p h95vh flex light-grey-bg absolute"
-						style="z-index: 2"
-						ng-if="EventReview.Model.loading"
-						>
-						<ion-spinner class="spinner-40px mb88px" icon="ripple">
-						</ion-spinner>
-				</div>
-				<!-- container -->
-				<div class="darker-b4px">
-						<div class="row zero pl5p light-grey-bb pt5px pr5p pb5px"
-								ng-repeat="review in EventReview.Model.reviews"
-						>
-								<div class="col-auto">
-										<img class="w60px h60px r60px"
-												ng-src="{{ review.createdBy.profile_picture }}"
-										>
-								</div>
-								<div class="col zero pt10px">
-										<div class="row zero flex-v">
-												<div class="col-auto ml5p pl5px pr5px">
-														<p class="zero f14px positive bold">
-																{{ review.createdBy.name}}
-														</p>
-												</div>
-											<div class="col-auto zero ml2px">
-  											<div class="ion-star f10px center positive"></div>
-											</div>
-                      <div class="col-auto zero ml2px">
-                        <div class="ion-star f10px center positive"></div>
+        <div class="w100p h95vh flex light-grey-bg absolute"
+          style="z-index: 2"
+          ng-if="EventReview.Model.loading"
+        >
+          <ion-spinner class="spinner-40px mb88px" icon="ripple">
+          </ion-spinner>
+        </div>
+        <!-- container -->
+        <div class="darker-b4px">
+            <div class="row zero pl5p light-grey-bb pt5px pr5p pb5px"
+                ng-repeat="review in EventReview.Model.reviews"
+            >
+                <div class="col-auto">
+                    <img class="w60px h60px r60px"
+                        ng-src="{{ review.createdBy | GetPhoto}}"
+                    >
+                </div>
+                <div class="col zero pt10px">
+                    <div class="row zero flex-v">
+                      <div class="col-auto ml5p pl5px pr5px">
+                        <p class="zero f14px positive bold">
+                          {{ review.createdBy.name}}
+                        </p>
                       </div>
                       <div class="col-auto zero ml2px">
-                        <div class="ion-star f10px center positive"></div>
+                        <div class="f10px center positive"
+                          ng-class="{
+                            'ion-star': review.rate >= 1,
+                            'ion-android-star-outline': review.rate < 1 || !review.rate
+                          }"
+                        ></div>
                       </div>
                       <div class="col-auto zero ml2px">
-                        <div class="ion-star f10px center positive"></div>
+                        <div class="f10px center positive"
+                          ng-class="{
+                            'ion-star': review.rate >= 2,
+                            'ion-android-star-outline': review.rate < 2 || !review.rate
+                          }"
+                        ></div>
                       </div>
                       <div class="col-auto zero ml2px">
-                        <div class="ion-android-star-outline f10px center positive"></div>
+                        <div class="f10px center positive"
+                          ng-class="{
+                            'ion-star': review.rate >= 3,
+                            'ion-android-star-outline': review.rate < 3 || !review.rate
+                          }"
+                          ></div>
+                      </div>
+                      <div class="col-auto zero ml2px">
+                        <div class="f10px center positive"
+                          ng-class="{
+                            'ion-star': review.rate >= 4,
+                            'ion-android-star-outline': review.rate < 4 || !review.rate
+                          }"
+                        ></div>
+                      </div>
+                      <div class="col-auto zero ml2px">
+                        <div class="f10px center positive"
+                          ng-class="{
+                            'ion-star': review.rate >= 5,
+                            'ion-android-star-outline': review.rate < 5 || !review.rate
+                          }"
+                        ></div>
                       </div>
                       <div class="col-auto zero ml10px positive f14px bold">
-                        <p class="zero"> {{ review.stars }} </p>
+                        <p class="zero"> {{ review.rate }} </p>
                       </div>
-										</div>
+                      <div class="col zero flex-right flex-v"
+                        ng-if="true"
+                      >
+<!--                       
+                        <div class="col-auto pl8px pr8px positive-br2px"
+                          ng-click=""
+                        >
+                          <p class="zero f14px positive bold">
+                            수정
+                          </p>
+                        </div>
+ -->
+                        <div class="col-auto pl8px pr8px"
+                          ng-if="AppStorage.user.id === review.owner"
+                          ng-click="EventReview.deleteReview(review, $index)"
+                        >
+                          <p class="zero f14px positive bold">
+                            삭제
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                     <p class="zero f14px ml5p mt5px dark-grey letter-spacing-1">
                       {{ review.content }}
                     </p>
                     <p class="zero f12px grey ml5p mt5px">
                       {{ review.createdAt | date: 'yyyy.MM.dd HH:mm'}}
                     </p>
-								</div>
-								
-						</div>
+                </div>
+            </div>
+        </div>
 
-				</div>
+        <ion-infinite-scroll
+            on-infinite="EventReview.loadMore()"
+            immediate-check="true"
+            ng-if="EventReview.Model.more"
+            >
+        </ion-infinite-scroll>
 
-				<ion-infinite-scroll
-						on-infinite="EventReview.loadMore()"
-						immediate-check="true"
-						ng-if="EventReview.Model.more"
-						>
-				</ion-infinite-scroll>
-
-		</ion-content>
-    <ion-pane class="h33px absolute top-none bottom44px light-grey-bg">
+    </ion-content>
+    <ion-pane class="h33px absolute top-none bottom66px light-grey-bg">
       <div class="row zero flex-v h33px ml5p mr10p">
         <div class="col-30">
           <p class="zero f14px positive bold">별점 주기</p>
         </div>
+
         <div class="col zero flex-v flex-right pr15p">
           <div class="col-auto pl5px pr5px">
-            <div class="ion-star f18px center positive"></div>
+            <div class="f20px center positive"
+              ng-class="{
+                'ion-star': EventReview.Model.form.rate >= 1,
+                'ion-android-star-outline': 
+                  EventReview.Model.form.rate < 1 ||
+                  !EventReview.Model.form.rate
+              }"
+              ng-click="EventReview.Model.form.rate = 1"
+            ></div>
           </div>
           <div class="col-auto pl5px pr5px">
-            <div class="ion-star f18px center positive"></div>
+            <div class="f20px center positive"
+              ng-class="{
+                'ion-star': EventReview.Model.form.rate >= 2,
+                'ion-android-star-outline': 
+                  EventReview.Model.form.rate < 2 ||
+                  !EventReview.Model.form.rate
+              }"
+              ng-click="EventReview.Model.form.rate = 2"
+            ></div>
           </div>
           <div class="col-auto pl5px pr5px">
-            <div class="ion-star f18px center positive"></div>
+            <div class="f20px center positive"
+              ng-class="{
+                'ion-star': EventReview.Model.form.rate >= 3,
+                'ion-android-star-outline': 
+                  EventReview.Model.form.rate < 3 ||
+                  !EventReview.Model.form.rate
+              }"
+              ng-click="EventReview.Model.form.rate = 3"
+            ></div>
           </div>
           <div class="col-auto pl5px pr5px">
-            <div class="ion-star f18px center positive"></div>
+            <div class="f20px center positive"
+              ng-class="{
+                'ion-star': EventReview.Model.form.rate >= 4,
+                'ion-android-star-outline': 
+                  EventReview.Model.form.rate < 4 ||
+                  !EventReview.Model.form.rate
+              }"
+              ng-click="EventReview.Model.form.rate = 4"
+            ></div>
           </div>
           <div class="col-auto pl5px pr5px">
-            <div class="ion-android-star-outline f18px center positive"></div>
+            <div class="f20px center positive"
+              ng-class="{
+                'ion-star': EventReview.Model.form.rate >= 5,
+                'ion-android-star-outline': 
+                  EventReview.Model.form.rate < 5 ||
+                  !EventReview.Model.form.rate
+              }"
+              ng-click="EventReview.Model.form.rate = 5"
+            ></div>
           </div>
         </div>
+
       </div>
     </ion-pane>
-    <ion-footer-bar class="zero positive-bg">
-      <div class="row zero h44px pt8px pb8px pl5p pr5p flex-v">
+
+    <ion-footer-bar class="zero positive-bg h66px">
+      <div class="row zero h66px pt8px pb8px pl5p pr5p flex-v">
         <div class="col-80">
-          <input class="darker-b2px h30px light-bg r3px f14px placeholder-f14px placeholder-grey pl5px" type="text"
-            placeholder="리뷰를 입력해주세요."
-          >
+          <textarea class="darker-b2px light-bg r3px f14px placeholder-f14px placeholder-grey pl5px h55px" type="text"
+            placeholder="별점과 함께 리뷰를 입력해주세요."
+            ng-model="EventReview.Model.form.content"
+          ></textarea>
         </div>
-        <div class="col-20 flex">
+        <div class="col-20 flex h55px"
+          ng-click="EventReview.createReview();"
+        >
           <div class="ion-chatbubble-working f26px white"></div>
         </div>
       </div>

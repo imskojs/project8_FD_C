@@ -70,26 +70,27 @@
     //  Terms
     //====================================================
     .state('Main.Terms', {
-        url: '/Terms',
-        views: {
-          Main: {
-            templateUrl: 'state/Terms/Terms.html',
-            controller: 'TermsController as Terms'
-          }
+      url: '/Terms',
+      views: {
+        Main: {
+          templateUrl: 'state/Terms/Terms.html',
+          controller: 'TermsController as Terms'
         }
-      })
-      //====================================================
-      //  Profile
-      //====================================================
-      .state('Main.Profile', {
-        url: '/Profile',
-        views: {
-          Main: {
-            templateUrl: 'state/Profile/Profile.html',
-            controller: 'ProfileController as Profile'
-          }
+      }
+    })
+
+    //====================================================
+    //  Profile
+    //====================================================
+    .state('Main.Profile', {
+      url: '/Profile',
+      views: {
+        Main: {
+          templateUrl: 'state/Profile/Profile.html',
+          controller: 'ProfileController as Profile'
         }
-      })
+      }
+    })
 
     //====================================================
     // Password 
@@ -185,7 +186,7 @@
     })
 
     .state('Main.EventReview', {
-      url: '/EventReview',
+      url: '/EventReview/:eventTitle/:event',
       views: {
         Main: {
           templateUrl: 'state/EventReview/EventReview.html',

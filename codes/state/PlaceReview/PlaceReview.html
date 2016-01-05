@@ -49,19 +49,44 @@
 												</p>
 											</div>
 											<div class="col-auto zero ml2px">
-  											<div class="ion-star f10px center positive"></div>
+  											<div class="f10px center positive"
+                          ng-class="{
+                            'ion-star': review.rate >= 1,
+                            'ion-android-star-outline': review.rate < 1 || !review.rate
+                          }"
+                        ></div>
 											</div>
                       <div class="col-auto zero ml2px">
-                        <div class="ion-star f10px center positive"></div>
+                        <div class="f10px center positive"
+                          ng-class="{
+                            'ion-star': review.rate >= 2,
+                            'ion-android-star-outline': review.rate < 2 || !review.rate
+                          }"
+                        ></div>
                       </div>
                       <div class="col-auto zero ml2px">
-                        <div class="ion-star f10px center positive"></div>
+                        <div class="f10px center positive"
+                          ng-class="{
+                            'ion-star': review.rate >= 3,
+                            'ion-android-star-outline': review.rate < 3 || !review.rate
+                          }"
+                          ></div>
                       </div>
                       <div class="col-auto zero ml2px">
-                        <div class="ion-star f10px center positive"></div>
+                        <div class="f10px center positive"
+                          ng-class="{
+                            'ion-star': review.rate >= 4,
+                            'ion-android-star-outline': review.rate < 4 || !review.rate
+                          }"
+                        ></div>
                       </div>
                       <div class="col-auto zero ml2px">
-                        <div class="ion-star f10px center positive"></div>
+                        <div class="f10px center positive"
+                          ng-class="{
+                            'ion-star': review.rate >= 5,
+                            'ion-android-star-outline': review.rate < 5 || !review.rate
+                          }"
+                        ></div>
                       </div>
                       <div class="col-auto zero ml10px positive f14px bold">
                         <p class="zero"> {{ review.rate }} </p>
@@ -111,23 +136,65 @@
         <div class="col-30">
           <p class="zero f14px positive bold">별점 주기</p>
         </div>
+
         <div class="col zero flex-v flex-right pr15p">
           <div class="col-auto pl5px pr5px">
-            <div class="ion-star f18px center positive"></div>
+            <div class="f20px center positive"
+              ng-class="{
+                'ion-star': PlaceReview.Model.form.rate >= 1,
+                'ion-android-star-outline': 
+                  PlaceReview.Model.form.rate < 1 ||
+                  !PlaceReview.Model.form.rate
+              }"
+              ng-click="PlaceReview.Model.form.rate = 1"
+            ></div>
           </div>
           <div class="col-auto pl5px pr5px">
-            <div class="ion-star f18px center positive"></div>
+            <div class="f20px center positive"
+              ng-class="{
+                'ion-star': PlaceReview.Model.form.rate >= 2,
+                'ion-android-star-outline': 
+                  PlaceReview.Model.form.rate < 2 ||
+                  !PlaceReview.Model.form.rate
+              }"
+              ng-click="PlaceReview.Model.form.rate = 2"
+            ></div>
           </div>
           <div class="col-auto pl5px pr5px">
-            <div class="ion-star f18px center positive"></div>
+            <div class="f20px center positive"
+              ng-class="{
+                'ion-star': PlaceReview.Model.form.rate >= 3,
+                'ion-android-star-outline': 
+                  PlaceReview.Model.form.rate < 3 ||
+                  !PlaceReview.Model.form.rate
+              }"
+              ng-click="PlaceReview.Model.form.rate = 3"
+            ></div>
           </div>
           <div class="col-auto pl5px pr5px">
-            <div class="ion-star f18px center positive"></div>
+            <div class="f20px center positive"
+              ng-class="{
+                'ion-star': PlaceReview.Model.form.rate >= 4,
+                'ion-android-star-outline': 
+                  PlaceReview.Model.form.rate < 4 ||
+                  !PlaceReview.Model.form.rate
+              }"
+              ng-click="PlaceReview.Model.form.rate = 4"
+            ></div>
           </div>
           <div class="col-auto pl5px pr5px">
-            <div class="ion-star f18px center positive"></div>
+            <div class="f20px center positive"
+              ng-class="{
+                'ion-star': PlaceReview.Model.form.rate >= 5,
+                'ion-android-star-outline': 
+                  PlaceReview.Model.form.rate < 5 ||
+                  !PlaceReview.Model.form.rate
+              }"
+              ng-click="PlaceReview.Model.form.rate = 5"
+            ></div>
           </div>
         </div>
+
       </div>
     </ion-pane>
 

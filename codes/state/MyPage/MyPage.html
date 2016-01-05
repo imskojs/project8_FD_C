@@ -23,12 +23,19 @@
   >
     <!-- Navigation -->
     <div class="relative h250px white-bg shadow">
-      <img class="w100p block h150px"
+      <div class="w100p h150px flex light-grey-bg"
+        ng-if="MyPage.Model.loadingBg"
+      >
+        <ion-spinner class="spinner-30px" icon="ripple">
+        </ion-spinner>
+      </div>
+      <img class="w100p block h150px before-enter-show"
         alt="MyPage BG"
-        ng-src="{{MyPage.Model.MyPage.form.myPageBg || 'img/suji.png'}}"
+        ng-if="!MyPage.Model.loadingBg"
+        ng-src="{{AppStorage.user.myPageBg && AppStorage.user.myPageBg.url || 'img/suji.png'}}"
         ng-click="MyPage.setMyPageBg();"
       >
-      <img class="block w70px h70px r70px absolute left10px top45p positive-b2px"
+      <img class="block w70px h70px r70px absolute left10px top45p positive-b2px before-enter-show"
         ng-src="{{AppStorage.user.profilePhoto.url}}"
       >
       <p class="zero ml90px f16px bold positive mt5px">

@@ -41,56 +41,56 @@
        별점
        </p>
        <div class="row zero mb5px">
-          <div class="col zero">
-            <div class="f10px center positive"
-              ng-class="{
-                'ion-star': Number(EventDetail.Model.event.averageStars) >= 1,
-                'ion-android-star-outline': 
-                  (Number(EventDetail.Model.event.averageStars) < 1) ||
-                  !Eventdetail.Model.event.averageStars
-              }"
-            ></div>
-          </div>
-          <div class="col zero">
-            <div class="f10px center positive"
-              ng-class="{
-                'ion-star': Number(EventDetail.Model.event.averageStars) >= 2,
-                'ion-android-star-outline': 
-                  (Number(EventDetail.Model.event.averageStars) < 2) ||
-                  !Eventdetail.Model.event.averageStars
-              }"
-            ></div>
-          </div>
-          <div class="col zero">
-            <div class="f10px center positive"
-              ng-class="{
-                'ion-star': Number(EventDetail.Model.event.averageStars) >= 3,
-                'ion-android-star-outline': 
-                  (Number(EventDetail.Model.event.averageStars) < 3) ||
-                  !Eventdetail.Model.event.averageStars
-              }"
-            ></div>
-          </div>
-          <div class="col zero">
-            <div class="f10px center positive"
-              ng-class="{
-                'ion-star': Number(EventDetail.Model.event.averageStars) >= 4,
-                'ion-android-star-outline': 
-                  (Number(EventDetail.Model.event.averageStars) < 4) ||
-                  !Eventdetail.Model.event.averageStars
-              }"
-            ></div>
-          </div>
-          <div class="col zero">
-            <div class="f10px center positive"
-              ng-class="{
-                'ion-star': Number(EventDetail.Model.event.averageStars) >= 5,
-                'ion-android-star-outline': 
-                  (Number(EventDetail.Model.event.averageStars) < 5) ||
-                  !Eventdetail.Model.event.averageStars
-              }"
-            ></div>
-          </div>
+         <div class="col zero">
+           <div class="f10px center positive"
+             ng-class="{
+               'ion-star': EventDetail.Model.event.averageStars >= 0.5,
+               'ion-android-star-outline': 
+                 (EventDetail.Model.event.averageStars < 0.5) ||
+                 !Eventdetail.Model.event.averageStars
+             }"
+           ></div>
+         </div>
+         <div class="col zero">
+           <div class="f10px center positive"
+             ng-class="{
+               'ion-star': EventDetail.Model.event.averageStars >= 1.5,
+               'ion-android-star-outline': 
+                 (EventDetail.Model.event.averageStars < 1.5) ||
+                 !Eventdetail.Model.event.averageStars
+             }"
+           ></div>
+         </div>
+         <div class="col zero">
+           <div class="f10px center positive"
+             ng-class="{
+               'ion-star': EventDetail.Model.event.averageStars >= 2.5,
+               'ion-android-star-outline': 
+                 (EventDetail.Model.event.averageStars < 2.5) ||
+                 !Eventdetail.Model.event.averageStars
+             }"
+           ></div>
+         </div>
+         <div class="col zero">
+           <div class="f10px center positive"
+             ng-class="{
+               'ion-star': EventDetail.Model.event.averageStars >= 3.5,
+               'ion-android-star-outline': 
+                 (EventDetail.Model.event.averageStars < 3.5) ||
+                 !Eventdetail.Model.event.averageStars
+             }"
+           ></div>
+         </div>
+         <div class="col zero">
+           <div class="f10px center positive"
+             ng-class="{
+               'ion-star': EventDetail.Model.event.averageStars >= 4.5,
+               'ion-android-star-outline': 
+                 (EventDetail.Model.event.averageStars < 4.5) ||
+                 !Eventdetail.Model.event.averageStars
+             }"
+           ></div>
+         </div>
        </div>
        <p class="zero positive center f14px">
          {{ EventDetail.Model.event.averageStars }}
@@ -108,7 +108,7 @@
            </div>
            <div class="col zero left ml5px">
              <div class="positive f16px">
-               {{ EventDetail.event.likes || 0 }}
+               {{ EventDetail.Model.event.likes || 0 }}
              </div>
            </div>
          </div>
@@ -121,13 +121,20 @@
 
   <ion-footer-bar class="bar-positive footer zero">
     <div class="row zero">
-      <div class="col-50 flex">
+      <div class="col-50 flex"
+        ng-click="EventDetail.likeEvent()"
+      >
         <div class="ion-heart f26px"></div>
         <p class="zero left ml10px f18px">
           좋아요
         </p>
       </div>
-      <div class="col-50 flex light-grey-bl">
+      <div class="col-50 flex light-grey-bl"
+        ng-click="goToState('Main.EventReview', {
+          event: EventDetail.Model.event.id,
+          eventTitle: EventDetail.Model.event.title
+        }, 'forward')"
+      >
         <div class="ion-chatbubble-working f26px"></div>
         <p class="zero left ml10px f18px">
           리뷰보기

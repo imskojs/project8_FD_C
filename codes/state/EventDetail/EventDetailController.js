@@ -15,17 +15,18 @@
 
   EventDetailController.$inject = [
     '$scope', '$state', '$q',
-    'EventDetailModel', 'Event', 'Message', 'U', 'Preload'
+    'EventDetailModel', 'Event', 'Message', 'U', 'Preload', 'Favorite'
   ];
 
   function EventDetailController(
     $scope, $state, $q,
-    EventDetailModel, Event, Message, U, Preload
+    EventDetailModel, Event, Message, U, Preload, Favorite
   ) {
     var EventDetail = this;
     EventDetail.Model = EventDetailModel;
 
     EventDetail.refresh = refresh;
+    EventDetail.likeEvent = likeEvent;
 
     $scope.$on('$ionicView.afterEnter', function() {
       U.resize();
@@ -65,6 +66,10 @@
     //====================================================
     //  Implementations
     //====================================================
+    function likeEvent() {
+      Favorite.likeEvent(EventDetailModel.event);
+    }
+
     function findOne(extraQuery) {
       var query = {
         id: $state.params.id,

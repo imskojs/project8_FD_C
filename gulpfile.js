@@ -81,7 +81,8 @@ var paths = {
     './codes/lib/angular-resource/angular-resource.js',
     './codes/lib/ngCordova/dist/ng-cordova.js',
     './codes/lib/ng-file-upload//ng-file-upload.js',
-    './codes/lib/ng-img-crop/compile/unminified/ng-img-crop.js'
+    './codes/lib/ng-img-crop-full-extended/compile/unminified/ng-img-crop.js'
+    // './codes/lib/ng-img-crop/compile/unminified/ng-img-crop.js'
   ]
 };
 

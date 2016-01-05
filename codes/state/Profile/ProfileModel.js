@@ -10,7 +10,9 @@
 
     var model = {
       form: {
-
+        files: [],
+        name: '',
+        nickname: ''
       }
     };
 

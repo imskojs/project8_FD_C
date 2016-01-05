@@ -28,9 +28,13 @@
     // Initial Loading of a state;
     //====================================================
     function createReview() {
+      var ok = validate();
+      if (!ok) {
+        return false;
+      }
       Message.loading();
       Review.createPlaceReview({}, {
-          rate: 5,
+          rate: PlaceReviewModel.form.rate,
           place: $state.params.place,
           content: PlaceReviewModel.form.content
         }).$promise
@@ -53,12 +57,12 @@
 
     function deleteReview(review, $index) {
       Message.loading();
-      Review.destroy({
+      Review.destroyPlaceReview({
           id: review.id
         }).$promise
-        .then(function(deletedReview) {
-          console.log("---------- deletedReview ----------");
-          console.log(deletedReview);
+        .then(function(updatedPlace) {
+          console.log("---------- updatedPlace ----------");
+          console.log(updatedPlace);
           $timeout(function() {
             PlaceReviewModel.reviews.splice($index, 1);
             U.resize();
@@ -87,6 +91,8 @@
           .then(function(placesWrapper) {
             console.log(placesWrapper);
             U.bindData(placesWrapper, PlaceReviewModel, 'reviews');
+            console.log("---------- PlaceReviewModel.form.rate ----------");
+            console.log(PlaceReviewModel.form.rate);
           })
           .catch(U.error);
       }
@@ -142,6 +148,18 @@
           var placesWrapper = array[0];
           return placesWrapper;
         });
+    }
+
+    function validate() {
+      var form = PlaceReviewModel.form;
+      if (!form.rate) {
+        Message.alert('리뷰쓰기 알림.', '별점을 입력해주세요.');
+        return false;
+      } else if (!form.content) {
+        Message.alert('리뷰쓰기 알림.', '내용을 입력해주세요.');
+        return false;
+      }
+      return true;
     }
 
     function reset() {

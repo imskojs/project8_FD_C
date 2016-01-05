@@ -15,19 +15,25 @@
 
     var reviewUrl = SERVER_URL + '/review' +
       '/:find' +
-      '/:findPlaceReviews' +
       '/:findOne' +
-      '/:createPlaceReview' +
       '/:update' +
-      '/:destroy';
+      '/:findPlaceReviews' +
+      '/:findEventReviews' +
+      '/:createPlaceReview' +
+      '/:createEventReview' +
+      '/:destroyPlaceReview' +
+      '/:destroyEventReview';
 
     var params = {
       find: '@find',
-      findPlaceReviews: '@findPlaceReviews',
       findOne: '@findOne',
-      createPlaceReview: '@createPlaceReview',
       update: '@update',
-      destroy: '@destroy'
+      findPlaceReviews: '@findPlaceReviews',
+      findEventReviews: '@findEventReviews',
+      createPlaceReview: '@createPlaceReview',
+      createEventReview: '@createEventReview',
+      destroyPlaceReview: '@destroyPlaceReview',
+      destroyEventReview: '@destroyEventReview'
     };
 
     var actions = {
@@ -37,22 +43,10 @@
           find: 'find'
         }
       },
-      findPlaceReviews: {
-        method: 'GET',
-        params: {
-          findPlaceReviews: 'findPlaceReviews'
-        }
-      },
       findOne: {
         method: 'GET',
         params: {
           findOne: 'findOne'
-        }
-      },
-      createPlaceReview: {
-        method: 'POST',
-        params: {
-          createPlaceReview: 'createPlaceReview'
         }
       },
       update: {
@@ -61,10 +55,41 @@
           update: 'update'
         }
       },
-      destroy: {
+      findPlaceReviews: {
+        method: 'GET',
+        params: {
+          findPlaceReviews: 'findPlaceReviews'
+        }
+      },
+      findEventReviews: {
+        method: 'GET',
+        params: {
+          findEventReviews: 'findEventReviews'
+        }
+      },
+      createPlaceReview: {
+        method: 'POST',
+        params: {
+          createPlaceReview: 'createPlaceReview'
+        }
+      },
+
+      createEventReview: {
+        method: 'POST',
+        params: {
+          createEventReview: 'createEventReview'
+        }
+      },
+      destroyPlaceReview: {
         method: 'DELETE',
         params: {
-          destroy: 'destroy'
+          destroyPlaceReview: 'destroyPlaceReview'
+        }
+      },
+      destroyEventReview: {
+        method: 'DELETE',
+        params: {
+          destroyEventReview: 'destroyEventReview'
         }
       }
     };

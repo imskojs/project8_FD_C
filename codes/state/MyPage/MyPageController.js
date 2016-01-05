@@ -6,13 +6,13 @@
   MyPageController.$inject = [
     '$scope', '$ionicScrollDelegate', '$timeout', '$q', '$ionicHistory', '$ionicSlideBoxDelegate',
     '$window',
-    'MyPageModel', 'Preload', 'Post', 'U', 'AppStorage', 'Place', 'Photo'
+    'MyPageModel', 'Preload', 'Post', 'U', 'AppStorage', 'Place', 'Photo', 'User', 'Message'
   ];
 
   function MyPageController(
     $scope, $ionicScrollDelegate, $timeout, $q, $ionicHistory, $ionicSlideBoxDelegate,
     $window,
-    MyPageModel, Preload, Post, U, AppStorage, Place, Photo
+    MyPageModel, Preload, Post, U, AppStorage, Place, Photo, User, Message
   ) {
 
     var _ = $window._;
@@ -25,6 +25,7 @@
     MyPage.loadMoreMyPostList = loadMoreMyPostList;
     MyPage.loadMoreFavoritePostList = loadMoreFavoritePostList;
     MyPage.loadMoreFavoritePlaceList = loadMoreFavoritePlaceList;
+    MyPage.destroyPost = destroyPost;
 
     $scope.$on('$ionicView.afterEnter', onAfterEnter);
 
@@ -34,18 +35,41 @@
     //====================================================
     //  Implementation
     //====================================================
+    function destroyPost(postObj) {
+      return Post.destroy({
+          id: postObj.id
+        }).$promise
+        .then(function(deletedPost) {
+          console.log("---------- deletedPost ----------");
+          console.log(deletedPost);
+        })
+        .catch(function(err) {
+          U.error(err);
+        });
+    }
+
     function setMyPageBg() {
-      return Photo.get('gallery', 800, true, 600, 'rectangle', 2)
+      MyPageModel.loadingBg = true;
+      return Photo.get('gallery', 800, true, {
+          w: 400,
+          h: 200
+        }, 'rectangle', 2)
         .then(function(base64) {
-          console.log("---------- base64 ----------");
-          console.log(base64);
-          $timeout(function() {
-            MyPageModel.MyPage.form.myPageBg = base64;
-          }, 0);
+          return User.updateMyPageBg({}, {
+            files: [base64]
+          }).$promise;
+        })
+        .then(function(updatedUser) {
+          MyPageModel.loadingBg = false;
+          AppStorage.user = updatedUser;
+          console.log("---------- updatedUser ----------");
+          console.log(updatedUser);
         })
         .catch(function(err) {
           console.log("---------- err ----------");
           console.log(err);
+          MyPageModel.loadingBg = false;
+          Message.alert();
         });
     }
 

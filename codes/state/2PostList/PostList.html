@@ -54,6 +54,7 @@
     </ion-nav-view>
 
     <ion-pane class="r60px w60px h60px absolute bottom33px top-none left-none right5p flex positive-b5px white-bg shadow z-index3"
+        ng-if="!isState('Main.MainTab.PostList.PostListContent')"
         ng-click="PostList.goToCreatePost();"
     >
         <i class="ion-plus f40px positive"></i>

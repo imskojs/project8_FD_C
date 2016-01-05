@@ -10,6 +10,7 @@
 
     var Model = {
       loading: false,
+      loadingBg: false,
       selectedTab: 'MyPostList',
       templateUrl: 'state/MyPage/template/MyPostList.html',
 

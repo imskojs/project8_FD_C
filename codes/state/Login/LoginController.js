@@ -6,13 +6,13 @@
   LoginController.$inject = [
     '$cordovaOauth',
     'LoginModel', 'User', 'U', 'Message',
-    'FACEBOOK_KEY', 'TWITTER_KEY', 'GOOGLE_KEY', 'AppStorage'
+    'FACEBOOK_KEY', 'TWITTER_CONSUMER_KEY', 'TWITTER_CONSUMER_SECRET', 'GOOGLE_KEY', 'AppStorage'
   ];
 
   function LoginController(
     $cordovaOauth,
     LoginModel, User, U, Message,
-    FACEBOOK_KEY, TWITTER_KEY, GOOGLE_KEY, AppStorage
+    FACEBOOK_KEY, TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, GOOGLE_KEY, AppStorage
   ) {
 
     var Login = this;
@@ -59,8 +59,7 @@
     }
 
     function loginWithTwitter() {
-      return $cordovaOauth.twitter(TWITTER_KEY,
-          't9MOmdTnIkG6AJgmPJnb1IlDD6appL4Qb8MROH2PPLdHosLPGi')
+      return $cordovaOauth.twitter(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET)
         .then(function(res) {
           console.log("---------- res ----------");
           console.log(res);

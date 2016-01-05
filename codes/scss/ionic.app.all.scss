@@ -470,6 +470,35 @@ img {
   }
 }
 
+.before-enter-show {
+  -webkit-animation: beforeEnterShow 1s;
+  animation: beforeEnterShow 1s;
+}
+
+@-webkit-keyframes beforeEnterShow {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes beforeEnterShow {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 /**
  * Created by Seunghoon Ko on 10/10/2015
  * As part of applicat platform
@@ -1034,11 +1063,13 @@ progress[value]::-webkit-progress-bar{
  * Written by Seunghoon Ko <imskojs@gmail.com>, 10/10/2015
  *
  */
+
 .wrap {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
+
 .flex {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1050,6 +1081,7 @@ progress[value]::-webkit-progress-bar{
   -ms-flex-align: center;
   align-items: center;
 }
+
 .flex-right {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1061,6 +1093,7 @@ progress[value]::-webkit-progress-bar{
   -ms-flex-align: flex-end;
   align-items: flex-end;
 }
+
 .flex-left {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1074,9 +1107,15 @@ progress[value]::-webkit-progress-bar{
 }
 
 .aling-left {
-  -webkit-align-self: flex-start;  
+  -webkit-align-self: flex-start;
   -ms-flex-item-align: start;
   align-self: flex-start;
+}
+
+.aling-right {
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
 }
 
 .flex-v {
@@ -1087,6 +1126,7 @@ progress[value]::-webkit-progress-bar{
   -ms-flex-align: center;
   align-items: center;
 }
+
 .baseline {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1095,6 +1135,7 @@ progress[value]::-webkit-progress-bar{
   -ms-flex-align: baseline;
   align-items: baseline;
 }
+
 .flex-h {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1103,16 +1144,19 @@ progress[value]::-webkit-progress-bar{
   -ms-flex-pack: center;
   justify-content: center;
 }
+
 .space-between {
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
 }
+
 .col-auto {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
 }
+
 @for $i from 1 through 100 {
   .col-offset-#{$i} {
     margin-left: #{$i}%;

@@ -16,12 +16,12 @@
 
   Favorite.$inject = [
     '$timeout',
-    'AppStorage', 'Post', 'Message', 'Place'
+    'AppStorage', 'Post', 'Message', 'Place', 'Event'
   ];
 
   function Favorite(
     $timeout,
-    AppStorage, Post, Message, Place
+    AppStorage, Post, Message, Place, Event
   ) {
 
     var service = {
@@ -29,7 +29,8 @@
       isFavorite: isFavorite,
 
       likePost: likePost,
-      likePlace: likePlace
+      likePlace: likePlace,
+      likeEvent: likeEvent
     };
 
     return service;
@@ -117,6 +118,35 @@
         .catch(function(err) {
           Message.hide();
           Message.alert();
+          console.log("---------- err ----------");
+          console.log(err);
+        });
+    }
+
+    function likeEvent(eventObj) {
+      Message.loading();
+      Event.like({}, {
+          event: eventObj.id
+        }).$promise
+        .then(function(event) {
+          if (event.message) {
+            Message.alert('좋아요 알림', event.message);
+          } else {
+            $timeout(function() {
+              eventObj.likes = event.likes;
+              Message.alert('좋아요 알림', '좋아요 성공!');
+            }, 0);
+          }
+          console.log("---------- event ----------");
+          console.log(event);
+        })
+        .catch(function(err) {
+          Message.hide();
+          if (err.data.message) {
+            Message.alert('좋아요 알림', err.data.message);
+          } else {
+            Message.alert();
+          }
           console.log("---------- err ----------");
           console.log(err);
         });

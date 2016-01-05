@@ -55,7 +55,9 @@
         // Not logged in user logic
         $state.go('Main.Login');
       } else {
-        $state.go('Main.MainTab.PlaceEvent.DaumMap');
+        // $state.go('Main.MainTab.PlaceEvent.DaumMap');
+        $state.go('Main.Login');
+        // $state.go('Main.Profile');
       }
     }
 

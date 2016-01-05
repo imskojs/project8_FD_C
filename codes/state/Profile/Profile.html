@@ -29,11 +29,13 @@
     <!-- profile img -->
     <div class="row zero mt5px flex-v">
       <div class="col-auto flex ml3p">
-        <img class="w60px h60px r60px dark-b"
-        ng-src="{{post.createdBy.photos[0].url || 'http://placehold.it/60x60'}}"
+        <img class="w70px h70px r70px dark-b"
+          ng-src="{{ Profile.Model.form.files[0] || (Profile.Model.form | GetPhoto) }}"
         >
       </div>
-      <div class="col-auto f16px ml15px">
+      <div class="col-auto f16px ml15px"
+        ng-click="Profile.getPhoto();"
+      >
         <button class="button-icon positive-bg white r5px h30px">
           사진변경
         </button>
@@ -46,7 +48,7 @@
         이름
       </p>
       <p class="zero w100p f14px bold dark-grey mt5px mb3px">
-        오미자
+        {{Profile.Model.form.name || '이름을 입력해주세요'}}
       </p>
     </div>
     <!-- row -->
@@ -55,7 +57,7 @@
         대화명
       </p>
       <p class="zero w100p f14px bold dark-grey mt5px mb3px">
-        대구사는 여신
+        {{Profile.Model.form.nickname || '대화명을 입력해주세요'}}
       </p>
     </div>
 
@@ -69,6 +71,7 @@
       <div class="col zero">
         <input class="h20px f14px darker-grey bold"
           type="text"
+          ng-model="Profile.Model.form.name"
         >
       </div>
     </div>
@@ -80,10 +83,11 @@
       <div class="col zero">
         <input class="h20px f14px darker-grey bold"
           type="text"
+          ng-model="Profile.Model.form.nickname"
         >
       </div>
     </div>
-    <!-- row -->
+<!-- 
     <div class="light-grey-bg h44px w90p auto r5px flex-v pl5px mb15px"
       ng-click="goToState('Main.Password', null, 'forward')"
     >
@@ -94,10 +98,13 @@
         <div class="ion-chevron-right f20px positive"></div>
       </div>
     </div>
+ -->    
   </ion-content>
 
   <ion-footer-bar class="bar-positive footer zero flex">
-    <p class="zero w100p white f16px center bold">
+    <p class="zero w100p white f16px center bold"
+      ng-click="Profile.sendForm();"
+    >
       변경 완료
     </p>
   </ion-footer-bar>
