@@ -47,7 +47,7 @@
         daum.maps.disableHD();
         var map = new daum.maps.Map(DOM, mapOptions);
         var ps = new daum.maps.services.Places();
-        map.setCopyrightPosition(daum.maps.CopyrightPosition.BOTTOMRIGHT, false);
+        map.setCopyrightPosition(daum.maps.CopyrightPosition.BOTTOMRIGHT /*BOTTOMLEFT*/ , false);
         // var geocoder = new daum.maps.services.Geocoder();
 
         //====================================================
@@ -80,7 +80,7 @@
           var PlacesPromise = {};
           var query = {};
           var categories;
-          if ($stateParams.id) {
+          if ($stateParams.id) { // if from place detail
             PlacesPromise = Place.findOne({
               id: $stateParams.id,
               populates: 'photos'

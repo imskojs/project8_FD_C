@@ -13,9 +13,7 @@
         <p class="zero positive bold">
           {{post.createdBy.name}}
         </p>
-        <p class="zero darker bold f14px mt2px"
-        ng-if="false"
-        >
+        <p class="zero darker bold f14px mt2px">
           {{post.createdBy.nickname}}
         </p>
         <p class="zero positive f14px grey mt2px"
@@ -56,13 +54,18 @@
     </ion-slide-box>
     <!--row end-->
     <!-- row start -->
-    <div class="row zero w90p ml5p mt5px mb5px">
-      <div class="col-auto">
+    <div class="row zero w90p ml5p mt5px mb5px"
+    >
+      <div class="col-auto"
+        ng-click="likePost(post)"
+      >
         <p class="zero positive f14px">
         좋아요 {{post.likes}}개
         </p>
       </div>
-      <div class="col-auto ml5p">
+      <div class="col-auto ml5p"
+        ng-click="goToState('Main.PostComment', {post: post.id}, 'forward')"
+      >
         <p class="zero grey f14px">
         댓글 {{post.commentsCount}}개
         </p>

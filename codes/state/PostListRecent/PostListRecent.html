@@ -80,12 +80,16 @@
         <!--row end-->
         <!-- row start -->
         <div class="row zero w90p ml5p mt5px mb5px">
-          <div class="col-auto">
+          <div class="col-auto"
+            ng-click="likePost(post)"
+          >
             <p class="zero positive f14px">
             좋아요 {{post.likes}}개
             </p>
           </div>
-          <div class="col-auto ml5p">
+          <div class="col-auto ml5p"
+            ng-click="goToState('Main.PostComment', {post: post.id})"
+          >
             <p class="zero grey f14px">
               댓글 {{post.commentsCount || 0}}개
             </p>

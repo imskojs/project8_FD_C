@@ -34,7 +34,7 @@
     //  Implementation
     //====================================================
     function getPhoto(sourceType, $index) {
-      return Photo.get(sourceType, 1000, true, 600, 'square')
+      return Photo.get(sourceType, 600, true, 600, 'square')
         .then(function(base64) {
           $timeout(function() {
             PostCreateModel.form.files[$index] = base64;

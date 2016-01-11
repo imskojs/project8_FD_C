@@ -212,18 +212,18 @@
       PostCreate
      */
     .state('Main.PostCreate', {
-        url: '/PostCreate/:category',
-        views: {
-          Main: {
-            templateUrl: 'state/PostCreate/PostCreate.html',
-            controller: 'PostCreateController as PostCreate'
-          }
+      url: '/PostCreate/:category/:from',
+      views: {
+        Main: {
+          templateUrl: 'state/PostCreate/PostCreate.html',
+          controller: 'PostCreateController as PostCreate'
         }
-      })
-      /*
-        PostComment
-       */
+      }
+    })
 
+    /*
+      PostComment
+     */
     .state('Main.PostComment', {
         url: '/PostComment/:post',
         views: {

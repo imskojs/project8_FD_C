@@ -28,7 +28,7 @@
     //====================================================
     function getPicture() {
       SignUp.imgLoading = true;
-      return Photo.get('gallery', 800, true, 'square')
+      return Photo.get('gallery', 800, true, 300, 'square', 1)
         .then(function(base64) {
 
           SignUpModel.form.files[0] = base64;
