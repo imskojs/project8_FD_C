@@ -24,8 +24,10 @@
       var params = {};
       if (U.isState('Main.MainTab.PostList.PostListRecent')) {
         params.category = 'NORMAL-POST';
+        params.from = 'PostListRecent';
       } else if (U.isState('Main.MainTab.PostList.PostListPopular')) {
         params.category = 'NORMAL-POST';
+        params.from = 'PostListPopular';
       } else if (U.isState('Main.MainTab.PostList.PostListContent')) {
         params.category = 'CONTENTS-POST';
       } else {

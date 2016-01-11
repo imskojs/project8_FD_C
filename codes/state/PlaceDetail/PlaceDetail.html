@@ -160,7 +160,7 @@
       기본 정보
       </p>
       <!-- row start -->
-      <div class="row zero wrap mb1px mt1px">
+      <div class="row zero wrap mb1px mt3px">
         <div class="col-22 flex-v">
           <p class="zero f16px positive">카테고리</p>
         </div>
@@ -180,7 +180,7 @@
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero mb5px mt1px">
+      <div class="row zero mb5px mt4px">
         <div class="col-22">
           <p class="zero f16px positive">시설유형</p>
         </div>
@@ -190,7 +190,7 @@
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero mb5px mt5px">
+      <div class="row zero mb5px mt8px">
         <div class="col-22">
           <p class="zero f16px positive">이용시간</p>
         </div>
@@ -200,17 +200,16 @@
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero mb5px mt5px">
+      <div class="row zero mb5px mt8px">
         <div class="col-22">
           <p class="zero f16px positive">가격</p>
         </div>
-        <div class="col zero ml5px light-grey f16px">
-          {{ PlaceDetail.Model.place.price }}
+        <div class="col zero ml5px light-grey f16px pre">{{ PlaceDetail.Model.place.price }}
         </div>
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero mb5px mt5px">
+      <div class="row zero mb5px mt8px">
         <div class="col-22">
           <p class="zero f16px positive">이용방법</p>
         </div>
@@ -220,7 +219,7 @@
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero mb5px mt5px">
+      <div class="row zero mb5px mt8px">
         <div class="col-22">
           <p class="zero f16px positive">주소</p>
         </div>
@@ -232,7 +231,9 @@
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero mb5px mt5px">
+      <div class="row zero mb5px mt8px"
+        ng-click="PlaceDetail.call()"
+      >
         <div class="col-22">
           <p class="zero f16px positive">문의전화</p>
         </div>
@@ -242,7 +243,9 @@
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero mb5px mt5px">
+      <div class="row zero mb5px mt8px"
+        ng-click="PlaceDetail.openHomepage();"
+      >
         <div class="col-22">
           <p class="zero f16px positive">홈페이지</p>
         </div>
@@ -253,7 +256,7 @@
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero mb5px mt5px">
+      <div class="row zero mb5px mt8px">
         <div class="col-22">
           <p class="zero f16px positive">부대시설</p>
         </div>
@@ -263,7 +266,7 @@
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero mb5px mt5px">
+      <div class="row zero mb5px mt8px">
         <div class="col-22">
           <p class="zero f16px positive">주차시설</p>
         </div>
@@ -273,7 +276,7 @@
       </div>
       <!-- row end -->
       <!-- row start -->
-      <div class="row zero mb10px mt5px">
+      <div class="row zero mb10px mt8px">
         <div class="col-22">
           <p class="zero f16px positive">기타</p>
         </div>
@@ -284,7 +287,7 @@
       <!-- row end -->
     </div>
     <p class="zero f16px positive center pt15px pb15px"
-      ng-click="PlaceDetail.openLink();"
+      ng-click="PlaceDetail.openBlog()"
     >
     자세히 보기 >
     </p>

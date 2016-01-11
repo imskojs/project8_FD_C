@@ -5,13 +5,13 @@
 
   MyPageController.$inject = [
     '$scope', '$ionicScrollDelegate', '$timeout', '$q', '$ionicHistory', '$ionicSlideBoxDelegate',
-    '$window',
+    '$window', '$state',
     'MyPageModel', 'Preload', 'Post', 'U', 'AppStorage', 'Place', 'Photo', 'User', 'Message'
   ];
 
   function MyPageController(
     $scope, $ionicScrollDelegate, $timeout, $q, $ionicHistory, $ionicSlideBoxDelegate,
-    $window,
+    $window, $state,
     MyPageModel, Preload, Post, U, AppStorage, Place, Photo, User, Message
   ) {
 
@@ -36,12 +36,17 @@
     //  Implementation
     //====================================================
     function destroyPost(postObj) {
+      Message.loading();
       return Post.destroy({
           id: postObj.id
         }).$promise
         .then(function(deletedPost) {
           console.log("---------- deletedPost ----------");
           console.log(deletedPost);
+          return Message.alert('삭제하기 알림', '내가 쓴글이 삭제 되었습니다.');
+        })
+        .then(function() {
+          loadTemplate('MyPostList');
         })
         .catch(function(err) {
           U.error(err);
@@ -126,7 +131,11 @@
 
 
     function onAfterEnter() {
-      return loadTemplate(MyPageModel.selectedTab);
+      if ($state.params.reset) {
+        return loadTemplate('MyPostList');
+      } else {
+        return loadTemplate(MyPageModel.selectedTab);
+      }
     }
 
     //====================================================

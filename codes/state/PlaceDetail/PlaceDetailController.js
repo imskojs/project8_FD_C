@@ -5,12 +5,14 @@
 
   PlaceDetailController.$inject = [
     '$window', '$scope', '$state', '$q',
-    'PlaceDetailModel', 'FilterListModel', 'Preload', 'Place', 'U', 'Link', 'Favorite'
+    'PlaceDetailModel', 'FilterListModel', 'Preload', 'Place', 'U', 'Link', 'Favorite',
+    'Message'
   ];
 
   function PlaceDetailController(
     $window, $scope, $state, $q,
-    PlaceDetailModel, FilterListModel, Preload, Place, U, Link, Favorite
+    PlaceDetailModel, FilterListModel, Preload, Place, U, Link, Favorite,
+    Message
   ) {
     var _ = $window._;
     var categoryImages = _.map(FilterListModel.filters, function(filterObj) {
@@ -23,7 +25,9 @@
     var PlaceDetail = this;
     PlaceDetail.Model = PlaceDetailModel;
     PlaceDetail.getCategoryIconImage = getCategoryIconImage;
-    PlaceDetail.openLink = openLink;
+    PlaceDetail.call = call;
+    PlaceDetail.openHomepage = openHomepage;
+    PlaceDetail.openBlog = openBlog;
     PlaceDetail.likePlace = likePlace;
 
 
@@ -50,10 +54,52 @@
       return imagePath;
     }
 
-    function openLink() {
+    function call() {
+      var phone = String(PlaceDetailModel.place.phone);
+      console.log("---------- PlaceDetailModel.place.phone ----------");
+      console.log(PlaceDetailModel.place.phone);
+      if (phone[0] !== '0') {
+        phone = '0' + phone;
+      }
+      var phoneArray = phone.split('');
+      var indexParen = phoneArray.indexOf(')');
+      if (indexParen !== -1) {
+        phoneArray.splice(indexParen, 1);
+      }
+      var indexDash = phoneArray.indexOf('-');
+      if (indexDash !== -1) {
+        phoneArray.splice(indexDash, 1);
+      }
+      indexDash = phoneArray.indexOf('-');
+      if (indexDash !== -1) {
+        phoneArray.splice(indexDash, 1);
+      }
+      indexDash = phoneArray.indexOf('-');
+      if (indexDash !== -1) {
+        phoneArray.splice(indexDash, 1);
+      }
+      phone = phoneArray.join('');
+      Link.call(phone);
+    }
+
+    function openHomepage() {
       console.log("---------- PlaceDetailModel.place.homepage ----------");
       console.log(PlaceDetailModel.place.homepage);
-      Link.open(PlaceDetailModel.place.homepage);
+      if (PlaceDetailModel.place.homepage === 'ㅡ' || !PlaceDetailModel.place.homepage) {
+        return Message.alert('홈페이지가기 알림', '홈페이지가 없는 시설입니다.');
+      } else {
+        Link.open(PlaceDetailModel.place.homepage);
+      }
+    }
+
+    function openBlog() {
+      console.log("---------- PlaceDetailModel.place.blog ----------");
+      console.log(PlaceDetailModel.place.blog);
+      if (PlaceDetailModel.place.blog) {
+        Link.open(PlaceDetailModel.place.blog);
+      } else {
+        Message.alert('자세히 보기 알림', '블로그가 없는 시설입니다.');
+      }
     }
 
     function onAfterEnter() {

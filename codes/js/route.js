@@ -320,7 +320,7 @@
     //  MyPage
     //====================================================
     .state('Main.MainTab.MyPage', {
-      url: '/MyPage',
+      url: '/MyPage/:reset',
       views: {
         MainTab: {
           templateUrl: 'state/MyPage/MyPage.html',

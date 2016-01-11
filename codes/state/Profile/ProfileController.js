@@ -47,6 +47,7 @@
           return Message.alert('프로필 변경 알림.', '프로필을 성공적으로 변경하였습니다.');
         })
         .then(function() {
+          U.goBack();
 
         })
         .catch(function(err) {

@@ -75,12 +75,25 @@
         .then(function(post) {
           console.log("---------- post ----------");
           console.log(post);
-          console.log("HAS TYPE: " + typeof post);
           Message.hide();
           return Message.alert('글작성 알림', '글이 성공적으로 작성 되었습니다.');
         })
         .then(function() {
-          U.goToState('Main.MainTab.MyPage', null, 'forward');
+          if ($state.params.from === 'PostListPopular') {
+
+            return U.goToState('Main.MainTab.PostList.PostListPopular', null, 'back');
+
+          } else if ($state.params.from === 'PostListRecent') {
+
+            return U.goToState('Main.MainTab.PostList.PostListRecent', null, 'back');
+
+          } else if (!$state.params.from) {
+
+            return U.goToState('Main.MainTab.MyPage', {
+              reset: true
+            }, 'back');
+
+          }
         })
         .catch(function(err) {
           console.log("---------- err ----------");
