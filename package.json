@@ -37,7 +37,9 @@
     {
       "locator": "https://github.com/wymsee/cordova-imagePicker.git",
       "id": "com.synconset.imagepicker"
-    }
+    },
+    "cordova-plugin-dialogs",
+    "cordova-plugin-media"
   ],
   "cordovaPlatforms": [
     "ios",

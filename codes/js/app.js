@@ -2,6 +2,7 @@
   'use strict';
   angular.module('app', [
       'ionic',
+      'applicat.push.service',
       'ngCordova',
       'ngResource',
       'ngFileUpload',

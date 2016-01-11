@@ -12,7 +12,6 @@
         "ng-file-upload": "7.3.9",
         "ngCordova": "~0.1.23-alpha",
         "jsSHA": "https://github.com/Caligatio/jsSHA.git#1.6.0",
-        "ng-img-crop": "ngImgCrop#~0.3.2",
         "angular-google-maps": "~2.2.1",
         "ng-img-crop-full-extended": "https://github.com/imskojs/ngImgCropFullExtended.git#master"
       },

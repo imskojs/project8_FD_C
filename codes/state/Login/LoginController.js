@@ -6,13 +6,13 @@
   LoginController.$inject = [
     '$cordovaOauth',
     'LoginModel', 'User', 'U', 'Message',
-    'FACEBOOK_KEY', 'TWITTER_CONSUMER_KEY', 'TWITTER_CONSUMER_SECRET', 'GOOGLE_KEY', 'AppStorage'
+    'FACEBOOK_KEY', 'TWITTER_CONSUMER_KEY', 'TWITTER_CONSUMER_SECRET', 'GOOGLE_OAUTH_CLIENT_ID', 'AppStorage'
   ];
 
   function LoginController(
     $cordovaOauth,
     LoginModel, User, U, Message,
-    FACEBOOK_KEY, TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, GOOGLE_KEY, AppStorage
+    FACEBOOK_KEY, TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, GOOGLE_OAUTH_CLIENT_ID, AppStorage
   ) {
 
     var Login = this;
@@ -73,7 +73,7 @@
     }
 
     function loginWithGoogle() {
-      return $cordovaOauth.google(GOOGLE_KEY, [
+      return $cordovaOauth.google(GOOGLE_OAUTH_CLIENT_ID, [
           "https://www.googleapis.com/auth/urlshortener", "https://www.googleapis.com/auth/userinfo.email",
           "https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/plus.me"
         ])

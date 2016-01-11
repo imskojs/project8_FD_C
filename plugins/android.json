@@ -48,6 +48,12 @@
         },
         "phonegap-plugin-push": {
             "PACKAGE_NAME": "kr.co.fitnessday"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "kr.co.fitnessday"
+        },
+        "cordova-plugin-media": {
+            "PACKAGE_NAME": "kr.co.fitnessday"
         }
     },
     "dependent_plugins": {}
