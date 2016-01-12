@@ -16,8 +16,8 @@
     // Development mode
     .constant("DEV_MODE", true)
     // Server
-    .constant("SERVER_URL", "http://192.168.0.65:1337")
-    // .constant("SERVER_URL", "http://52.192.17.128")
+    // .constant("SERVER_URL", "http://192.168.0.65:1337")
+    .constant("SERVER_URL", "http://52.192.17.128")
     .constant("APP_NAME", "FITNESS_DAY")
     .constant("APP_ID", 9);
 })(angular);

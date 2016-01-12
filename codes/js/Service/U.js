@@ -7,13 +7,13 @@
   U.$inject = [
     '$ionicHistory', '$ionicScrollDelegate', '$timeout', '$filter',
     '$ionicSideMenuDelegate', '$state', '$ionicViewSwitcher', '$ionicSlideBoxDelegate',
-    'Message', 'RootScope'
+    'Message', 'RootScope', 'Dom'
   ];
 
   function U(
     $ionicHistory, $ionicScrollDelegate, $timeout, $filter,
     $ionicSideMenuDelegate, $state, $ionicViewSwitcher, $ionicSlideBoxDelegate,
-    Message, RootScope
+    Message, RootScope, Dom
   ) {
 
     var service = {
@@ -101,7 +101,17 @@
 
     function error(err) {
       Message.hide();
-      Message.alert();
+      if (err.data && err.data.invalidAttributes && err.data.invalidAttributes.username) {
+        return Message.alert('회원가입 알림', '이미 존제하는 이메일입니다. 다른이메일을 입력해주세요.')
+          .then(function() {
+            Dom.focusById('email');
+          });
+      } else if (err.data && err.data.invalidAttributes && err.data.invalidAttributes.email) {
+        return Message.alert('회원가입 알림', '이미 존제하는 이메일입니다. 다른이메일을 입력해주세요.')
+          .then(function() {
+            Dom.focusById('email');
+          });
+      }
       console.log(err);
     }
 

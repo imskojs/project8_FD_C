@@ -149,9 +149,9 @@ gulp.task('js', function(done) {
   gulp.src(paths.js)
     .pipe(concat('app.all.js'))
     .pipe(gulpif(argv.production, stripDebug()))
-    .pipe(gulpif(argv.production, uglify({
-      mangle: false
-    })))
+    // .pipe(gulpif(argv.production, uglify({
+    //   mangle: false
+    // })))
     .pipe(rename({
       extname: '.min.js'
     }))
