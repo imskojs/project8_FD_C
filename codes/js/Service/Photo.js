@@ -28,6 +28,7 @@
     SERVER_URL, Message, Upload
   ) {
 
+    var _ = $window._;
     $ionicModal.fromTemplateUrl('state/0Template/ImageCropModal.html', {
         id: '1',
         scope: $rootScope,
@@ -170,13 +171,16 @@
     //    $q.reject(err);
     //  })
     function post(url, form, method) {
+      var form_copy = _.clone(form);
       var filesToSend = [];
-      angular.forEach(form.files, function(base64File) {
+      angular.forEach(form_copy.files, function(base64File) {
         if (base64File != null) {
           filesToSend.push(base64ToFile(base64File));
         }
       });
-      delete form.files;
+      delete form_copy.files;
+      console.log("---------- form.files ----------");
+      console.log(form.files);
 
       if (url[0] !== '/') {
         url = '/' + url;
@@ -186,7 +190,7 @@
         url: SERVER_URL + url,
         method: method || 'POST',
         file: filesToSend,
-        fields: form,
+        fields: form_copy,
         header: {
           enctype: "multipart/form-data"
         }

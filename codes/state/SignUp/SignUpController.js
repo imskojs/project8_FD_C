@@ -76,10 +76,7 @@
       var alert = Message.alert.bind(Message, '회원가입 알림');
       var form = SignUpModel.form;
       if (SignUpModel.form.files.length === 0) {
-        alert('사진을 등록해주세요')
-          .then(function() {
-            U.top();
-          });
+        alert('사진을 등록해주세요');
         return false;
       } else if (!form.name) {
         alert('이름을 입력해주세요')
