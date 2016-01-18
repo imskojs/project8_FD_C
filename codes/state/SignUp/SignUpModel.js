@@ -18,6 +18,7 @@
         password: ''
       },
       confirmPassword: null,
+      agree: false
     };
 
     return model;

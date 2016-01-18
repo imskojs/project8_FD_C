@@ -90,19 +90,22 @@
     </div>
     <hr class="darker-b2px mt20px mb20px">
     <div class="row zero ml5p w90p flex-v">
-      <div class="w25px h25px flex r5px"
-        ng-class="{'positive-bg': true}"
-        >
+      <div class="w25px h25px flex r5px positive-b"
+        ng-class="{'positive-bg': SignUp.Model.agree}"
+        ng-click="SignUp.Model.agree = !SignUp.Model.agree"
+      >
         <i class="ion-checkmark-round white f18px"></i>
       </div>
-      <div class="col zero ml5p">
+      <div class="col zero ml5p"
+        ng-click="SignUp.Model.agree = !SignUp.Model.agree"
+      >
         <p class="zero f14px dark bold">
         이용약관 동의
         </p>
       </div>
       <div class="col zero flex-v"
-        ng-click=""
-        >
+        ng-click="goToState('Main.Terms')"
+      >
         <div class="col zero">
           <p class="zero f14px positive bold right">
           약관보기

@@ -41,8 +41,11 @@
         .catch(function(err) {
           console.log("---------- err ----------");
           console.log(err);
-          Message.hide();
-          Message.alert();
+          if (err.status === 403) {
+            return Message.alert('로그인 알림', '비밀번호/이메일이 틀렸습니다. 다시 입력해주세요');
+          } else {
+            return Message.alert();
+          }
         });
     }
 

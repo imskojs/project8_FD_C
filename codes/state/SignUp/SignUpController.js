@@ -108,6 +108,9 @@
             Dom.focusById('email');
           });
         return false;
+      } else if (!SignUpModel.agree) {
+        alert('이용약관을 동의 해주시기 바랍니다');
+        return false;
       } else {
         return true;
       }

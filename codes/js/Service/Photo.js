@@ -179,8 +179,6 @@
         }
       });
       delete form_copy.files;
-      console.log("---------- form.files ----------");
-      console.log(form.files);
 
       if (url[0] !== '/') {
         url = '/' + url;
