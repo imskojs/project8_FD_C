@@ -36,20 +36,28 @@
     //  Implementation
     //====================================================
     function destroyPost(postObj) {
-      Message.loading();
-      return Post.destroy({
-          id: postObj.id
-        }).$promise
-        .then(function(deletedPost) {
-          console.log("---------- deletedPost ----------");
-          console.log(deletedPost);
-          return Message.alert('삭제하기 알림', '내가 쓴글이 삭제 되었습니다.');
-        })
-        .then(function() {
-          loadTemplate('MyPostList');
-        })
-        .catch(function(err) {
-          U.error(err);
+      return Message.confirm('글지우기 알림', '글을 지우시겠습니까?')
+        .then(function(ok) {
+          if (ok) {
+            Message.loading();
+            return Post.destroy({
+                id: postObj.id
+              }).$promise
+              .then(function(deletedPost) {
+                console.log("---------- deletedPost ----------");
+                console.log(deletedPost);
+                return Message.alert('삭제하기 알림', '내가 쓴글이 삭제 되었습니다.');
+              })
+              .then(function() {
+                loadTemplate('MyPostList');
+              })
+              .catch(function(err) {
+                U.error(err);
+              });
+          } else {
+            console.log("---------- '취소' ----------");
+            console.log('취소');
+          }
         });
     }
 

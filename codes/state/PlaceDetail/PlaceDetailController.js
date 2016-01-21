@@ -29,6 +29,8 @@
     PlaceDetail.openHomepage = openHomepage;
     PlaceDetail.openBlog = openBlog;
     PlaceDetail.likePlace = likePlace;
+    PlaceDetail.unlikePlace = unlikePlace;
+    PlaceDetail.isFavorite = Favorite.isFavorite;
 
 
     $scope.$on('$ionicView.beforeEnter', onBeforeEnter);
@@ -45,6 +47,10 @@
 
     function likePlace() {
       Favorite.likePlace(PlaceDetailModel.place);
+    }
+
+    function unlikePlace() {
+      Favorite.unlikePlace(PlaceDetailModel.place);
     }
 
     function getCategoryIconImage(filterObj) {
@@ -98,7 +104,7 @@
       if (PlaceDetailModel.place.blog) {
         Link.open(PlaceDetailModel.place.blog);
       } else {
-        Message.alert('자세히 보기 알림', '블로그가 없는 시설입니다.');
+        Message.alert('자세히 보기 알림', '추가정보가 없는 시설입니다.');
       }
     }
 

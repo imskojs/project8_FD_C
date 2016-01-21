@@ -25,7 +25,8 @@
       hide: loadingHide,
       success: messageSuccess,
       error: messageError,
-      alert: popUpAlertDefault
+      alert: popUpAlertDefault,
+      confirm: confirm
     };
 
     return service;
@@ -57,6 +58,14 @@
       return $ionicPopup.alert({
         title: title || '인터넷이 끊겼습니다.',
         template: message || '인터넷을 켜주세요.'
+      });
+    }
+
+    function confirm(title, message) {
+      loadingHide();
+      return $ionicPopup.confirm({
+        title: title || '메세지',
+        template: message || '확인을 눌러주세요.'
       });
     }
 

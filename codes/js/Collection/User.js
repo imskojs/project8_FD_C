@@ -18,12 +18,14 @@
     var postUrl = SERVER_URL + '/user' +
       '/:login' +
       '/:findOne' +
-      '/:update';
+      '/:update' +
+      '/:changePassword';
 
     var params = {
       login: '@login',
       findOne: '@findOne',
-      update: '@update'
+      update: '@update',
+      changePassword: '@changePassword'
     };
 
     var actions = {
@@ -45,6 +47,13 @@
         method: 'PUT',
         params: {
           update: 'update'
+        }
+      },
+
+      changePassword: {
+        method: 'POST',
+        params: {
+          changePassword: 'changePassword'
         }
       }
     };

@@ -8,10 +8,14 @@
 
   function PasswordModel() {
 
-    var model = {
-
+    var Model = {
+      form: {
+        oldPassword: '',
+        newPassword: ''
+      },
+      newPasswordConfirm: ''
     };
 
-    return model;
+    return Model;
   }
 })();

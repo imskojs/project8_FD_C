@@ -34,90 +34,114 @@
     >
 
    <!-- stars -->
-   <div class="row zero dark-grey-bb pl5p pr5p flex-v mt2px h66px">
+    <div class="row zero dark-grey-bb pl5p pr5p flex-v mt2px h66px">
 
-     <div class="col zero">
-       <p class="f14px light-grey center mb5px">
-       별점
-       </p>
-       <div class="row zero mb5px">
-         <div class="col zero">
-           <div class="f10px center positive"
-             ng-class="{
-               'ion-star': EventDetail.Model.event.averageStars >= 0.5,
-               'ion-android-star-outline': 
-                 (EventDetail.Model.event.averageStars < 0.5) ||
-                 !Eventdetail.Model.event.averageStars
-             }"
-           ></div>
-         </div>
-         <div class="col zero">
-           <div class="f10px center positive"
-             ng-class="{
-               'ion-star': EventDetail.Model.event.averageStars >= 1.5,
-               'ion-android-star-outline': 
-                 (EventDetail.Model.event.averageStars < 1.5) ||
-                 !Eventdetail.Model.event.averageStars
-             }"
-           ></div>
-         </div>
-         <div class="col zero">
-           <div class="f10px center positive"
-             ng-class="{
-               'ion-star': EventDetail.Model.event.averageStars >= 2.5,
-               'ion-android-star-outline': 
-                 (EventDetail.Model.event.averageStars < 2.5) ||
-                 !Eventdetail.Model.event.averageStars
-             }"
-           ></div>
-         </div>
-         <div class="col zero">
-           <div class="f10px center positive"
-             ng-class="{
-               'ion-star': EventDetail.Model.event.averageStars >= 3.5,
-               'ion-android-star-outline': 
-                 (EventDetail.Model.event.averageStars < 3.5) ||
-                 !Eventdetail.Model.event.averageStars
-             }"
-           ></div>
-         </div>
-         <div class="col zero">
-           <div class="f10px center positive"
-             ng-class="{
-               'ion-star': EventDetail.Model.event.averageStars >= 4.5,
-               'ion-android-star-outline': 
-                 (EventDetail.Model.event.averageStars < 4.5) ||
-                 !Eventdetail.Model.event.averageStars
-             }"
-           ></div>
-         </div>
-       </div>
-       <p class="zero positive center f14px">
+      <div class="col zero">
+        <p class="f14px light-grey center mb5px">
+         별점
+        </p>
+        <div class="row zero mb5px">
+          <div class="col zero">
+            <div class="f10px center positive"
+              ng-class="{
+                'ion-star': EventDetail.Model.event.averageStars >= 0.5,
+                'ion-android-star-outline': 
+                  (EventDetail.Model.event.averageStars < 0.5) ||
+                  !Eventdetail.Model.event.averageStars
+              }"
+            ></div>
+          </div>
+          <div class="col zero">
+            <div class="f10px center positive"
+              ng-class="{
+                'ion-star': EventDetail.Model.event.averageStars >= 1.5,
+                'ion-android-star-outline': 
+                  (EventDetail.Model.event.averageStars < 1.5) ||
+                  !Eventdetail.Model.event.averageStars
+              }"
+            ></div>
+          </div>
+          <div class="col zero">
+            <div class="f10px center positive"
+              ng-class="{
+                'ion-star': EventDetail.Model.event.averageStars >= 2.5,
+                'ion-android-star-outline': 
+                  (EventDetail.Model.event.averageStars < 2.5) ||
+                  !Eventdetail.Model.event.averageStars
+              }"
+            ></div>
+          </div>
+          <div class="col zero">
+            <div class="f10px center positive"
+              ng-class="{
+                'ion-star': EventDetail.Model.event.averageStars >= 3.5,
+                'ion-android-star-outline': 
+                  (EventDetail.Model.event.averageStars < 3.5) ||
+                  !Eventdetail.Model.event.averageStars
+              }"
+            ></div>
+          </div>
+          <div class="col zero">
+            <div class="f10px center positive"
+              ng-class="{
+                'ion-star': EventDetail.Model.event.averageStars >= 4.5,
+                'ion-android-star-outline': 
+                  (EventDetail.Model.event.averageStars < 4.5) ||
+                  !Eventdetail.Model.event.averageStars
+              }"
+            ></div>
+          </div>
+        </div>
+        <p class="zero positive center f14px">
          {{ EventDetail.Model.event.averageStars }}
-       </p>
-     </div>
+        </p>
+      </div>
 
-     <div class="col zero flex">
-       <div>
-         <p class="f14px light-grey center mb10px">
-         좋아요
-         </p>
-         <div class="row zero mb5px">
-           <div class="col zero right">
-             <div class="ion-heart positive f18px"></div>
-           </div>
-           <div class="col zero left ml5px">
-             <div class="positive f16px">
-               {{ EventDetail.Model.event.likes || 0 }}
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-
-   </div>
-
+      <div class="col zero flex">
+        <div>
+          <p class="f14px light-grey center mb10px">
+          좋아요
+          </p>
+          <div class="row zero mb5px">
+            <div class="col zero right">
+              <div class="ion-heart positive f18px"></div>
+            </div>
+            <div class="col zero left ml5px">
+              <div class="positive f16px">
+                {{ EventDetail.Model.event.likes || 0 }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- photo1 -->
+    <img class="w100p block" alt="이벤트 이미지 1"
+      ng-if="EventDetail.Model.event.photos[1]"
+      ng-src="{{EventDetail.Model.event.photos[1].url | Cloudinary600}}"
+    >
+    <!-- photo2 -->
+    <img class="w100p block" alt="이벤트 이미지 2"
+      ng-if="EventDetail.Model.event.photos[2]"
+      ng-src="{{EventDetail.Model.event.photos[2].url | Cloudinary600}}"
+    >
+    <!-- photo3 -->
+    <img class="w100p block" alt="이벤트 이미지 3"
+      ng-if="EventDetail.Model.event.photos[3]"
+      ng-src="{{EventDetail.Model.event.photos[3].url | Cloudinary600}}"
+    >
+    <!-- photo4 -->
+    <img class="w100p block" alt="이벤트 이미지 4"
+      ng-if="EventDetail.Model.event.photos[4]"
+      ng-src="{{EventDetail.Model.event.photos[4].url | Cloudinary600}}"
+    >
+    <!-- photo5 -->
+    <img class="w100p block" alt="이벤트 이미지 5"
+      ng-if="EventDetail.Model.event.photos[5]"
+      ng-src="{{EventDetail.Model.event.photos[5].url | Cloudinary600}}"
+    >
   </ion-content>
+  
 
   <ion-footer-bar class="bar-positive footer zero">
     <div class="row zero">

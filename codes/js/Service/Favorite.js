@@ -30,6 +30,7 @@
 
       likePost: likePost,
       likePlace: likePlace,
+      unlikePlace: unlikePlace,
       likeEvent: likeEvent
     };
 
@@ -105,11 +106,13 @@
         }).$promise
         .then(function(place) {
           if (place.message) {
-            Message.alert('좋아요 알림', place.message);
+            Message.alert('좋아요 알림', place.message); // already liked
+            toggleSaveToFavorite(place.id);
           } else {
             $timeout(function() {
               placeObj.likes = place.likes;
               Message.alert('좋아요 알림', '좋아요 성공!');
+              toggleSaveToFavorite(place.id);
             }, 0);
           }
           console.log("---------- place ----------");
@@ -121,6 +124,34 @@
           console.log("---------- err ----------");
           console.log(err);
         });
+    }
+
+    function unlikePlace(placeObj) {
+      Message.loading();
+      Place.unlike({}, {
+          place: placeObj.id
+        }).$promise
+        .then(function(place) {
+          if (place.message) {
+            Message.alert('좋아요 알림', place.message); // 좋아요 안한거 안좋아요 했음.
+            toggleSaveToFavorite(place.id);
+          } else {
+            $timeout(function() {
+              placeObj.likes = place.likes;
+              Message.alert('좋아요 알림', '좋아요를 취소하였습니다.');
+              toggleSaveToFavorite(place.id);
+            }, 0);
+          }
+          console.log("---------- place ----------");
+          console.log(place);
+        })
+        .catch(function(err) {
+          Message.hide();
+          Message.alert();
+          console.log("---------- err ----------");
+          console.log(err);
+        });
+
     }
 
     function likeEvent(eventObj) {

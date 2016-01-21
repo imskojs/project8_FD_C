@@ -14,14 +14,30 @@
   ) {
     var Profile = this;
     Profile.Model = ProfileModel;
+    $scope.$on('$ionicView.beforeEnter', onBeforeEnter);
 
     Profile.getPhoto = getPhoto;
     Profile.sendForm = sendForm;
 
-    $scope.$on('$ionicView.beforeEnter', onBeforeEnter);
     //====================================================
     //  Implementation
     //====================================================
+    function onBeforeEnter() {
+      userFindOne()
+        .then(function(user) {
+          console.log("---------- user ----------");
+          console.log(user);
+          $timeout(function() {
+            AppStorage.user = user;
+            ProfileModel.form = user;
+            console.log("---------- ProfileModel.form ----------");
+            console.log(ProfileModel.form);
+          }, 0);
+        })
+        .catch(function(err) {
+          return U.error(err);
+        });
+    }
 
     function getPhoto() {
       return Photo.get('gallery', 600, true, 300, 'square', 1)
@@ -35,11 +51,7 @@
 
     function sendForm() {
       Message.loading();
-      return User.update({}, {
-          files: ProfileModel.form.files,
-          name: ProfileModel.form.name,
-          nickname: ProfileModel.form.nickname
-        }).$promise
+      userUpdate()
         .then(function(user) {
           console.log("---------- user ----------");
           console.log(user);
@@ -58,23 +70,22 @@
         });
     }
 
-    function onBeforeEnter() {
+
+    //====================================================
+    //  REST
+    //====================================================
+    function userFindOne() {
       return User.findOne({
-          id: AppStorage.user.id
-        }).$promise
-        .then(function(user) {
-          console.log("---------- user ----------");
-          console.log(user);
-          $timeout(function() {
-            AppStorage.user = user;
-            ProfileModel.form = user;
-            console.log("---------- ProfileModel.form ----------");
-            console.log(ProfileModel.form);
-          }, 0);
-        })
-        .catch(function(err) {
-          return U.error(err);
-        });
+        id: AppStorage.user.id
+      }).$promise;
+    }
+
+    function userUpdate() {
+      return User.update({}, {
+        files: ProfileModel.form.files,
+        name: ProfileModel.form.name,
+        nickname: ProfileModel.form.nickname
+      }).$promise;
     }
 
   }

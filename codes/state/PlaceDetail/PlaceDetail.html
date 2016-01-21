@@ -296,6 +296,7 @@
   <ion-footer-bar class="bar-positive footer zero">
     <div class="row zero">
       <div class="col-50 flex"
+        ng-if="!PlaceDetail.isFavorite(PlaceDetail.Model.place.id)"
         ng-click="PlaceDetail.likePlace()"
       >
         <div class="ion-heart f26px"></div>
@@ -303,6 +304,17 @@
         좋아요
         </p>
       </div>
+
+      <div class="col-50 flex"
+        ng-if="PlaceDetail.isFavorite(PlaceDetail.Model.place.id)"
+        ng-click="PlaceDetail.unlikePlace()"
+      >
+        <div class="ion-heart f26px red"></div>
+        <p class="zero left ml10px f18px red">
+        좋아요 취소
+        </p>
+      </div>
+
       <div class="col-50 flex light-grey-bl"
         ng-click="goToState('Main.PlaceReview', {
           place: PlaceDetail.Model.place.id,

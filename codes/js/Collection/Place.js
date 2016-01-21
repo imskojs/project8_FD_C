@@ -21,6 +21,7 @@
       '/:update' +
       '/:destroy' +
       '/:like' +
+      '/:unlike' +
 
       '/:within';
 
@@ -32,6 +33,7 @@
       update: '@update',
       destroy: '@destroy',
       like: '@like',
+      unlike: '@unlike',
 
       within: '@within'
     };
@@ -87,6 +89,12 @@
         }
       },
 
+      unlike: {
+        method: 'POST',
+        params: {
+          unlike: 'unlike'
+        }
+      },
       // longitude, latitude, distance
       within: {
         method: 'GET',
