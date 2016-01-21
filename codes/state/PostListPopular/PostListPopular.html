@@ -81,7 +81,7 @@
         <!-- row start -->
         <div class="row zero w90p ml5p mt5px mb5px">
           <div class="col-auto"
-            ng-click="likePost(post)"
+            ng-click="Favorite.likePost(post)"
           >
             <p class="zero positive f14px">
             좋아요 {{post.likes}}개
@@ -99,13 +99,25 @@
         <!-- row start -->
         <div class="row zero rb5px h38px flex-v positive-bg mt0px">
           <div class="col zero flex"
-            ng-click="likePost(post)"
+            ng-if="!Favorite.isFavorite(post.id)"
+            ng-click="Favorite.likePost(post)"
             >
-            <i class="ion-ios-heart white f20px white"></i>
+            <i class="ion-ios-heart white f20px"></i>
             <p class="zero center f16px white ml5p">
-                좋아요
+              좋아요
             </p>
           </div>
+
+          <div class="col zero flex"
+            ng-if="Favorite.isFavorite(post.id)"
+            ng-click="Favorite.unlikePost(post)"
+          >
+            <i class="ion-ios-heart f20px red"></i>
+            <p class="zero center f16px ml5p red">
+              좋아요 취소
+            </p>
+          </div>
+
           <div class="col zero flex"1
             ng-click="goToState('Main.PostComment', {post: post.id}, 'forward')"
             >

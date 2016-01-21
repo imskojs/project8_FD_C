@@ -2,6 +2,7 @@
   <div class="col zero">
     <div class="row zero mt0px light-grey-bb flex-v"
       ng-repeat="event in MyPage.Model.FavoriteEventList.events"
+      ng-click="goToState('Main.EventDetail', {id: event.id}, 'forward')"
     >
       <div class="col-30 mt5px">
         <img class="w100p block positive-b h70px"
@@ -10,7 +11,7 @@
       <div class="col zero ml3p mt5px">
 
         <p class="zero f16px darker bold text-overflow">
-        {{event.name}}
+        {{event.title}}
         </p>
         <p class="zero mt5px dark-grey f14px">
         {{event.address}}
@@ -19,3 +20,9 @@
     </div>
   </div>
 </div>
+<ion-infinite-scroll
+  on-infinite="MyPage.loadMoreFavoriteEventList()"
+  immediate-check="false"
+  ng-if="MyPage.Model.FavoriteEventList.more"
+>
+</ion-infinite-scroll>

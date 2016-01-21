@@ -19,7 +19,9 @@
       '/:create' +
       '/:update' +
       '/:destroy' +
-      '/:like';
+      '/:like' +
+      '/:unlike' +
+      '/:findLikedEvents';
 
     var params = {
       find: '@find',
@@ -27,7 +29,9 @@
       create: '@create',
       update: '@update',
       destroy: '@destroy',
-      like: '@like'
+      like: '@like',
+      unlike: '@unlike',
+      findLikedEvents: '@findLikedEvents'
     };
 
     var actions = {
@@ -72,7 +76,20 @@
         params: {
           like: 'like'
         }
-      }
+      },
+
+      unlike: {
+        method: 'POST',
+        params: {
+          unlike: 'unlike'
+        }
+      },
+      findLikedEvents: {
+        method: 'GET',
+        params: {
+          findOne: 'findLikedEvents'
+        }
+      },
     };
 
     var service = $resource(eventUrl, params, actions);

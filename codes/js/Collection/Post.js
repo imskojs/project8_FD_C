@@ -32,7 +32,8 @@
       '/:findOne' +
       '/:update' +
       '/:destroy' +
-      '/:like';
+      '/:like' +
+      '/:unlike';
 
     var params = {
       find: '@find',
@@ -41,7 +42,8 @@
       findOne: '@findOne',
       update: '@update',
       destroy: '@destroy',
-      like: '@like'
+      like: '@like',
+      unlike: '@unlike'
     };
 
     var actions = {
@@ -91,6 +93,13 @@
         method: 'POST',
         params: {
           like: 'like'
+        }
+      },
+
+      unlike: {
+        method: 'POST',
+        params: {
+          unlike: 'unlike'
         }
       }
     };

@@ -36,7 +36,8 @@
 
       FavoriteEventList: {
         more: true,
-        events: []
+        events: [],
+        likes: []
       },
 
       FavoritePostList: {

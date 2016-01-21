@@ -146,13 +146,25 @@
   <ion-footer-bar class="bar-positive footer zero">
     <div class="row zero">
       <div class="col-50 flex"
-        ng-click="EventDetail.likeEvent()"
+        ng-if="!Favorite.isFavorite(EventDetail.Model.event.id)"
+        ng-click="Favorite.likeEvent(EventDetail.Model.event)"
       >
         <div class="ion-heart f26px"></div>
         <p class="zero left ml10px f18px">
           좋아요
         </p>
       </div>
+
+      <div class="col-50 flex"
+        ng-if="Favorite.isFavorite(EventDetail.Model.event.id)"
+        ng-click="Favorite.unlikeEvent(EventDetail.Model.event)"
+      >
+        <div class="ion-heart f26px red"></div>
+        <p class="zero left ml10px f18px red">
+        좋아요 취소
+        </p>
+      </div>
+
       <div class="col-50 flex light-grey-bl"
         ng-click="goToState('Main.EventReview', {
           event: EventDetail.Model.event.id,

@@ -45,6 +45,7 @@
       areaType: 'square',
       aspectRatio: 1
     };
+    $rootScope.getPhotoCancelled = true;
 
     var service = {
       get: get,
@@ -209,8 +210,9 @@
       var deferred = $q.defer();
       $window.imagePicker.getPictures(function(results) {
         deferred.resolve(results[0]);
-      }, function(err) {
-        deferred.reject(err);
+      }, function(isCancelled) {
+        $rootScope.getPhotoCancelled = true;
+        deferred.resolve(isCancelled);
       }, {
         maximumImagesCount: 1,
         width: width || 800,

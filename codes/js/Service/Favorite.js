@@ -29,9 +29,11 @@
       isFavorite: isFavorite,
 
       likePost: likePost,
+      unlikePost: unlikePost,
       likePlace: likePlace,
       unlikePlace: unlikePlace,
-      likeEvent: likeEvent
+      likeEvent: likeEvent,
+      unlikeEvent: unlikeEvent
     };
 
     return service;
@@ -74,31 +76,10 @@
       return false;
     }
 
-    function likePost(postObj) {
-      Message.loading();
-      Post.like({}, {
-          post: postObj.id
-        }).$promise
-        .then(function(post) {
-          if (post.message) {
-            Message.alert('좋아요 알림', post.message);
-          } else {
-            $timeout(function() {
-              postObj.likes = post.likes;
-              Message.alert('좋아요 알림', '좋아요 성공!');
-            }, 0);
-          }
-          console.log("---------- post ----------");
-          console.log(post);
-        })
-        .catch(function(err) {
-          Message.hide();
-          Message.alert();
-          console.log("---------- err ----------");
-          console.log(err);
-        });
-    }
 
+    //====================================================
+    //  Place
+    //====================================================
     function likePlace(placeObj) {
       Message.loading();
       Place.like({}, {
@@ -107,7 +88,7 @@
         .then(function(place) {
           if (place.message) {
             Message.alert('좋아요 알림', place.message); // already liked
-            toggleSaveToFavorite(place.id);
+            // toggleSaveToFavorite(place.id);
           } else {
             $timeout(function() {
               placeObj.likes = place.likes;
@@ -134,7 +115,7 @@
         .then(function(place) {
           if (place.message) {
             Message.alert('좋아요 알림', place.message); // 좋아요 안한거 안좋아요 했음.
-            toggleSaveToFavorite(place.id);
+            // toggleSaveToFavorite(place.id);
           } else {
             $timeout(function() {
               placeObj.likes = place.likes;
@@ -151,33 +132,117 @@
           console.log("---------- err ----------");
           console.log(err);
         });
-
     }
 
-    function likeEvent(eventObj) {
+    //====================================================
+    // Event
+    //====================================================
+    function likeEvent(placeObj) {
       Message.loading();
       Event.like({}, {
-          event: eventObj.id
+          place: placeObj.id
         }).$promise
-        .then(function(event) {
-          if (event.message) {
-            Message.alert('좋아요 알림', event.message);
+        .then(function(place) {
+          if (place.message) {
+            Message.alert('좋아요 알림', place.message); // already liked
+            // toggleSaveToFavorite(place.id);
           } else {
             $timeout(function() {
-              eventObj.likes = event.likes;
+              placeObj.likes = place.likes;
               Message.alert('좋아요 알림', '좋아요 성공!');
+              toggleSaveToFavorite(place.id);
             }, 0);
           }
-          console.log("---------- event ----------");
-          console.log(event);
+          console.log("---------- place ----------");
+          console.log(place);
         })
         .catch(function(err) {
           Message.hide();
-          if (err.data.message) {
-            Message.alert('좋아요 알림', err.data.message);
+          Message.alert();
+          console.log("---------- err ----------");
+          console.log(err);
+        });
+    }
+
+    function unlikeEvent(placeObj) {
+      Message.loading();
+      Event.unlike({}, {
+          place: placeObj.id
+        }).$promise
+        .then(function(place) {
+          if (place.message) {
+            Message.alert('좋아요 알림', place.message); // 좋아요 안한거 안좋아요 했음.
+            // toggleSaveToFavorite(place.id);
           } else {
-            Message.alert();
+            $timeout(function() {
+              placeObj.likes = place.likes;
+              Message.alert('좋아요 알림', '좋아요를 취소하였습니다.');
+              toggleSaveToFavorite(place.id);
+            }, 0);
           }
+          console.log("---------- place ----------");
+          console.log(place);
+        })
+        .catch(function(err) {
+          Message.hide();
+          Message.alert();
+          console.log("---------- err ----------");
+          console.log(err);
+        });
+    }
+
+    //====================================================
+    // Post
+    //====================================================
+    function likePost(placeObj) {
+      Message.loading();
+      Post.like({}, {
+          place: placeObj.id
+        }).$promise
+        .then(function(place) {
+          if (place.message) {
+            Message.alert('좋아요 알림', place.message); // already liked
+            // toggleSaveToFavorite(place.id);
+          } else {
+            $timeout(function() {
+              placeObj.likes = place.likes;
+              Message.alert('좋아요 알림', '좋아요 성공!');
+              toggleSaveToFavorite(place.id);
+            }, 0);
+          }
+          console.log("---------- place ----------");
+          console.log(place);
+        })
+        .catch(function(err) {
+          Message.hide();
+          Message.alert();
+          console.log("---------- err ----------");
+          console.log(err);
+        });
+    }
+
+    function unlikePost(placeObj) {
+      Message.loading();
+      Post.unlike({}, {
+          place: placeObj.id
+        }).$promise
+        .then(function(place) {
+          if (place.message) {
+            Message.alert('좋아요 알림', place.message); // 좋아요 안한거 안좋아요 했음.
+            // toggleSaveToFavorite(place.id);
+          } else {
+            $timeout(function() {
+              placeObj.likes = place.likes;
+              Message.alert('좋아요 알림', '좋아요를 취소하였습니다.');
+              toggleSaveToFavorite(place.id);
+            }, 0);
+          }
+          console.log("---------- place ----------");
+          console.log(place);
+        })
+        .catch(function(err) {
+          Message.hide();
+          Message.alert();
           console.log("---------- err ----------");
           console.log(err);
         });

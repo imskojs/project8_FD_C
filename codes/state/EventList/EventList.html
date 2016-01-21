@@ -40,6 +40,11 @@
           </div>
           <div class="col zero ml3p mt5px">
 
+            <p class="zero f13px bold mb5px text-overflow red"
+              ng-if="EventList.isNew(event)"
+            >
+              [NEW]
+            </p>
             <p class="zero f16px darker bold text-overflow">
             {{event.title}}
             </p>

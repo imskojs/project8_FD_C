@@ -53,6 +53,7 @@
       comingSoon: comingSoon,
       DEV_MODE: DEV_MODE,
 
+      Favorite: Favorite,
       likePost: Favorite.likePost,
       likePlace: Favorite.likePlace
     };

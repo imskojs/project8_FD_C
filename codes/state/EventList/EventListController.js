@@ -4,19 +4,21 @@
     .controller('EventListController', EventListController);
 
   EventListController.$inject = [
-    '$scope', '$q', '$ionicScrollDelegate',
+    '$scope', '$q', '$ionicScrollDelegate', '$window',
     'EventListModel', 'U', 'Event', 'Preload'
   ];
 
   function EventListController(
-    $scope, $q, $ionicScrollDelegate,
+    $scope, $q, $ionicScrollDelegate, $window,
     EventListModel, U, Event, Preload
   ) {
+    var moment = $window.moment;
     var EventList = this;
     EventList.Model = EventListModel;
     var noLoadingStates = [];
 
     EventList.loadMore = loadMore;
+    EventList.isNew = isNew;
 
     $scope.$on('$ionicView.beforeEnter', onBeforeEnter);
     $scope.$on('$ionicView.afterEnter', onAfterEnter);
@@ -24,6 +26,14 @@
     //====================================================
     // Initial Loading of a state;
     //====================================================
+    function isNew(event) {
+      var createdAt = moment(event.createdAt);
+      var now = moment();
+      var dayAgo = moment().subtract(1, 'day');
+      var isNewy = createdAt.isBetween(dayAgo, now);
+      return isNewy;
+    }
+
     function onBeforeEnter() {
       if (!U.areSiblingViews(noLoadingStates)) {
         EventListModel.events = [];

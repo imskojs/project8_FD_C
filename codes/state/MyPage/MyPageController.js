@@ -6,13 +6,13 @@
   MyPageController.$inject = [
     '$scope', '$ionicScrollDelegate', '$timeout', '$q', '$ionicHistory', '$ionicSlideBoxDelegate',
     '$window', '$state',
-    'MyPageModel', 'Preload', 'Post', 'U', 'AppStorage', 'Place', 'Photo', 'User', 'Message'
+    'MyPageModel', 'Preload', 'Post', 'U', 'AppStorage', 'Place', 'Photo', 'User', 'Message', 'Event'
   ];
 
   function MyPageController(
     $scope, $ionicScrollDelegate, $timeout, $q, $ionicHistory, $ionicSlideBoxDelegate,
     $window, $state,
-    MyPageModel, Preload, Post, U, AppStorage, Place, Photo, User, Message
+    MyPageModel, Preload, Post, U, AppStorage, Place, Photo, User, Message, Event
   ) {
 
     var _ = $window._;
@@ -25,7 +25,9 @@
     MyPage.loadMoreMyPostList = loadMoreMyPostList;
     MyPage.loadMoreFavoritePostList = loadMoreFavoritePostList;
     MyPage.loadMoreFavoritePlaceList = loadMoreFavoritePlaceList;
+    MyPage.loadMoreFavoriteEventList = loadMoreFavoriteEventList;
     MyPage.destroyPost = destroyPost;
+    MyPage.splice = splice;
 
     $scope.$on('$ionicView.afterEnter', onAfterEnter);
 
@@ -35,6 +37,11 @@
     //====================================================
     //  Implementation
     //====================================================
+    function splice($index) {
+      MyPageModel.FavoritePostList.posts.splice($index, 1);
+      MyPageModel.FavoritePostList.likes.splice($index, 1);
+    }
+
     function destroyPost(postObj) {
       return Message.confirm('글지우기 알림', '글을 지우시겠습니까?')
         .then(function(ok) {
@@ -137,6 +144,21 @@
         });
     }
 
+    function loadMoreFavoriteEventList() {
+      var last = MyPageModel.FavoriteEventList.likes.length - 1;
+      return findFavoriteEventList({
+          olderThan: MyPageModel.FavoriteEventList.likes[last].id
+        })
+        .then(function(eventsWrapper) {
+          angular.forEach(eventsWrapper.likes, function(like) {
+            MyPageModel.FavoriteEventList.likes.push(like);
+          });
+          U.appendData(eventsWrapper, MyPageModel.FavoriteEventList, 'events');
+        })
+        .catch(function(err) {
+          U.error(err);
+        });
+    }
 
     function onAfterEnter() {
       if ($state.params.reset) {
@@ -189,12 +211,11 @@
 
     function findFavoriteEventList(extraQuery) { // and Event
       var query = {
-        category: 'notification',
         limit: 20,
         sort: 'id DESC'
       };
       angular.extend(query, extraQuery);
-      return Post.find(query).$promise
+      return Event.findLikedEvents(query).$promise
         .then(function(postsWrapper) {
           var photosPromise = Preload.photos(postsWrapper.posts, 'Cloudinary600', true);
           return $q.all([postsWrapper, photosPromise]);
@@ -258,8 +279,11 @@
           });
       } else if (tab === 'FavoriteEventList' /*Event and Places*/ ) {
         return findFavoriteEventList()
-          .then(function(postsWrapper) {
-            U.bindData(postsWrapper, MyPageModel.FavoriteEventList, 'events', /*loadingModel*/ MyPageModel);
+          .then(function(eventsWrapper) {
+            console.log("---------- eventsWrapper ----------");
+            console.log(eventsWrapper);
+            MyPageModel.FavoriteEventList.likes = eventsWrapper.likes;
+            U.bindData(eventsWrapper, MyPageModel.FavoriteEventList, 'events', /*loadingModel*/ MyPageModel);
           })
           .catch(U.error)
           .finally(function() {
