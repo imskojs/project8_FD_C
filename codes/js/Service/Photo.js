@@ -30,7 +30,7 @@
 
     var _ = $window._;
     $ionicModal.fromTemplateUrl('state/0Template/ImageCropModal.html', {
-        id: '1',
+        id: '9999',
         scope: $rootScope,
         animation: 'instant-slide'
       })
@@ -45,6 +45,7 @@
       areaType: 'square',
       aspectRatio: 1
     };
+
     $rootScope.getPhotoCancelled = true;
 
     var service = {
@@ -61,7 +62,7 @@
     //Usage
     //  Photo.get('camera' || 'gallery', 800, true, 300,'square | circle | rectangle', aspectRatioIfRectangle)
     //Output:
-    //  'data:base64, asdfk1jmcl1j등등어쩌구저쩌구'
+    //  'data:base64, asdfk1jmcl1...'
     function get(sourceType, width, cropTrue, resultImageSize, areaType, aspectRatio) {
 
       var promise;
@@ -77,20 +78,16 @@
             cameraDirection: $window.Camera.Direction.BACK,
             sourceType: 1 //camera
           })
-          .catch(function(err) {
-            console.log("---------- err camera ----------");
-            console.log(err);
+          .catch(function( /* cancelled */ ) {
             return $q.reject({
-              message: 'camera'
+              message: 'cancelled'
             });
           });
       } else if (sourceType === 'gallery') {
         promise = pickImage(width)
-          .catch(function(err) {
-            console.log("---------- err gallery ----------");
-            console.log(err);
+          .catch(function( /* cancelled */ ) {
             return $q.reject({
-              message: 'gallery'
+              message: 'cancelled'
             });
           });
       }
@@ -100,13 +97,6 @@
           var name = filePath.substr(filePath.lastIndexOf('/') + 1);
           var namePath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
           return $cordovaFile.readAsDataURL(namePath, name);
-        })
-        .catch(function(err) {
-          console.log("---------- err readAsDataURL ----------");
-          console.log(err);
-          return $q.reject({
-            message: 'readAsDataURL'
-          });
         });
 
       if (cropTrue) {
@@ -121,12 +111,15 @@
             // $rootScope.ImageCropModal.show();
             var deferred = $q.defer();
             var modalHiddenListenerOff = $rootScope.$on('modal.hidden', function(event, modal) {
-              if (modal.id === '1') {
-                deferred.resolve($rootScope.ImageCropAttribute.croppedImageBase64);
-              } else {
-                deferred.reject({
-                  message: 'Modal is Hidden but is not ImageCropModal'
-                });
+              if (modal.id === '9999') {
+                if ($rootScope.getPhotoCancelled === true) {
+                  $rootScope.getPhotoCancelled = false;
+                  return $q.reject({
+                    message: 'cancelled'
+                  });
+                } else {
+                  deferred.resolve($rootScope.ImageCropAttribute.croppedImageBase64);
+                }
               }
             });
             return $q.all([deferred.promise, modalHiddenListenerOff]);
@@ -136,18 +129,10 @@
             var modalHiddenListenerOff = array[1];
             modalHiddenListenerOff();
             return base64;
-          })
-          .catch(function(err) {
-            console.log("---------- err ngImgCrop ----------");
-            console.log(err);
-            return $q.reject({
-              message: 'ngImgCrop'
-            });
           });
       }
 
       return promise;
-
     }
 
     //====================================================

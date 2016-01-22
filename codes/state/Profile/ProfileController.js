@@ -45,6 +45,8 @@
           ProfileModel.form.files = [base64];
         })
         .catch(function(err) {
+          console.log("---------- err ----------");
+          console.log(err);
           U.error(err);
         });
     }
