@@ -23,7 +23,7 @@
     //  Implementation
     //====================================================
     function onBeforeEnter() {
-      userFindOne()
+      return userFindOne()
         .then(function(user) {
           console.log("---------- user ----------");
           console.log(user);
@@ -45,9 +45,9 @@
           ProfileModel.form.files = [base64];
         })
         .catch(function(err) {
-          console.log("---------- err ----------");
+          console.log("---------- err from getPhoto controller----------");
           console.log(err);
-          U.error(err);
+          // U.error(err);
         });
     }
 

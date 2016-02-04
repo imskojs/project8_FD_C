@@ -14,11 +14,16 @@
     </div>
   </ion-content>
   <ion-footer-bar class="bar-positive footer zero">
-    <div class="row zero flex">
-      <button class="button f18px bold"
-        ng-click="getPhotoCancelled = false; ImageCropModal.hide();"
+    <div class="row zero flex w100p">
+      <button class="button f18px bold w50p"
+        ng-click="hideImageCropModal()"
       >
         완료
+      </button>
+      <button class="button f18px bold w50p"
+        ng-click="ImageCropModal.hide()"
+      >
+        취소
       </button>
     </div>
   </ion-footer-bar>

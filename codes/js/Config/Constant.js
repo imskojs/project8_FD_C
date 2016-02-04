@@ -3,7 +3,7 @@
 
   angular.module('app')
     // Social login with Kakao
-    .constant("KAKAO_KEY", "abcdefghijklmnopqrstu0123456789")
+    .constant("KAKAO_KEY", "11a41399e0c742f9c48207e541790c99")
     // Social login with Facebook
     .constant("FACEBOOK_KEY", "1009847152386966")
     // Social login with twitter
@@ -18,6 +18,7 @@
     // Server
     // .constant("SERVER_URL", "http://192.168.0.65:1337")
     .constant("SERVER_URL", "http://52.192.17.128")
+    .constant("OAUTH_CALLBACK_URL", "http://localhost/callback")
     .constant("APP_NAME", "FITNESS_DAY")
     .constant("APP_ID", 9);
 })(angular);

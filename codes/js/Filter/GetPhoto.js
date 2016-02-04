@@ -9,8 +9,8 @@
     return function(createdBy) {
       if (createdBy.profilePhoto && createdBy.profilePhoto.url) {
         return createdBy.profilePhoto.url;
-      } else if (createdBy.profile_picture) {
-        return createdBy.profile_picture;
+      } else if (createdBy.profile_image) {
+        return createdBy.profile_image;
       } else {
         return 'http://placehold.it/200x200';
       }

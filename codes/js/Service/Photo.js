@@ -1,13 +1,3 @@
-/**
- * Created by Seunghoon Ko on 10/10/2015
- * As part of applicat platform
- *
- * Copyright (C) Applicat (www.applicat.co.kr) & Seunghoon Ko - All Rights Reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * Proprietary and confidential
- * Written by Seunghoon Ko <imskojs@gmail.com>, 10/10/2015
- *
- */
 //  Dependencies
 //ng-file-uploead
 //cordovaCamera/
@@ -36,6 +26,10 @@
       })
       .then(function(modal) {
         $rootScope.ImageCropModal = modal;
+        $rootScope.hideImageCropModal = function() {
+          $rootScope.getPhotoCancelled = false;
+          $rootScope.ImageCropModal.hide();
+        };
       });
 
     $rootScope.ImageCropAttribute = {
@@ -47,6 +41,7 @@
     };
 
     $rootScope.getPhotoCancelled = true;
+
 
     var service = {
       get: get,
@@ -69,27 +64,17 @@
 
       if (sourceType === 'camera') {
         promise = $cordovaCamera.getPicture({
-            quality: 50,
-            destinationType: $window.Camera.DestinationType.FILE_URI,
-            encodingType: $window.Camera.EncodingType.JPEG,
-            targetWidth: width || 800,
-            correctOrientation: true,
-            mediaType: $window.Camera.MediaType.PICTURE,
-            cameraDirection: $window.Camera.Direction.BACK,
-            sourceType: 1 //camera
-          })
-          .catch(function( /* cancelled */ ) {
-            return $q.reject({
-              message: 'cancelled'
-            });
-          });
+          quality: 50,
+          destinationType: $window.Camera.DestinationType.FILE_URI,
+          encodingType: $window.Camera.EncodingType.JPEG,
+          targetWidth: width || 800,
+          correctOrientation: true,
+          mediaType: $window.Camera.MediaType.PICTURE,
+          cameraDirection: $window.Camera.Direction.BACK,
+          sourceType: 1 //camera
+        });
       } else if (sourceType === 'gallery') {
-        promise = pickImage(width)
-          .catch(function( /* cancelled */ ) {
-            return $q.reject({
-              message: 'cancelled'
-            });
-          });
+        promise = pickImage(width);
       }
 
       promise = promise
@@ -97,6 +82,12 @@
           var name = filePath.substr(filePath.lastIndexOf('/') + 1);
           var namePath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
           return $cordovaFile.readAsDataURL(namePath, name);
+        })
+        .catch(function( /* cancelled */ ) {
+          $rootScope.ImageCropModal.hide();
+          return $q.reject({
+            message: 'cancelled'
+          });
         });
 
       if (cropTrue) {
@@ -113,11 +104,13 @@
             var modalHiddenListenerOff = $rootScope.$on('modal.hidden', function(event, modal) {
               if (modal.id === '9999') {
                 if ($rootScope.getPhotoCancelled === true) {
-                  $rootScope.getPhotoCancelled = false;
+                  console.log("---------- 'true' ----------");
+                  console.log('true');
                   return $q.reject({
                     message: 'cancelled'
                   });
                 } else {
+                  $rootScope.getPhotoCancelled = true;
                   deferred.resolve($rootScope.ImageCropAttribute.croppedImageBase64);
                 }
               }
@@ -194,10 +187,15 @@
     function pickImage(width) {
       var deferred = $q.defer();
       $window.imagePicker.getPictures(function(results) {
-        deferred.resolve(results[0]);
-      }, function(isCancelled) {
-        $rootScope.getPhotoCancelled = true;
-        deferred.resolve(isCancelled);
+        if (results.length === 0) {
+          deferred.reject({
+            message: 'cancelled'
+          });
+        } else {
+          deferred.resolve(results[0]);
+        }
+      }, function(cancelled) {
+        deferred.reject(cancelled);
       }, {
         maximumImagesCount: 1,
         width: width || 800,

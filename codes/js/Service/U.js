@@ -101,7 +101,6 @@
 
     function error(err) {
       Message.hide();
-      console.log(err);
       if (err && err.data && err.data.invalidAttributes && err.data.invalidAttributes.username) {
         return Message.alert('회원가입 알림', '이미 존제하는 이메일입니다. 다른이메일을 입력해주세요.')
           .then(function() {
@@ -112,6 +111,14 @@
           .then(function() {
             Dom.focusById('email');
           });
+      } else if (err === 'Problem authenticating') {
+        Message.alert('로그인 알림', '로그인이 잘못 되었습니다. 다시 시도해주세요.');
+      } else if (err === 'Facebook returned error_code=100: Invalid permissions') {
+        Message.alert('로그인 알림', '로그인이 잘못 되었습니다. 다시 시도해주세요.');
+      } else if (err === 'The sign in flow was canceled') {
+        Message.alert('로그인 알림', '로그인을 취소 하셨습니다.');
+      } else {
+        return Message.alert();
       }
     }
 

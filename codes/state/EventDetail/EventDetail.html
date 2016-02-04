@@ -32,12 +32,23 @@
     <img class="w100p block" alt="이벤트 이미지"
       ng-src="{{EventDetail.Model.event.photos[0].url | Cloudinary600}}"
     >
+    <div class="row flex-v h30px zero pl5p mt5px">
+      <p class="positive f18px zero">
+      {{ EventDetail.Model.event.title }}
+      </p>
+    </div>
+
+    <div class="row flex-v h30px zero pl5p">
+      <p class="light-grey f16px zero">
+      {{ EventDetail.Model.event.address }}
+      </p>
+    </div>
 
    <!-- stars -->
     <div class="row zero dark-grey-bb pl5p pr5p flex-v mt2px h66px">
 
       <div class="col zero">
-        <p class="f14px light-grey center mb5px">
+        <p class="f14px light-grey center mb15px">
          별점
         </p>
         <div class="row zero mb5px">
@@ -115,6 +126,7 @@
         </div>
       </div>
     </div>
+
     <!-- photo1 -->
     <img class="w100p block" alt="이벤트 이미지 1"
       ng-if="EventDetail.Model.event.photos[1]"
