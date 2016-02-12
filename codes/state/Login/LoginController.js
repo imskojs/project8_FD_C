@@ -60,24 +60,6 @@
         .catch(function(err) {
           U.error(err);
         });
-      // .then(function(result) {
-      //   result.provider = 'facebook';
-      //   console.log("result :::\n", result);
-      //   return $http({
-      //     url: SERVER_URL + '/user/registerPassport',
-      //     method: 'POST',
-      //     headers: {
-      //       'Content-Type': 'application/json'
-      //     },
-      //     data: result
-      //   });
-      // })
-      // .then(function(userWrapper) {
-      //   AppStorage.user = userWrapper.user;
-      //   AppStorage.token = userWrapper.token;
-      //   AppStorage.isFirstTime = false;
-      //   U.goToState('Main.MainTab.PostList.PostListRecent', null, 'forward');
-      // })
     }
 
     function loginWithKakao() {
@@ -88,27 +70,6 @@
         .catch(function(err) {
           U.error(err);
         });
-      // .then(function(result) {
-      //   result.provider = 'kakao';
-      //   console.log("result :::\n", result);
-      //   return $http({
-      //     url: SERVER_URL + '/user/registerPassport',
-      //     method: 'POST',
-      //     headers: {
-      //       'Content-Type': 'application/json'
-      //     },
-      //     data: result
-      //   });
-      // })
-      // .then(function(userWrapper) {
-      //   AppStorage.user = userWrapper.user;
-      //   AppStorage.token = userWrapper.token;
-      //   AppStorage.isFirstTime = false;
-      //   U.goToState('Main.MainTab.PostList.PostListRecent', null, 'forward');
-      // })
-      // .catch(function(err) {
-      //   console.log("err :::\n", err);
-      // });
     }
 
     // function loginWithTwitter() {

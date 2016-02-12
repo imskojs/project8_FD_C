@@ -1,3 +1,26 @@
+//====================================================
+//  Usage
+//====================================================
+// function loginWithFacebook() {
+//   return Oauth.facebook(FACEBOOK_KEY, ["email", "public_profile"])
+//     .then(function() {
+//       U.goToState('Main.Home', null, 'forward');
+//     })
+//     .catch(function(err) {
+//       U.error(err);
+//     });
+// }
+
+// function loginWithKakao() {
+//   return Oauth.kakao(KAKAO_KEY)
+//     .then(function() {
+//       U.goToState('Main.Home', null, 'forward');
+//     })
+//     .catch(function(err) {
+//       U.error(err);
+//     });
+// }
+
 (function() {
   'use strict';
 

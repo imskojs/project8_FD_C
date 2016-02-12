@@ -89,7 +89,7 @@
           console.log("---------- err ----------");
           console.log(err);
           MyPageModel.loadingBg = false;
-          Message.alert();
+          Message.alert('사진바꾸기 알림', '사진바꾸기를 취소하셨습니다.');
         });
     }
 
