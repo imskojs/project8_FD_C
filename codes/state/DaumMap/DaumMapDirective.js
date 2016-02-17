@@ -36,8 +36,8 @@
           latitude = DaumMapModel.lastCenter.latitude;
           longitude = DaumMapModel.lastCenter.longitude;
         } else {
-          latitude = 37.5;
-          longitude = 127;
+          latitude = 37.57265336288831;
+          longitude = 126.89297254106213;
         }
         var mapOptions = {
           center: new daum.maps.LatLng(latitude, longitude),
@@ -223,10 +223,10 @@
                 latitude: map.getCenter().getLat()
               };
               if (Math.abs(currentCenter.longitude - place.geoJSON.coordinates[1]) < 0.00001 && Math.abs(currentCenter.latitude - place.geoJSON.coordinates[0]) < 0.00001) {
-                map.panTo(new daum.maps.LatLng(
-                  currentCenter.longitude + 0.011,
-                  currentCenter.latitude + 0.011
-                ));
+                // map.panTo(new daum.maps.LatLng(
+                //   currentCenter.longitude + 0.011,
+                //   currentCenter.latitude + 0.011
+                // ));
               }
               //------------------------
               //  Hacky fix ends;
@@ -282,13 +282,19 @@
           var markerClickedImg = new daum.maps.MarkerImage(scope.markerClickedSrc, markerSize);
           map.relayout();
           DaumMapModel.domMap = map;
+          var currentCenter = {};
+          // if (!DaumMapModel.lastCenter) {
+          //   currentCenter.longitude = longitude;
+          //   currentCenter.latitude = latitude;
+          //   drawMarkers(currentCenter, markerImg, markerClickedImg, scope);
+          // }
           // ------------------------
           //  Search when moved
           // ------------------------
           daum.maps.event.addListener(map, 'idle', function() {
             map.relayout();
             Message.loading();
-            var currentCenter = {
+            currentCenter = {
               longitude: map.getCenter().getLng(),
               latitude: map.getCenter().getLat()
             };

@@ -39,7 +39,7 @@ var paths = {
   sass: [
     './codes/scss/00_variables.scss',
     './codes/scss/00_functions.scss',
-    './codes/scss/01_backgroundColors.scss',
+    './codes/scss/01_background.scss',
     './codes/scss/02_texts.scss',
     './codes/scss/03_images.scss',
     './codes/scss/04_icons.scss',

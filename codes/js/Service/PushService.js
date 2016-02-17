@@ -61,6 +61,7 @@
 
       push.on('notification', function(notification) {
         if (ionic.Platform.isAndroid()) {
+          console.log("'test' :::\n", 'test');
           $window.plugin.notification.local.schedule({
             title: notification.title,
             text: notification.message,

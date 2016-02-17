@@ -82,11 +82,13 @@ PushNotification.prototype.unregister = function(successCallback, errorCallback,
 
     var that = this;
     var cleanHandlersAndPassThrough = function() {
-        that._handlers = {
-            'registration': [],
-            'notification': [],
-            'error': []
-        };
+        if (!options) {
+            that._handlers = {
+                'registration': [],
+                'notification': [],
+                'error': []
+            };
+        }
         successCallback();
     };
 
@@ -228,6 +230,10 @@ module.exports = {
 
     init: function(options) {
         return new PushNotification(options);
+    },
+
+    hasPermission: function(successCallback, errorCallback) {
+        exec(successCallback, errorCallback, 'PushNotification', 'hasPermission', []);
     },
 
     /**

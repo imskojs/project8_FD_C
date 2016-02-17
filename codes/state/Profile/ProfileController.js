@@ -25,13 +25,9 @@
     function onBeforeEnter() {
       return userFindOne()
         .then(function(user) {
-          console.log("---------- user ----------");
-          console.log(user);
           $timeout(function() {
             AppStorage.user = user;
             ProfileModel.form = user;
-            console.log("---------- ProfileModel.form ----------");
-            console.log(ProfileModel.form);
           }, 0);
         })
         .catch(function(err) {
@@ -54,15 +50,21 @@
     function sendForm() {
       Message.loading();
       userUpdate()
+        .then(function(dataWrapper){
+          console.log("dataWrapper.data :::\n", dataWrapper.data);
+          return userFindOne();
+        })
         .then(function(user) {
-          console.log("---------- user ----------");
-          console.log(user);
+          console.log("user :::\n", user);
+          $timeout(function(){
+            AppStorage.user = user;
+            ProfileModel.form = user;
+          }, 0);
           Message.hide();
           return Message.alert('프로필 변경 알림.', '프로필을 성공적으로 변경하였습니다.');
         })
         .then(function() {
           U.goBack();
-
         })
         .catch(function(err) {
           console.log("---------- err ----------");

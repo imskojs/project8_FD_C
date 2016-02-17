@@ -36,10 +36,10 @@
         ng-click="MyPage.setMyPageBg();"
       >
       <img class="block w70px h70px r70px absolute left10px top45p positive-b2px before-enter-show"
-        ng-src="{{AppStorage.user.profilePhoto.url}}"
+        ng-src="{{(AppStorage.user.profilePhoto && AppStorage.user.profilePhoto.url) || AppStorage.user.profile_image }}"
       >
       <p class="zero ml90px f16px bold positive mt5px">
-      {{AppStorage.user.name || '오미자'}}
+      {{AppStorage.user.name || '이름을 등록해주세요'}}
       </p>
       <p class="zero ml90px f16px bold positive mt2px grey">
       {{AppStorage.user.nickname || '여신'}}

@@ -167,17 +167,6 @@ $app-colors: 'lighter',
 }
 
 
-/**
- * Created by Seunghoon Ko on 10/10/2015
- * As part of applicat platform
- *
- * Copyright (C) Applicat (www.applicat.co.kr) & Seunghoon Ko - All Rights Reserved
- * Unauthorized copying of this file, via any medium is strictly prohibited
- * Proprietary and confidential
- * Written by Seunghoon Ko <imskojs@gmail.com>, 10/10/2015
- *
- */
-
 @each $app-color in $app-colors {
   //.stable-bg
   .#{$app-color}-bg {
@@ -198,6 +187,15 @@ $app-colors: 'lighter',
 [nav-view-transition] {
   background-color: $lighter !important;
 }
+
+.bs-cover {
+  background-size: cover;
+}
+
+.bp-center {
+  background-position: center;
+}
+
 
 /**
  * Created by Seunghoon Ko on 10/10/2015
@@ -555,7 +553,7 @@ img {
 }
 
 .icon.ion-record {
-  color: $positive;
+  color: $white;
 }
 
 .spinner {
@@ -580,6 +578,23 @@ img {
   }
 }
 
+// .slider-pager {
+// // slider pager container
+// // position top, right, bottom, left
+//   .slider-pager-page {
+//   //
+//     .icon.ion-record {
+//       border: 1px solid white;
+//       border-radius: 16px;
+//       width: 16px;
+//       height: 16px;
+//       display: block;
+//       &::before {
+//         font-size: 16px;
+//       }
+//     }
+//   }
+// }
 /**
  * Created by Seunghoon Ko on 10/10/2015
  * As part of applicat platform
@@ -1284,7 +1299,11 @@ progress[value]::-webkit-progress-bar{
   }
 }
 
-
+#walk-through {
+  .slider-pager {
+    top: 44px;
+  }
+}
 // Dependencies:
 //  daum map <script> with places library
 

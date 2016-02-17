@@ -54,7 +54,7 @@
 }
 
 .icon.ion-record {
-  color: $positive;
+  color: $white;
 }
 
 .spinner {
@@ -78,3 +78,21 @@
     }
   }
 }
+
+// .slider-pager {
+// // slider pager container
+// // position top, right, bottom, left
+//   .slider-pager-page {
+//   //
+//     .icon.ion-record {
+//       border: 1px solid white;
+//       border-radius: 16px;
+//       width: 16px;
+//       height: 16px;
+//       display: block;
+//       &::before {
+//         font-size: 16px;
+//       }
+//     }
+//   }
+// }

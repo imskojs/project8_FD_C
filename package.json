@@ -30,10 +30,13 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard",
     "cordova-plugin-geolocation",
-    "cordova-plugin-inappbrowser",
     "phonegap-plugin-push",
     "cordova-plugin-camera",
     "cordova-plugin-file-transfer",
+    {
+      "locator": "https://github.com/apache/cordova-plugin-inappbrowser.git#master",
+      "id": "cordova-plugin-inappbrowser"
+    },
     {
       "locator": "https://github.com/wymsee/cordova-imagePicker.git",
       "id": "com.synconset.imagepicker"

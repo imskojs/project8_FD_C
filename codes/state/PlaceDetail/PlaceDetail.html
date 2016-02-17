@@ -184,9 +184,7 @@
         <div class="col-22">
           <p class="zero f16px positive">시설유형</p>
         </div>
-        <div class="col zero ml5px light-grey f16px">
-          {{ PlaceDetail.Model.place.placeType }}
-        </div>
+        <div class="col zero ml5px light-grey f16px pre">{{ PlaceDetail.Model.place.placeType }} </div>
       </div>
       <!-- row end -->
       <!-- row start -->
@@ -194,9 +192,7 @@
         <div class="col-22">
           <p class="zero f16px positive">이용시간</p>
         </div>
-        <div class="col zero ml5px light-grey f16px">
-          {{ PlaceDetail.Model.place.openingHours }}
-        </div>
+        <div class="col zero ml5px light-grey f16px pre">{{ PlaceDetail.Model.place.openingHours }} </div>
       </div>
       <!-- row end -->
       <!-- row start -->
@@ -204,8 +200,7 @@
         <div class="col-22">
           <p class="zero f16px positive">가격</p>
         </div>
-        <div class="col zero ml5px light-grey f16px pre">{{ PlaceDetail.Model.place.price }}
-        </div>
+        <div class="col zero ml5px light-grey f16px pre">{{ PlaceDetail.Model.place.price }} </div>
       </div>
       <!-- row end -->
       <!-- row start -->
@@ -213,9 +208,7 @@
         <div class="col-22">
           <p class="zero f16px positive">이용방법</p>
         </div>
-        <div class="col zero ml5px light-grey f16px">
-          {{ PlaceDetail.Model.place.usage }}
-        </div>
+        <div class="col zero ml5px light-grey f16px pre">{{ PlaceDetail.Model.place.usage }} </div>
       </div>
       <!-- row end -->
       <!-- row start -->
@@ -224,9 +217,7 @@
           <p class="zero f16px positive">주소</p>
         </div>
         <div class="col zero ml5px light-grey f16px">
-          <p class="zero w100p">
-          {{ PlaceDetail.Model.place.address }}
-          </p>
+          <p class="zero w100p pre"> {{ PlaceDetail.Model.place.address }} </p>
         </div>
       </div>
       <!-- row end -->
@@ -237,9 +228,7 @@
         <div class="col-22">
           <p class="zero f16px positive">문의전화</p>
         </div>
-        <div class="col zero ml5px light-grey f16px">
-          {{ PlaceDetail.Model.place.phone }}
-        </div>
+        <div class="col zero ml5px light-grey f16px pre"> {{ PlaceDetail.Model.place.phone }} </div>
       </div>
       <!-- row end -->
       <!-- row start -->
@@ -260,9 +249,7 @@
         <div class="col-22">
           <p class="zero f16px positive">부대시설</p>
         </div>
-        <div class="col zero ml5px light-grey f16px">
-          {{ PlaceDetail.Model.place.utilities }}
-        </div>
+        <div class="col zero ml5px light-grey f16px pre"> {{ PlaceDetail.Model.place.utilities }} </div>
       </div>
       <!-- row end -->
       <!-- row start -->
@@ -270,9 +257,7 @@
         <div class="col-22">
           <p class="zero f16px positive">주차시설</p>
         </div>
-        <div class="col zero ml5px light-grey f16px">
-          {{ PlaceDetail.Model.place.canPark | AppText }}
-        </div>
+        <div class="col zero ml5px light-grey f16px pre"> {{ PlaceDetail.Model.place.canPark | AppText }} </div>
       </div>
       <!-- row end -->
       <!-- row start -->
@@ -280,9 +265,7 @@
         <div class="col-22">
           <p class="zero f16px positive">기타</p>
         </div>
-        <div class="col zero ml5px light-grey f16px">
-          {{ PlaceDetail.Model.place.etc || '-'}}
-        </div>
+        <div class="col zero ml5px light-grey f16px pre"> {{ PlaceDetail.Model.place.etc || '-'}} </div>
       </div>
       <!-- row end -->
     </div>

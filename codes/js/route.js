@@ -35,6 +35,13 @@
           }
         }
       })
+
+      .state('WalkThrough', {
+        url: '/WalkThrough',
+        templateUrl: 'state/WalkThrough/WalkThrough.html',
+        controller: 'WalkThroughController as WalkThrough'
+      })
+
       .state('Main.Notification', {
         // abstract: true
         url: '/Notification',
