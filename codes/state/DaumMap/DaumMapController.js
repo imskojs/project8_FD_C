@@ -41,15 +41,18 @@
       }, 20);
       var latitude;
       var longitude;
-      if ($stateParams.id) {
-        DaumMapModel.findPlaceByIdThenDrawAPlace($stateParams.id);
-      } else if (DaumMapModel.selectedPlace.geoJSON &&
-        DaumMapModel.selectedPlace.geoJSON.coordinates) {
-        latitude = DaumMapModel.selectedPlace.geoJSON.coordinates[1];
-        longitude = DaumMapModel.selectedPlace.geoJSON.coordinates[0];
-        DaumMapModel.domMap.panTo(new daum.maps.LatLng(latitude + 0.01, longitude + 0.01));
-        DaumMapModel.domMap.panTo(new daum.maps.LatLng(latitude - 0.01, longitude - 0.01));
-      }
+      $timeout(function() {
+        if ($stateParams.id) {
+          DaumMapModel.findPlaceByIdThenDrawAPlace($stateParams.id);
+        } else if (DaumMapModel.selectedPlace.geoJSON &&
+          DaumMapModel.selectedPlace.geoJSON.coordinates) {
+          latitude = DaumMapModel.selectedPlace.geoJSON.coordinates[1];
+          longitude = DaumMapModel.selectedPlace.geoJSON.coordinates[0];
+          DaumMapModel.domMap.panTo(new daum.maps.LatLng(latitude, longitude));
+          // DaumMapModel.domMap.panTo(new daum.maps.LatLng(latitude + 0.01, longitude + 0.01));
+          // DaumMapModel.domMap.panTo(new daum.maps.LatLng(latitude - 0.01, longitude - 0.01));
+        }
+      }, 30);
     }
 
     //====================================================

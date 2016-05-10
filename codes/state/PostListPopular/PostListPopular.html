@@ -95,6 +95,14 @@
               댓글 {{post.commentsCount || 0}}개
             </p>
           </div>
+          <div class="col zero flex align-right"
+            ng-click="snitch()"
+          >
+            <img src="img/siren_03.png" class="h20px assertive">
+            <p class="zero f16px assertive ml5p">
+              Report content
+            </p>
+          </div>
         </div>
         <!-- row end -->
         <!-- row start -->
@@ -119,7 +127,7 @@
             </p>
           </div>
 
-          <div class="col zero flex"1
+          <div class="col zero flex"
             ng-click="goToState('Main.PostComment', {post: post.id}, 'forward')"
             >
             <i class="ion-chatbubble-working white f20px white"></i>
@@ -127,6 +135,8 @@
               댓글쓰기
             </p>
           </div>
+
+
         </div>
         <!-- row end -->
       </div>

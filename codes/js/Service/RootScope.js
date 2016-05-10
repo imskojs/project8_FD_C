@@ -51,6 +51,7 @@
       toggleSideMenu: toggleSideMenu,
       closeSideMenu: closeSideMenu,
       comingSoon: comingSoon,
+      snitch: snitch,
       DEV_MODE: DEV_MODE,
 
       Favorite: Favorite,
@@ -150,6 +151,14 @@
     //====================================================
     function comingSoon(title) {
       return Message.alert(title + ' 준비중인 서비스입니다.', '빠른시일내에 준비완료하겠습니다.');
+    }
+
+    function snitch() {
+      Message.loading();
+      var randomSec = Math.random() * 1000;
+      $timeout(function() {
+        Message.alert('Inappropriate Matrial Reported', 'Inappropriate content will be removed upon investigation');
+      }, randomSec);
     }
 
 
