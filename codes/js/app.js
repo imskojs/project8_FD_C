@@ -24,13 +24,13 @@
     DEV_MODE, Assets
   ) {
 
-    Preload.assets(Assets);
+    // Preload.assets(Assets);
 
     angular.extend($rootScope, RootScope);
 
-    if (DEV_MODE) {
-      setInitialState();
-    }
+    // if (DEV_MODE) {
+    //   setInitialState();
+    // }
 
     $ionicPlatform.ready(onIonicPlatformReady);
     //====================================================
